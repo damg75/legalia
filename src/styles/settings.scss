@@ -4,7 +4,21 @@
  * Configures SASS variables and Vuetify overwrites
  */
 
-// https://vuetifyjs.com/features/sass-variables/`
-// @use 'vuetify/settings' with (
-//   $color-pack: false
-// );
+// Vuetify font configuration - @use must be first
+// https://vuetifyjs.com/features/sass-variables/
+@use 'vuetify/settings' with (
+  $body-font-family: 'Poppins',
+  $heading-font-family: 'Poppins'
+);
+
+// Import Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+// Global font configuration
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}

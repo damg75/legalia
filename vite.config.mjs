@@ -30,10 +30,16 @@ export default defineConfig({
     Components(),
     Fonts({
       google: {
-        families: [{
-          name: 'Roboto',
-          styles: 'wght@100;300;400;500;700;900',
-        }],
+        families: [
+          {
+            name: 'Poppins',
+            styles: 'wght@100;200;300;400;500;600;700;800;900',
+          },
+          {
+            name: 'Roboto',
+            styles: 'wght@100;300;400;500;700;900',
+          }
+        ],
       },
     }),
     AutoImport({
