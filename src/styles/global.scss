@@ -1,0 +1,16 @@
+/**
+ * src/styles/global.scss
+ *
+ * Clases CSS globales para toda la aplicación
+ */
+
+/* Colores del tema */
+.text-primary { color: #8B1538 !important; }
+.text-primary-dark { color: #63071E !important; }
+.bg-primary { background-color: #8B1538 !important; }
+.bg-primary-dark { background-color: #63071E !important; }
+
+/* Clase para debugging */
+.red {
+  background: red !important;
+}

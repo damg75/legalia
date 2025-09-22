@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <Navbar />
     <v-main class="landing-main">
       <slot />
     </v-main>
@@ -7,8 +8,7 @@
 </template>
 
 <script setup>
-// Layout específico para la landing page
-// Sin navegación ni footer para un diseño más limpio
+import Navbar from '@/components/Navbar.vue'
 </script>
 
 <style scoped>

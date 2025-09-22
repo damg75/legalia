@@ -7,6 +7,7 @@
 // Styles
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
+import '@/styles/global.scss'
 
 // Composables
 import { createVuetify } from 'vuetify'
@@ -14,15 +15,38 @@ import { createVuetify } from 'vuetify'
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
   theme: {
-    defaultTheme: 'system',
+    defaultTheme: 'customLight',
+    themes: {
+      customLight: {
+        dark: false,
+        colors: {
+          background: '#FFFFFF',
+          surface: '#FFFFFF',
+          primary: '#8B1538',
+          'primary-dark': '#63071E',
+          secondary: '#64748B',
+          accent: '#8B1538',
+          error: '#DC2626',
+          warning: '#F59E0B',
+          info: '#3B82F6',
+          success: '#10B981',
+        }
+      }
+    }
   },
   defaults: {
     global: {
-      ripple: false,
+      ripple: true,
     },
     VSheet: {
       elevation: 4,
     },
+    VApp: {
+      theme: 'customLight'
+    },
+    VMain: {
+      style: 'background-color: #FFFFFF;'
+    }
   },
   display: {
     mobileBreakpoint: 'sm',
