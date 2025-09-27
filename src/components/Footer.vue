@@ -4,7 +4,7 @@
       <!-- Desktop Version -->
       <v-row class="d-none d-md-flex py-8">
         <!-- Logo y descripción -->
-        <v-col cols="12" md="4" class="d-flex flex-column">
+        <v-col cols="12" md="3" class="d-flex flex-column">
           <div class="mb-4">
             <LegaliaLogo />
           </div>
@@ -66,7 +66,7 @@
         </v-col>
 
         <!-- Legal -->
-        <v-col cols="12" md="2" class="d-flex flex-column">
+        <v-col cols="12" md="3" class="d-flex flex-column">
           <h3 class="footer-title mb-4">Legal</h3>
           <v-btn variant="text" class="footer-link justify-start pa-0 mb-2" @click="$router.push('/terminos')">
             Términos y condiciones
