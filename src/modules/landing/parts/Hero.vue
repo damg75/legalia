@@ -58,7 +58,7 @@
          :key="card.id"
          cols="12" 
          md="4" 
-         class="d-flex d-md-block justify-center mb-4"
+         class="d-flex justify-center mb-4"
        >
          <v-card
            class="hero-card d-flex flex-column pa-3"
