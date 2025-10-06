@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="red">
+  <v-container fluid class="ma-0 pa-0">
     <Hero />
   </v-container>
 </template>
