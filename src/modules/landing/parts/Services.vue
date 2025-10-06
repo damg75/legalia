@@ -22,9 +22,9 @@
           cols="12" 
           md="6" 
           lg="6"
+          class="d-flex justify-center mb-6"
           :class="[
-            'd-flex mb-6',
-            index === 0 ? 'justify-end justify-md-center' : 'justify-start justify-md-center'
+            index === 0 ? 'justify-md-end' : 'justify-md-start'
           ]"
         >
         <v-card
@@ -33,6 +33,7 @@
           max-width="560"
           rounded="xl"
           height="auto"
+
         >
           <v-card-text class="pa-8">
             <!-- Icono -->

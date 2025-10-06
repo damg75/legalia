@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class=" d-flex flex-column justify-start hero px-16">
+  <v-container fluid class=" d-flex flex-column justify-start hero px-16 pt-16">
 
     <!-- IMage -->
 
