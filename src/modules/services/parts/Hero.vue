@@ -18,10 +18,10 @@
           <span class="text-gray">Desarrollamos </span><span class="text-primary-dark">soluciones jurídicas </span><span class="text-primary-dark">personalizadas</span><span class="text-gray">, evitando complicaciones y garantizando tu tranquilidad.</span>
         </h1>
 
-        <div style="width: 100%" class="d-flex justify-end">
-          <v-btn class="hero-cta mt-8 " color="primary-dark" height="52" rounded="lg" elevation="2">
-          Agendar asesoría
-        </v-btn>
+        <div class="button-container d-flex justify-end">
+          <v-btn class="hero-cta mt-8" color="primary-dark" height="52" rounded="lg" elevation="2">
+            Agendar asesoría
+          </v-btn>
         </div>
 
       </div>
@@ -114,6 +114,10 @@
   font-weight: 500;
 }
 
+.button-container {
+  width: 100%;
+}
+
 .hero-cta {
   font-size: 1.1rem;
   font-weight: 600;
@@ -165,13 +169,13 @@
   }
 
   .hero-content {
-    padding: 0 5%;
+    padding: 0 5% !important;
     justify-content: center !important;
   }
-
+ 
   .hero-text {
     max-width: 100%;
-    text-align: center;
+    text-align: center !important;
     align-items: center !important;
   }
 
@@ -179,11 +183,16 @@
     font-size: 28px;
     line-height: 42px;
     margin-bottom: 1.5rem;
+    text-align: center !important;
   }
 
   .hero-cta {
     font-size: 1rem;
     padding: 14px 28px !important;
+  }
+  
+  .button-container {
+    justify-content: center !important;
   }
 }
 
@@ -226,13 +235,7 @@
 /* Ajustes para el overlay en dispositivos móviles */
 @media (max-width: 768px) {
   .hero-overlay {
-    background: linear-gradient(90deg,
-        rgba(255, 255, 255, 0.1) 0%,
-        rgba(255, 255, 255, 0.2) 20%,
-        rgba(255, 255, 255, 0.4) 40%,
-        rgba(255, 255, 255, 0.7) 60%,
-        rgba(255, 255, 255, 0.9) 80%,
-        rgba(255, 255, 255, 0.95) 100%);
+    background: rgba(255, 255, 255, 0.85);
   }
 }
 </style>
