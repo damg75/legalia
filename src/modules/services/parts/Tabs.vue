@@ -28,15 +28,10 @@
               </v-col>
 
               <!-- Tarjetas de servicios -->
-              <v-col cols="12" md="7" lg="8">
-                <v-row>
-                  <v-col 
-                    v-for="service in naturalesServices" 
-                    :key="service.title"
-                    cols="12" 
-                    sm="6" 
-                    lg="4"
-                  >
+              <v-col cols="12" md="7" lg="8" class="">
+                <!-- Desktop: Grid normal -->
+                <v-row class="d-none d-md-flex">
+                  <v-col v-for="service in naturalesServices" :key="service.title" cols="12" sm="6" lg="4">
                     <v-card class="service-card" elevation="3">
                       <v-card-text class="pa-6">
                         <div class="icon-container mb-4">
@@ -50,6 +45,23 @@
                     </v-card>
                   </v-col>
                 </v-row>
+
+                <!-- Mobile: Slide group -->
+                <v-slide-group class="d-md-none" :show-arrows="false" content-class="pb-4">
+                  <v-slide-group-item v-for="service in naturalesServices" :key="service.title" class="">
+                    <v-card class="service-card ma-2" elevation="3" width="280">
+                      <v-card-text class="pa-6">
+                        <div class="icon-container mb-4">
+                          <span class="service-icon">{{ service.icon }}</span>
+                        </div>
+                        <h3 class="service-title mb-3">{{ service.title }}</h3>
+                        <p class="service-description">
+                          {{ service.description }}
+                        </p>
+                      </v-card-text>
+                    </v-card>
+                  </v-slide-group-item>
+                </v-slide-group>
               </v-col>
             </v-row>
           </v-container>
@@ -206,6 +218,8 @@ const naturalesServices = [
   color: #444B53;
   margin: 0;
 }
+
+
 
 /* Responsive */
 @media (max-width: 960px) {
