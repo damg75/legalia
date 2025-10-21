@@ -9,6 +9,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 // Components
 import Landing from '@/modules/landing/Landing.vue'
+import Services from '@/modules/services/Services.vue'
 
 const routes = [
   {
@@ -18,6 +19,19 @@ const routes = [
     meta: {
       layout: 'LandingLayout'
     }
+  },
+  {
+    path: '/servicios',
+    name: 'Services',
+    component: Services,
+    meta: {
+      layout: 'LandingLayout'
+    }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    redirect: '/'
   }
 ]
 
