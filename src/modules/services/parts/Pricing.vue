@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="pricing-section py-16">
-    <v-container fluid class="px-16 d-none">
+    <v-container fluid class="px-4 px-md-16 d-none">
       <!-- Contenido condicional basado en el tab seleccionado -->
       <v-row v-if="selectedTab === 'naturales'" class="align-center">
         <!-- Texto izquierdo -->

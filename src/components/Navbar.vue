@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app-bar elevation="4" color="white" height="100" class="navbar">
-      <v-container fluid class="d-flex align-center justify-space-between px-16">
+      <v-container fluid class="d-flex align-center justify-space-between px-4 px-md-16">
         <!-- Logo Section -->
         <LegaliaLogo />
 

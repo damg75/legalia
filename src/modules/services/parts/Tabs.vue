@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="tabs-section py-12">
-    <v-container fluid class="px-16">
+    <v-container fluid class="px-4 px-md-16">
       <v-tabs v-model="tab" align-tabs="center" color="primary-dark" class="custom-tabs mb-8 pa-0">
         <v-tab value="naturales" class="tab-item">
           Personas naturales
