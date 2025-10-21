@@ -13,69 +13,22 @@
       <v-tabs-window v-model="tab" class="mx-0 px-0">
         <!-- Personas Naturales -->
         <v-tabs-window-item value="naturales">
-          <v-container fluid class="px-0">
-            <v-row>
-              <!-- Título y descripción -->
-              <v-col cols="12" md="5" lg="4" class="d-flex flex-column justify-start">
-                <h2 class="section-title">
-                  Tu protección en <br>
-                  <b class="text-black">cada área</b>
-                </h2>
-                <p class="section-description mt-10">
-                  Ofrecemos un enfoque integral en múltiples áreas del Derecho. Nuestro objetivo es brindarte una
-                  protección completa y soluciones efectivas para cada una de tus necesidades legales.
-                </p>
-              </v-col>
-
-              <!-- Tarjetas de servicios -->
-              <v-col cols="12" md="7" lg="8" class="">
-                <!-- Desktop: Grid normal -->
-                <v-row class="d-none d-md-flex">
-                  <v-col v-for="service in naturalesServices" :key="service.title" cols="12" sm="6" lg="4">
-                    <v-card class="service-card" elevation="3">
-                      <v-card-text class="pa-6">
-                        <div class="icon-container mb-4">
-                          <span class="service-icon">{{ service.icon }}</span>
-                        </div>
-                        <h3 class="service-title mb-3">{{ service.title }}</h3>
-                        <p class="service-description">
-                          {{ service.description }}
-                        </p>
-                      </v-card-text>
-                    </v-card>
-                  </v-col>
-                </v-row>
-
-                <!-- Mobile: Slide group -->
-                <v-slide-group class="d-md-none" :show-arrows="false" content-class="pb-4">
-                  <v-slide-group-item v-for="service in naturalesServices" :key="service.title" class="">
-                    <v-card class="service-card ma-2" elevation="3" width="280">
-                      <v-card-text class="pa-6">
-                        <div class="icon-container mb-4">
-                          <span class="service-icon">{{ service.icon }}</span>
-                        </div>
-                        <h3 class="service-title mb-3">{{ service.title }}</h3>
-                        <p class="service-description">
-                          {{ service.description }}
-                        </p>
-                      </v-card-text>
-                    </v-card>
-                  </v-slide-group-item>
-                </v-slide-group>
-              </v-col>
-            </v-row>
-          </v-container>
+          <TabChild
+            :title="naturalesData.title"
+            :description="naturalesData.description"
+            :services="naturalesData.services"
+            @service-click="handleServiceClick"
+          />
         </v-tabs-window-item>
 
-        <!-- Personas Jurídicas (placeholder por ahora) -->
+        <!-- Personas Jurídicas -->
         <v-tabs-window-item value="juridicas">
-          <v-container class="px-0">
-            <v-row>
-              <v-col cols="12" class="text-center py-12">
-                <p class="text-h6 text-grey">Contenido de Personas Jurídicas próximamente</p>
-              </v-col>
-            </v-row>
-          </v-container>
+          <TabChild
+            :title="juridicasData.title"
+            :description="juridicasData.description"
+            :services="juridicasData.services"
+            @service-click="handleServiceClick"
+          />
         </v-tabs-window-item>
       </v-tabs-window>
     </v-container>
@@ -84,8 +37,9 @@
 
 <script setup>
 import { ref, watch } from 'vue'
+import TabChild from './partials/TabChild.vue'
 
-const emit = defineEmits(['tab-change'])
+const emit = defineEmits(['tab-change', 'service-click'])
 
 const tab = ref('naturales')
 
@@ -94,38 +48,96 @@ watch(tab, (newTab) => {
   emit('tab-change', newTab)
 })
 
-const naturalesServices = [
-  {
-    icon: '💡',
-    title: 'Propiedad Intelectual',
-    description: 'Protección de marcas, patentes y derechos de autor.'
-  },
-  {
-    icon: '🔧',
-    title: 'Derecho Procesal',
-    description: 'Estrategias judiciales y control de plazos.'
-  },
-  {
-    icon: '❤️',
-    title: 'Violencia de Género',
-    description: 'Asistencia urgente y medidas de protección.'
-  },
-  {
-    icon: '⚖️',
-    title: 'Derecho Civil',
-    description: 'Contratos, daños, sucesiones y responsabilidad civil.'
-  },
-  {
-    icon: '🏭',
-    title: 'Energía, Petróleo y Gas',
-    description: 'Asesoría en licencias, contratos y regulaciones del sector.'
-  },
-  {
-    icon: '🧾',
-    title: 'Asesoría Fiscal y Tributaria',
-    description: 'Planificación fiscal y defensa ante litigios.'
-  }
-]
+// Manejar click en servicios
+const handleServiceClick = (serviceCode, serviceData) => {
+  emit('service-click', serviceCode, serviceData)
+}
+
+const naturalesData = {
+  title: 'Tu protección en <br><b class="text-black">cada área</b>',
+  description: 'Ofrecemos un enfoque integral en múltiples áreas del Derecho. Nuestro objetivo es brindarte una protección completa y soluciones efectivas para cada una de tus necesidades legales.',
+  services: [
+    {
+      code: 'propiedad_intelectual',
+      icon: '💡',
+      title: 'Propiedad Intelectual',
+      description: 'Protección de marcas, patentes y derechos de autor.'
+    },
+    {
+      code: 'derecho_procesal',
+      icon: '🔧',
+      title: 'Derecho Procesal',
+      description: 'Estrategias judiciales y control de plazos.'
+    },
+    {
+      code: 'violencia_de_genero',
+      icon: '❤️',
+      title: 'Violencia de Género',
+      description: 'Asistencia urgente y medidas de protección.'
+    },
+    {
+      code: 'derecho_civil',
+      icon: '⚖️',
+      title: 'Derecho Civil',
+      description: 'Contratos, daños, sucesiones y responsabilidad civil.'
+    },
+    {
+      code: 'energia_petroleo_gas',
+      icon: '🏭',
+      title: 'Energía, Petróleo y Gas',
+      description: 'Asesoría en licencias, contratos y regulaciones del sector.'
+    },
+    {
+      code: 'asesoria_fiscal_tributaria',
+      icon: '🧾',
+      title: 'Asesoría Fiscal y Tributaria',
+      description: 'Planificación fiscal y defensa ante litigios.'
+    }
+  ]
+}
+
+const juridicasData = {
+  title: 'Protegemos <br><b class="text-black">tu empresa</b> en cada paso',
+  description: 'Desde contratos hasta cumplimiento normativo, contamos con abogados especializados para proteger tu empresa.',
+  services: [
+    {
+      code: 'propiedad_intelectual_empresas',
+      icon: '💡',
+      title: 'Propiedad Intelectual',
+      description: 'Protección de marcas, patentes y derechos de autor.'
+    },
+    {
+      code: 'derecho_procesal_empresas',
+      icon: '🔧',
+      title: 'Derecho Procesal',
+      description: 'Estrategias judiciales y control de plazos.'
+    },
+    {
+      code: 'violencia_de_genero_empresas',
+      icon: '❤️',
+      title: 'Violencia de Género',
+      description: 'Asistencia urgente y medidas de protección.'
+    },
+    {
+      code: 'derecho_civil_empresas',
+      icon: '⚖️',
+      title: 'Derecho Civil',
+      description: 'Contratos, daños, sucesiones y responsabilidad civil.'
+    },
+    {
+      code: 'energia_petroleo_gas_empresas',
+      icon: '🏭',
+      title: 'Energía, Petróleo y Gas',
+      description: 'Asesoría en licencias, contratos y regulaciones del sector.'
+    },
+    {
+      code: 'asesoria_fiscal_tributaria_empresas',
+      icon: '🧾',
+      title: 'Asesoría Fiscal y Tributaria',
+      description: 'Planificación fiscal y defensa ante litigios.'
+    }
+  ]
+}
 </script>
 
 <style scoped>
@@ -158,75 +170,8 @@ const naturalesServices = [
   height: 3px;
 }
 
-/* Sección de título */
-.section-title {
-  font-family: 'Poppins', sans-serif;
-  font-size: 50px;
-  font-weight: 400;
-  color: #425066;
-}
-
-.section-description {
-  font-family: 'Poppins', sans-serif;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 1.6;
-  color: #000000;
-  max-width: 500px;
-}
-
-/* Tarjetas de servicios */
-.service-card {
-  border-radius: 16px;
-  transition: all 0.3s ease;
-  background-color: #FFFFFF;
-  height: 100%;
-}
-
-.service-card:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  transform: translateY(-4px);
-}
-
-.icon-container {
-  width: 56px;
-  height: 56px;
-  border-radius: 12px;
-  background-color: #F9FAFB;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.service-icon {
-  font-size: 32px;
-}
-
-.service-title {
-  font-family: 'Poppins', sans-serif;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 1.3;
-  color: #000000;
-}
-
-.service-description {
-  font-family: 'Poppins', sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #444B53;
-  margin: 0;
-}
-
-
-
 /* Responsive */
 @media (max-width: 960px) {
-  .section-title {
-    font-size: 36px;
-  }
-
   .tab-item {
     font-size: 16px;
     min-width: 150px;
@@ -234,23 +179,9 @@ const naturalesServices = [
 }
 
 @media (max-width: 600px) {
-  .section-title {
-    font-size: 28px;
-    text-align: center;
-  }
-
-  .section-description {
-    font-size: 14px;
-    text-align: center;
-  }
-
   .tab-item {
     font-size: 14px;
     min-width: 120px;
-  }
-
-  .service-card {
-    margin-bottom: 1rem;
   }
 }
 </style>
