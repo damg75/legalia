@@ -2,7 +2,9 @@
   <v-container fluid class="ma-0 pa-0">
     <Hero />
 
-    <Services />
+    <Services />\
+
+    <Payments />
 
     <CTA />
     
@@ -12,6 +14,7 @@
 <script setup>
 import Hero from './parts/Hero.vue'
 import Services from './parts/Services.vue'
+import Payments from './parts/Payments.vue'
 import CTA from './parts/CTA.vue'
 </script>
 

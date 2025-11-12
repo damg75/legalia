@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="services-section py-16">
+  <v-container fluid class="services-section pt-16 pb-2">
     <!-- Título principal -->
     <v-row class="justify-center mb-8">
       <v-col cols="12" md="8" class="text-center">
