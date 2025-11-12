@@ -66,7 +66,7 @@ const menuItems = [
   { title: 'Inicio', href: '/' },
   { title: 'Servicios', href: '/servicios' },
   { title: 'Sobre nosotros', href: '/sobre-nosotros' },
-  { title: 'Únete a nosotros', href: '/unete-a-nosotros' }
+  { title: 'Únete a nosotros', href: '/unete' }
 ]
 
 const navigateAndClose = (href) => {

@@ -10,6 +10,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 // Components
 import Landing from '@/modules/landing/Landing.vue'
 import Services from '@/modules/services/Services.vue'
+import Form from '@/modules/form/Form.vue'
 
 const routes = [
   {
@@ -24,6 +25,14 @@ const routes = [
     path: '/servicios',
     name: 'Services',
     component: Services,
+    meta: {
+      layout: 'LandingLayout'
+    }
+  },
+  {
+    path: '/unete',
+    name: 'Form',
+    component: Form,
     meta: {
       layout: 'LandingLayout'
     }
