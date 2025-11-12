@@ -20,16 +20,106 @@
           </p>
         </v-col>
       </v-row>
+      <!-- Tarjetas de Formación -->
+      <v-row class="mt-8">
+        <v-col 
+          v-for="(course, index) in courses" 
+          :key="index"
+          cols="6" 
+          md="3"
+          class="d-flex"
+        >
+          <v-card class="course-card" elevation="4" hover>
+            <v-card-text class="pa-6">
+              <div class="course-icon-wrapper mb-4">
+                <div class="course-icon" :style="{ backgroundColor: course.iconBg }">
+                  <v-icon :color="course.iconColor" size="24">{{ course.icon }}</v-icon>
+                </div>
+              </div>
+              <h3 class="course-title mb-2">{{ course.title }}</h3>
+              <p class="course-description">{{ course.description }}</p>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+
+      <!-- Botón -->
+      <v-row class="mt-16">
+        <v-col cols="12" class="d-flex justify-center">
+          <v-btn class="juridicas-button" color="#1E2761" height="52" rounded="lg" elevation="2" width="250">
+            Solicitar cotización
+            <v-icon class="ml-2" size="20">mdi-arrow-right</v-icon>
+          </v-btn>
+        </v-col>
+      </v-row>
     </v-container>
   </v-container>
 </template>
 
 <script setup>
+import { ref } from 'vue'
+
+const courses = ref([
+  {
+    icon: 'mdi-robot',
+    iconColor: '#1E3A8A',
+    iconBg: '#DBEAFE',
+    title: 'IA para la Gestión Legal y Empresarial',
+    description: 'Herramientas inteligentes para automatizar tareas jurídicas y aumentar la eficiencia operativa.'
+  },
+  {
+    icon: 'mdi-account-group',
+    iconColor: '#1E3A8A',
+    iconBg: '#DBEAFE',
+    title: 'Capacitación en Derecho Laboral',
+    description: 'Normativa, relaciones laborales y resolución de conflictos.'
+  },
+  {
+    icon: 'mdi-shield-check',
+    iconColor: '#1E3A8A',
+    iconBg: '#DBEAFE',
+    title: 'Contratación y Gestión de Riesgos',
+    description: 'Talleres para prevenir y reducir riesgos legales.'
+  },
+  {
+    icon: 'mdi-clipboard-check',
+    iconColor: '#1E3A8A',
+    iconBg: '#DBEAFE',
+    title: 'Cumplimiento Normativo',
+    description: 'Formación para prevenir sanciones y optimizar procesos.'
+  },
+  {
+    icon: 'mdi-lock',
+    iconColor: '#1E3A8A',
+    iconBg: '#DBEAFE',
+    title: 'Protección de Datos y Ciberseguridad',
+    description: 'Seminarios adaptados a la normativa vigente.'
+  },
+  {
+    icon: 'mdi-domain',
+    iconColor: '#1E3A8A',
+    iconBg: '#DBEAFE',
+    title: 'Constitución y Formalización',
+    description: 'Asesoría completa desde la idea hasta la puesta en marcha.'
+  },
+  {
+    icon: 'mdi-rocket-launch',
+    iconColor: '#1E3A8A',
+    iconBg: '#DBEAFE',
+    title: 'Cursos para Emprendedores',
+    description: 'Constitución, obligaciones fiscales y mercantiles.'
+  },
+  {
+    icon: 'mdi-tune',
+    iconColor: '#1E3A8A',
+    iconBg: '#DBEAFE',
+    title: 'Programas a Medida',
+    description: 'Formación adaptada a las necesidades de tu organización.'
+  }
+])
 </script>
 
 <style scoped>
-
-
 .juridicas-title-wrapper {
   text-align: center;
   position: relative;
@@ -65,7 +155,67 @@
   width: 120px;
   height: 4px;
   background-color: #FBBF24;
+}
 
+.juridicas-button {
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  border-radius: 12px;
+  box-shadow: none !important;
+}
+
+/* Tarjetas de Cursos */
+.course-card {
+  border-radius: 16px;
+  background-color: #FFFFFF;
+  height: 100%;
+  transition: all 0.3s ease;
+  border: 1px solid #E5E7EB;
+}
+
+.course-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+.course-icon-wrapper {
+  display: flex;
+  align-items: flex-start;
+}
+
+.course-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.course-card:hover .course-icon {
+  transform: scale(1.1);
+}
+
+.course-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+  line-height: 1.4;
+  min-height: 44px;
+}
+
+.course-description {
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #6B7280;
+  line-height: 1.5;
+  margin: 0;
 }
 
 /* Responsive - Mobile */
@@ -82,6 +232,25 @@
     width: 100px;
     left: 10%;
   }
+
+  .course-title {
+    font-size: 15px;
+    min-height: 40px;
+  }
+
+  .course-description {
+    font-size: 12px;
+  }
+
+  .course-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .juridicas-button {
+    width: 100% !important;
+    max-width: 300px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -97,6 +266,30 @@
     width: 80px;
     height: 3px;
     left: 8%;
+  }
+
+  .course-card {
+    border-radius: 12px;
+  }
+
+  .course-title {
+    font-size: 14px;
+    min-height: 36px;
+  }
+
+  .course-description {
+    font-size: 11px;
+  }
+
+  .course-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .juridicas-button {
+    width: 100% !important;
+    font-size: 14px;
+    height: 48px !important;
   }
 }
 </style>
