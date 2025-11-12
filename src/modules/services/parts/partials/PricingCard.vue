@@ -115,21 +115,21 @@ const iconSrc = computed(() => {
 }
 
 .pricing-card-wrapper.small {
-  height: 452px;
+  min-height: 452px;
 }
 
 .pricing-card-wrapper.big {
-  height: 552px;
+  min-height: 570px;
 }
 
 /* Mobile: todas las tarjetas miden 400px */
 @media (max-width: 959px) {
   .pricing-card-wrapper.small {
-    height: 450px;
+    min-height: 450px;
   }
 
   .pricing-card-wrapper.big {
-    height: 500px;
+    min-height: 500px;
   }
 }
 

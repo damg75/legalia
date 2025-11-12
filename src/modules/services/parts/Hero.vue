@@ -19,7 +19,7 @@
         </h1>
 
         <div class="button-container d-flex justify-end">
-          <v-btn class="hero-cta mt-8" color="primary-dark" height="52" rounded="lg" elevation="2">
+          <v-btn class="hero-cta mt-8 d-flex flex-row align-center justify-center" color="primary-dark" height="52" rounded="lg" elevation="2">
             Agendar asesoría
           </v-btn>
         </div>

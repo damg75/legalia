@@ -6,6 +6,7 @@
       @service-click="handleServiceClick"
     />
     <Pricing :selected-tab="selectedTab" />
+    <PostPricing :selected-tab="selectedTab" />
   </v-container>
 </template>
 
@@ -14,6 +15,7 @@ import { ref } from 'vue'
 import Hero from './parts/Hero.vue'
 import Tabs from './parts/Tabs.vue'
 import Pricing from './parts/Pricing.vue'
+import PostPricing from './parts/PostPricing.vue'
 
 const selectedTab = ref('naturales')
 
