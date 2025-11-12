@@ -11,6 +11,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Landing from '@/modules/landing/Landing.vue'
 import Services from '@/modules/services/Services.vue'
 import Form from '@/modules/form/Form.vue'
+import AboutUs from '@/modules/about-us/AboutUs.vue'
 
 const routes = [
   {
@@ -33,6 +34,14 @@ const routes = [
     path: '/unete',
     name: 'Form',
     component: Form,
+    meta: {
+      layout: 'LandingLayout'
+    }
+  },
+  {
+    path: '/sobre-nosotros',
+    name: 'AboutUs',
+    component: AboutUs,
     meta: {
       layout: 'LandingLayout'
     }
