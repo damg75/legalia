@@ -54,7 +54,7 @@
       :dismissable="true"
       :closeable="isMobile ? false : true"
       :persistent="false"
-      max-width="600px"
+      max-width="80%"
     >
       <ModalPayload
         :selected-service="selectedService"
@@ -70,6 +70,7 @@ import { ref, computed } from 'vue'
 import { useDisplay } from 'vuetify'
 import BaseModal from '@/components/BaseModal.vue'
 import ModalPayload from './ModalPayload.vue'
+import { servicesModalData } from '../../data/servicesModalData.js'
 
 const { xs, mdAndDown } = useDisplay()
 
@@ -97,8 +98,17 @@ defineProps({
 const isModalOpen = ref(false)
 const selectedService = ref(null)
 
+// Función para enriquecer los datos del servicio con la información del modal
+const enrichServiceData = (service) => {
+  const enrichedData = servicesModalData[service.code] || {}
+  return {
+    ...service,
+    ...enrichedData
+  }
+}
+
 const handleServiceClick = (service) => {
-  selectedService.value = service
+  selectedService.value = enrichServiceData(service)
   isModalOpen.value = true
   emit('service-click', service.code, service)
 }

@@ -1,118 +1,271 @@
 <template>
-  <div class="modal-payload">
-    <v-card-title class="text-h5 pa-6 pb-4">
-      <div class="d-flex align-center">
+  <div class="modal-payload pa-4">
+    <!-- Header con icono y título -->
+    <v-card-title class="pa-6 pb-2">
+      <div class="d-flex align-start">
         <div class="icon-container-modal mr-4">
           <span class="service-icon-modal">{{ selectedService?.icon }}</span>
         </div>
-        <div>{{ selectedService?.title }}</div>
+        <div class="flex-grow-1">
+          <h2 class="service-modal-title">{{ selectedService?.title }}</h2>
+        </div>
       </div>
     </v-card-title>
     
     <v-card-text class="pa-6 pt-2">
-      <p class="text-body-1 mb-4">
-        {{ selectedService?.description }}
+      <!-- Subtítulo -->
+      <p v-if="selectedService?.subtitle" class="service-subtitle mb-4">
+        {{ selectedService.subtitle }}
       </p>
       
-      <v-divider class="my-4" />
+      <!-- Descripción principal -->
+      <p v-if="selectedService?.description" class="service-description mb-6">
+        {{ selectedService.description }}
+      </p>
       
-      <div class="service-details">
-        <h4 class="text-h6 mb-3">Información adicional</h4>
-        <p class="text-body-2">
-          Este es un ejemplo de modal que se abre al hacer clic en un servicio.
-          El modal es responsivo y se comporta como:
-        </p>
-        <ul class="mt-2">
-          <li><strong>Desktop:</strong> Modal centrado con esquinas redondeadas</li>
-          <li><strong>Mobile:</strong> Bottom sheet estilo Android con esquinas superiores redondeadas</li>
+      <!-- Sección: ¿En qué situaciones podemos ayudarte? -->
+      <div v-if="selectedService?.situations && selectedService.situations.length > 0" class="situations-section mb-6">
+        <h3 class="section-title mb-4">¿En qué situaciones podemos ayudarte?</h3>
+        <ul class="situations-list">
+          <li v-for="(situation, index) in selectedService.situations" :key="index" class="situation-item">
+            <span class="situation-title">{{ situation.title }}</span>
+            <span v-if="situation.subtitle" class="situation-subtitle">
+              {{ situation.subtitle }}
+            </span>
+          </li>
         </ul>
-        <p class="text-body-2 mt-3">
-          Puedes cerrar este modal:
-        </p>
-        <ul class="mt-2">
-          <li>Haciendo clic en la X superior derecha</li>
-          <li>Haciendo clic fuera del modal (dismissable)</li>
-          <li>Presionando ESC</li>
-        </ul>
+      </div>
+      
+      <!-- Sección: ¿Por qué elegirnos? -->
+      <div v-if="selectedService?.whyChooseUs" class="why-section mb-6">
+        <h3 class="section-title mb-3">¿Por qué elegirnos?</h3>
+        <p class="why-text">{{ selectedService.whyChooseUs }}</p>
+      </div>
+      
+      <!-- Chips para tipo de persona -->
+      <div v-if="showPersonType" class="person-type-chips mb-4">
+        <v-chip
+          v-if="selectedService?.forNaturalPerson"
+          size="small"
+          color="primary"
+          variant="outlined"
+          class="mr-2"
+        >
+          Personas Naturales
+        </v-chip>
+        <v-chip
+          v-if="selectedService?.forLegalEntity"
+          size="small"
+          color="primary"
+          variant="outlined"
+        >
+          Personas Jurídicas
+        </v-chip>
       </div>
     </v-card-text>
     
+    <!-- CTA Button -->
     <v-card-actions class="pa-6 pt-0">
-      <v-spacer />
       <v-btn
-        variant="text"
-        @click="$emit('cancel')"
-      >
-        Cancelar
-      </v-btn>
-      <v-btn
-        color="primary"
+        block
+        color="#1E40AF"
         variant="flat"
+        size="large"
+        class="cta-button"
         @click="$emit('confirm', selectedService)"
+        max-width="800px"
       >
-        Confirmar
+        {{ selectedService?.ctaText || 'Solicitar asesoría' }}
       </v-btn>
     </v-card-actions>
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+
+interface ServiceSituation {
+  title: string
+  subtitle?: string
+}
+
 interface Service {
   icon: string
   title: string
-  description: string
+  subtitle?: string
+  description?: string
   code?: string
+  situations?: ServiceSituation[]
+  whyChooseUs?: string
+  ctaText?: string
+  forNaturalPerson?: boolean
+  forLegalEntity?: boolean
 }
 
 interface Props {
   selectedService: Service | null
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 
-defineEmits<{
+const emit = defineEmits<{
   (e: 'cancel'): void
   (e: 'confirm', service: Service | null): void
 }>()
+
+const showPersonType = computed(() => {
+  return props.selectedService?.forNaturalPerson || props.selectedService?.forLegalEntity
+})
 </script>
 
 <style scoped lang="scss">
 .modal-payload {
   width: 100%;
-}
-
-/* Modal styles */
-.icon-container-modal {
-  width: 64px;
-  height: 64px;
-  border-radius: 16px;
-  background-color: #F9FAFB;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.service-icon-modal {
-  font-size: 40px;
-}
-
-.service-details {
   font-family: 'Poppins', sans-serif;
 }
 
-.service-details h4 {
-  color: #425066;
+/* Header Section */
+.icon-container-modal {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background-color: #F3F4F6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
-.service-details ul {
-  list-style-type: disc;
-  padding-left: 24px;
-  color: #444B53;
+.service-icon-modal {
+  font-size: 28px;
 }
 
-.service-details li {
-  margin-bottom: 8px;
+.service-modal-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #1F2937;
+  margin: 0;
+}
+
+/* Subtitle */
+.service-subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
   line-height: 1.5;
+  color: #6B7280;
+  margin: 0;
+}
+
+/* Description */
+.service-description {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #374151;
+  margin: 0;
+}
+
+/* Sections */
+.section-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #1F2937;
+  margin: 0;
+}
+
+/* Situations List */
+.situations-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.situation-item {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 16px;
+  
+  &:before {
+    content: '•';
+    position: absolute;
+    left: 8px;
+    color: #3B82F6;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.situation-title {
+  display: block;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #1F2937;
+}
+
+.situation-subtitle {
+  display: block;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #6B7280;
+  margin-top: 2px;
+}
+
+/* Why Choose Us */
+.why-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #374151;
+  margin: 0;
+}
+
+/* Person Type Chips */
+.person-type-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* CTA Button */
+.cta-button {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  border-radius: 8px;
+  height: 48px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .service-modal-title {
+    font-size: 20px;
+  }
+  
+  .icon-container-modal {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .service-icon-modal {
+    font-size: 24px;
+  }
 }
 </style>
 
