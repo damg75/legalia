@@ -112,6 +112,7 @@ const handleClickOutside = () => {
     max-height: 85vh;
     width: 100%;
     margin: 0 !important;
+    padding-bottom: env(safe-area-inset-bottom) !important;
   }
 
   &--desktop {

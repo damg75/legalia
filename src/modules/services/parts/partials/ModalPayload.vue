@@ -65,7 +65,7 @@
     </v-card-text>
     
     <!-- CTA Button -->
-    <v-card-actions class="pa-6 pt-0">
+    <v-card-actions class="pa-4 pa-md-6 pt-0">
       <v-btn
         block
         color="#1E40AF"
@@ -250,10 +250,15 @@ const showPersonType = computed(() => {
   letter-spacing: 0;
   border-radius: 8px;
   height: 48px;
+  width: 100%;
 }
 
 /* Responsive */
 @media (max-width: 600px) {
+  .modal-payload {
+    padding: 16px !important;
+  }
+
   .service-modal-title {
     font-size: 20px;
   }
@@ -265,6 +270,32 @@ const showPersonType = computed(() => {
   
   .service-icon-modal {
     font-size: 24px;
+  }
+
+  .cta-button {
+    font-size: 15px;
+    height: 52px;
+    width: 100%;
+    margin: 0;
+  }
+
+  .person-type-chips {
+    justify-content: center;
+  }
+
+  .v-card-actions {
+    padding: 16px !important;
+    padding-top: 0 !important;
+  }
+
+  .v-card-title {
+    padding: 16px !important;
+    padding-bottom: 8px !important;
+  }
+
+  .v-card-text {
+    padding: 16px !important;
+    padding-top: 8px !important;
   }
 }
 </style>

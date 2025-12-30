@@ -56,6 +56,18 @@ const routes = [
 const router = createRouter({
   history: createWebHistory('/'),
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    // Si hay una posición guardada (navegación hacia atrás/adelante), usarla
+    if (savedPosition) {
+      return savedPosition
+    }
+    // Si hay un hash en la ruta, hacer scroll a ese elemento
+    if (to.hash) {
+      return { el: to.hash }
+    }
+    // Por defecto, scroll al inicio de la página (instantáneo)
+    return { top: 0 }
+  }
 })
 
 // Workaround for https://github.com/vitejs/vite/issues/11804

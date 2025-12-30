@@ -31,7 +31,7 @@
 
         <!-- Mobile: Slide group -->
         <v-slide-group class="d-md-none" :show-arrows="false" content-class="pb-4">
-          <v-slide-group-item v-for="service in services" :key="service.title" class="">
+          <v-slide-group-item v-for="service in services" :key="service.title">
             <v-card class="service-card ma-2" elevation="3" width="280" @click="handleServiceClick(service)">
               <v-card-text class="pa-6">
                 <div class="icon-container mb-4">

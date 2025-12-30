@@ -173,14 +173,14 @@ const juridicasData = {
 /* Responsive */
 @media (max-width: 960px) {
   .tab-item {
-    font-size: 16px;
+    font-size: 20px;
     min-width: 150px;
   }
 }
 
 @media (max-width: 600px) {
   .tab-item {
-    font-size: 14px;
+    font-size: 20px;
     min-width: 120px;
   }
 }

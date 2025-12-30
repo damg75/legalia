@@ -1,13 +1,9 @@
 <template>
   <v-container fluid class="ma-0 pa-0">
     <Hero />
-
-    <Services />\
-
+    <Services />
     <Payments />
-
     <CTA />
-    
   </v-container>
 </template>
 
@@ -21,5 +17,14 @@ import CTA from './parts/CTA.vue'
 <style scoped>
 .fill-height {
   min-height: 80vh;
+}
+
+/* Ocultar cualquier texto directo en el contenedor */
+.v-container {
+  font-size: 0;
+}
+
+.v-container > * {
+  font-size: initial;
 }
 </style>
