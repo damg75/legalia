@@ -1,7 +1,7 @@
 <template>
   <div class="team-card-wrapper">
     <!-- Profile Image - Outside and on top -->
-    <div class="profile-image-container">
+    <div class="profile-image-container" @click="handleHeaderClick">
       <v-img
         v-if="member.profileUrl"
         :src="member.profileUrl"
@@ -17,8 +17,10 @@
     <v-card class="team-card" elevation="2">
       <v-card-text class="team-card-content">
         <!-- Member Info -->
-        <h3 class="member-name">{{ member.name }}</h3>
-        <p class="member-title">{{ member.title }}</p>
+        <div class="member-header" @click="handleHeaderClick">
+          <h3 class="member-name">{{ member.name }}</h3>
+          <p class="member-title">{{ member.title }}</p>
+        </div>
         
         <!-- Dashed Divider -->
         <div class="dashed-divider"></div>
@@ -31,7 +33,9 @@
 </template>
 
 <script setup>
-defineProps({
+const emit = defineEmits(['header-click'])
+
+const props = defineProps({
   member: {
     type: Object,
     required: true,
@@ -44,6 +48,10 @@ defineProps({
     })
   }
 })
+
+const handleHeaderClick = () => {
+  emit('header-click', props.member)
+}
 </script>
 
 <style scoped>
@@ -60,6 +68,12 @@ defineProps({
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.profile-image-container:hover {
+  transform: translateX(-50%) scale(1.05);
 }
 
 .profile-image {
@@ -106,6 +120,11 @@ defineProps({
   border-top: 2px dashed #D1D5DB;
   margin: 12px 0;
   flex-shrink: 0;
+}
+
+.member-header {
+  cursor: pointer;
+  width: 100%;
 }
 
 .member-name {
