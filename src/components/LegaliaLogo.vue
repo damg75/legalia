@@ -1,14 +1,12 @@
 <template>
   <div class="d-flex align-center">
-    <v-icon
-      icon="mdi-scale-balance"
-      size="32"
-      color="#8B1538"
-      class="mr-2"
+    <v-img
+      class="mr-2"  
+      alt="Legalia Logo"
+      height="40"
+      width="200"  
+      src="@/assets/legalia-final.png"
     />
-    <div class="logo-text">
-      Legalia
-    </div>
   </div>
 </template>
 

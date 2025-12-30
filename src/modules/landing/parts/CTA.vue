@@ -37,10 +37,10 @@
 <script setup>
 const openWhatsApp = () => {
   // Número de WhatsApp (reemplazar con el número real)
-  const phoneNumber = '1234567890' // Cambiar por el número real
+  const phoneNumber = '+584122515898' // Cambiar por el número real
   const message = encodeURIComponent('Hola, me interesa conocer más sobre sus servicios legales.')
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`
-  
+
   window.open(whatsappUrl, '_blank')
 }
 </script>
