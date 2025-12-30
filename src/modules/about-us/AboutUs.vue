@@ -31,14 +31,25 @@
       <!-- Carousel -->
       <v-row class="mt-8">
         <v-col cols="12">
-          <div class="carousel-container">
-            <v-carousel
-              hide-delimiters
-              show-arrows="true"
-              height="auto"
-              class="team-carousel"
-              crossfade
+          <div class="carousel-wrapper">
+            <v-btn
+              icon
+              variant="elevated"
+              class="carousel-nav-btn carousel-prev"
+              @click="prevSlide"
             >
+              <v-icon>mdi-chevron-left</v-icon>
+            </v-btn>
+            <div class="carousel-container">
+              <v-carousel
+                ref="carouselRef"
+                v-model="currentSlide"
+                hide-delimiters
+                show-arrows="false"
+                height="auto"
+                class="team-carousel"
+                crossfade
+              >
               <v-carousel-item
                 v-for="(chunk, chunkIndex) in chunkedMembers"
                 :key="chunkIndex"
@@ -83,7 +94,16 @@
                   </v-col>
                 </v-row>
               </v-carousel-item>
-            </v-carousel>
+              </v-carousel>
+            </div>
+            <v-btn
+              icon
+              variant="elevated"
+              class="carousel-nav-btn carousel-next"
+              @click="nextSlide"
+            >
+              <v-icon>mdi-chevron-right</v-icon>
+            </v-btn>
           </div>
         </v-col>
       </v-row>
@@ -128,6 +148,26 @@ import { useDisplay } from 'vuetify'
 
 const display = useDisplay()
 const mobile = computed(() => display.smAndDown.value)
+const carouselRef = ref(null)
+const currentSlide = ref(0)
+
+const prevSlide = () => {
+  if (carouselRef.value && currentSlide.value > 0) {
+    currentSlide.value--
+  } else if (carouselRef.value) {
+    // Si estamos en el primer slide, ir al último
+    currentSlide.value = chunkedMembers.value.length - 1
+  }
+}
+
+const nextSlide = () => {
+  if (carouselRef.value && currentSlide.value < chunkedMembers.value.length - 1) {
+    currentSlide.value++
+  } else if (carouselRef.value) {
+    // Si estamos en el último slide, volver al primero
+    currentSlide.value = 0
+  }
+}
 
 // Tamaño responsive para las comillas
 const quoteSize = computed(() => {
@@ -331,50 +371,72 @@ const chunkedMembers = computed(() => {
 }
 
 /* Team Carousel Styles */
+.carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
 .carousel-container {
   position: relative;
-  padding: 0 60px;
+  flex: 1;
   overflow: visible;
 }
 
 .carousel-row {
-  padding-left: 100px;
-  padding-right: 100px;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .team-carousel {
   margin: 0 auto;
   overflow: visible !important;
+  position: relative;
 }
 
 .team-carousel :deep(.v-window) {
   overflow: visible !important;
 }
 
-.team-carousel :deep(.v-carousel__controls) {
+.team-carousel :deep(.v-carousel__controls),
+.team-carousel :deep(.v-window__controls),
+.team-carousel :deep(.v-window__control),
+.team-carousel :deep(.v-window__left),
+.team-carousel :deep(.v-window__right),
+.team-carousel :deep(button.v-window__left),
+.team-carousel :deep(button.v-window__right) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.carousel-nav-btn {
   position: absolute;
-  width: 100%;
   top: 50%;
   transform: translateY(-50%);
-  pointer-events: none;
+  background-color: #F3F4F6 !important;
+  color: #6B7280 !important;
+  box-shadow: none !important;
+  width: 40px !important;
+  height: 40px !important;
+  z-index: 10;
+  flex-shrink: 0;
+  border-radius: 50% !important;
 }
 
-.team-carousel :deep(.v-btn--icon) {
-  pointer-events: all;
-  background-color: #FFFFFF !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-  width: 48px !important;
-  height: 48px !important;
+.carousel-nav-btn:hover {
+  background-color: #E5E7EB !important;
+  color: #374151 !important;
 }
 
-.team-carousel :deep(.v-carousel__controls__item:first-child) {
-  position: absolute;
-  left: -60px;
+.carousel-prev {
+  left: -40px;
 }
 
-.team-carousel :deep(.v-carousel__controls__item:last-child) {
-  position: absolute;
-  right: -60px;
+.carousel-next {
+  right: -40px;
 }
 
 .team-card-wrapper {
@@ -428,12 +490,14 @@ const chunkedMembers = computed(() => {
   flex-direction: column;
   align-items: center;
   height: 100%;
+  overflow: hidden;
 }
 
 .dashed-divider {
   width: 100%;
   border-top: 2px dashed #D1D5DB;
   margin: 12px 0;
+  flex-shrink: 0;
 }
 
 .member-name {
@@ -444,6 +508,7 @@ const chunkedMembers = computed(() => {
   text-align: center;
   line-height: 1.3;
   margin-bottom: 8px;
+  flex-shrink: 0;
 }
 
 .member-title {
@@ -454,6 +519,7 @@ const chunkedMembers = computed(() => {
   text-align: center;
   line-height: 1.5;
   margin-bottom: 0;
+  flex-shrink: 0;
 }
 
 .member-description {
@@ -464,6 +530,49 @@ const chunkedMembers = computed(() => {
   line-height: 1.6;
   text-align: justify;
   width: 100%;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100%;
+  padding-right: 4px;
+  margin-top: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  transition: scrollbar-color 0.3s ease;
+}
+
+/* Scrollbar styling - minimalista y oculto por defecto */
+.member-description::-webkit-scrollbar {
+  width: 3px;
+}
+
+.member-description::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.member-description::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+/* Mostrar scrollbar solo al hacer hover o scroll */
+.member-description:hover::-webkit-scrollbar-thumb,
+.member-description:active::-webkit-scrollbar-thumb {
+  background: rgba(209, 213, 219, 0.4);
+}
+
+.member-description:hover::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.6);
+}
+
+/* Para Firefox */
+.member-description:hover {
+  scrollbar-color: rgba(209, 213, 219, 0.4) transparent;
+}
+
+.member-description:active {
+  scrollbar-color: rgba(156, 163, 175, 0.6) transparent;
 }
 
 /* Quote Section Styles */
@@ -519,21 +628,21 @@ const chunkedMembers = computed(() => {
     font-size: 16px;
   }
 
-  .carousel-container {
-    padding: 0;
+  .carousel-wrapper {
+    padding: 0 50px;
   }
 
-  .carousel-row {
-    padding-left: 16px;
-    padding-right: 16px;
+  .carousel-prev {
+    left: 10px;
   }
 
-  .team-carousel :deep(.v-carousel__controls__item:first-child) {
-    left: 0;
+  .carousel-next {
+    right: 10px;
   }
 
-  .team-carousel :deep(.v-carousel__controls__item:last-child) {
-    right: 0;
+  .carousel-nav-btn {
+    width: 36px !important;
+    height: 36px !important;
   }
 
   .team-carousel :deep(.v-btn--icon) {
@@ -615,6 +724,23 @@ const chunkedMembers = computed(() => {
   .about-paragraph {
     font-size: 15px;
     text-align: left;
+  }
+
+  .carousel-wrapper {
+    padding: 0 40px;
+  }
+
+  .carousel-prev {
+    left: 4px;
+  }
+
+  .carousel-next {
+    right: 4px;
+  }
+
+  .carousel-nav-btn {
+    width: 32px !important;
+    height: 32px !important;
   }
 
   .team-card-wrapper {

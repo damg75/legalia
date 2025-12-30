@@ -65,10 +65,16 @@
                 <div class="file-upload-wrapper mt-2">
                   <input ref="fileInput" type="file" accept=".pdf,.doc,.docx" style="display: none"
                     @change="handleFileChange" />
-                  <v-btn variant="outlined" color="#6B7280" block size="large" @click="$refs.fileInput.click()"
-                    :disabled="loading">
-                    <v-icon start>mdi-cloud-upload</v-icon>
-                    Seleccionar archivo (PDF/Word)
+                  <v-btn 
+                    variant="outlined" 
+                    color="#6B7280" 
+                    block 
+                    :size="mobile ? 'default' : 'large'" 
+                    @click="$refs.fileInput.click()"
+                    :disabled="loading"
+                    class="file-upload-btn">
+                    <v-icon :size="mobile ? 18 : 20" start>mdi-cloud-upload</v-icon>
+                    <span class="file-upload-text">Seleccionar archivo (PDF/Word)</span>
                   </v-btn>
 
                   <!-- Archivo adjunto -->
@@ -142,6 +148,10 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useDisplay } from 'vuetify'
+
+// Display
+const { mobile } = useDisplay()
 
 // Referencias
 const formRef = ref(null)
@@ -333,6 +343,31 @@ const closeSuccessDialog = () => {
 
 .file-upload-wrapper {
   width: 100%;
+  overflow: hidden;
+}
+
+.file-upload-btn {
+  min-height: 44px;
+  overflow: hidden;
+}
+
+.file-upload-btn :deep(.v-btn__content) {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  overflow: hidden;
+  padding: 0 4px;
+}
+
+.file-upload-text {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
 }
 
 .file-selected {
@@ -401,6 +436,61 @@ const closeSuccessDialog = () => {
   .submit-button {
     font-size: 15px;
     height: 48px !important;
+  }
+
+  .file-upload-btn {
+    min-height: 40px;
+    font-size: 14px;
+    padding: 8px 12px !important;
+  }
+
+  .file-upload-btn :deep(.v-btn__content) {
+    padding: 0 2px;
+    gap: 6px;
+  }
+
+  .file-upload-text {
+    font-size: 13px;
+    max-width: calc(100% - 30px);
+  }
+
+  .file-upload-wrapper {
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .file-upload-text {
+    font-size: 12px;
+    max-width: calc(100% - 28px);
+  }
+
+  .file-upload-btn {
+    min-height: 38px;
+    padding: 6px 8px !important;
+  }
+
+  .file-upload-btn :deep(.v-btn__content) {
+    padding: 0 2px;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 400px) {
+  .file-upload-text {
+    font-size: 11px;
+    max-width: calc(100% - 26px);
+  }
+
+  .file-upload-btn {
+    min-height: 36px;
+    padding: 4px 6px !important;
+  }
+
+  .file-upload-btn :deep(.v-icon) {
+    font-size: 16px !important;
+    width: 16px !important;
+    height: 16px !important;
   }
 }
 </style>
