@@ -16,7 +16,7 @@
 
         <!-- Contact Button -->
         <div class="d-none d-md-block">
-          <v-btn color="#8B1538" variant="flat" class="contact-button elevation-4">
+          <v-btn color="#8B1538" variant="flat" class="contact-button elevation-4" @click="goToWhatsapp">
             Contáctanos
           </v-btn>
         </div>
@@ -72,6 +72,14 @@ const menuItems = [
 const navigateAndClose = (href) => {
   router.push(href)
   mobileMenu.value = false
+}
+
+const goToWhatsapp = () => {
+  const phoneNumber = '+584122515898'// Cambiar por el número real
+  const message = encodeURIComponent('Hola, me interesa conocer más sobre sus servicios legales.')
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`
+
+  window.open(whatsappUrl, '_blank')
 }
 </script>
 
