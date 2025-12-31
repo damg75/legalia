@@ -6,7 +6,7 @@
         <!-- Logo y descripción -->
         <v-col cols="12" md="3" class="d-flex flex-column">
           <div class="mb-4">
-            <LegaliaLogo />
+            <LegaliaLogo variant="white" />
           </div>
           <p class="footer-description">
             Acercamos el acceso a la justicia con soluciones legales digitales, accesibles y eficientes para personas y
@@ -81,7 +81,7 @@
       <div class="d-md-none py-6">
         <!-- Logo centrado -->
         <div class="d-flex justify-center mb-6">
-          <LegaliaLogo />
+          <LegaliaLogo variant="white" />
         </div>
 
         <!-- Descripción -->
