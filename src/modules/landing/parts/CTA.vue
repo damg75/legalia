@@ -35,14 +35,9 @@
 </template>
 
 <script setup>
-const openWhatsApp = () => {
-  // Número de WhatsApp (reemplazar con el número real)
-  const phoneNumber = '+584122515898' // Cambiar por el número real
-  const message = encodeURIComponent('Hola, me interesa conocer más sobre sus servicios legales.')
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`
+import { useWhatsApp } from '@/composables/useWhatsApp'
 
-  window.open(whatsappUrl, '_blank')
-}
+const { openWhatsApp } = useWhatsApp()
 </script>
 
 <style scoped lang="scss">

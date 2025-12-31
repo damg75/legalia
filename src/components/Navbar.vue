@@ -16,7 +16,7 @@
 
         <!-- Contact Button -->
         <div class="d-none d-md-block">
-          <v-btn color="#8B1538" variant="flat" class="contact-button elevation-4" @click="goToWhatsapp">
+          <v-btn color="#8B1538" variant="flat" class="contact-button elevation-4" @click="openWhatsApp">
             Contáctanos
           </v-btn>
         </div>
@@ -45,7 +45,7 @@
         </div>
 
         <div class="mt-6">
-          <v-btn color="#8B1538" variant="flat" class="contact-button-mobile elevation-4" @click="mobileMenu = false">
+          <v-btn color="#8B1538" variant="flat" class="contact-button-mobile elevation-4" @click="handleWhatsAppClick">
             Contáctanos
           </v-btn>
         </div>
@@ -58,9 +58,11 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import LegaliaLogo from './LegaliaLogo.vue'
+import { useWhatsApp } from '@/composables/useWhatsApp'
 
 const router = useRouter()
 const mobileMenu = ref(false)
+const { openWhatsApp } = useWhatsApp()
 
 const menuItems = [
   { title: 'Inicio', href: '/' },
@@ -74,13 +76,11 @@ const navigateAndClose = (href) => {
   mobileMenu.value = false
 }
 
-const goToWhatsapp = () => {
-  const phoneNumber = '+584122515898'// Cambiar por el número real
-  const message = encodeURIComponent('Hola, me interesa conocer más sobre sus servicios legales.')
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`
-
-  window.open(whatsappUrl, '_blank')
+const handleWhatsAppClick = () => {
+  openWhatsApp()
+  mobileMenu.value = false
 }
+
 </script>
 
 <style scoped>

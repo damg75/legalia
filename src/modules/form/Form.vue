@@ -14,7 +14,7 @@
 
           <!-- Formulario -->
           <v-card class="form-card pa-8" elevation="2">
-            <v-form ref="formRef" v-model="valid" :disabled="loading" @submit.prevent="handleSubmit">
+            <v-form ref="formRef" v-model="valid" :disabled="loading" @submit.prevent="handleSubmit" netlify>
               <!-- Nombre y Apellido -->
               <div class="form-field mb-6">
                 <label class="field-label" for="name">

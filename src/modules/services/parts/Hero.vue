@@ -19,7 +19,7 @@
         </h1>
 
         <div class="button-container d-flex justify-end">
-          <v-btn class="hero-cta mt-8 d-flex flex-row align-center justify-center" color="primary-dark" height="52" rounded="lg" elevation="2" @click="goToWhatsapp">
+          <v-btn class="hero-cta mt-8 d-flex flex-row align-center justify-center" color="primary-dark" height="52" rounded="lg" elevation="2" @click="openWhatsApp">
             Agendar asesoría
           </v-btn>
         </div>
@@ -30,13 +30,9 @@
 </template>
 
 <script setup>
-  const goToWhatsapp = () => {
-    const phoneNumber = '+584122515898'// Cambiar por el número real
-    const message = encodeURIComponent('Hola, me interesa conocer más sobre sus servicios legales.')
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`
+import { useWhatsApp } from '@/composables/useWhatsApp'
 
-    window.open(whatsappUrl, '_blank')
-  }
+const { openWhatsApp } = useWhatsApp()
 </script>
 
 <style scoped>
@@ -111,7 +107,7 @@
 }
 
 .text-gray {
-  color: #444B53;
+  color: #1E293B;
   font-weight: 500;
 }
 
