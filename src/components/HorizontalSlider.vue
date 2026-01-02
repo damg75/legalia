@@ -53,11 +53,12 @@ const sliderStyle = computed(() => {
 .horizontal-slider-wrapper {
   width: 100%;
   overflow: hidden;
-  padding: 8px 0;
+  padding: 0;
 }
 
 .horizontal-slider {
   display: flex;
+  align-items: stretch;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
@@ -71,10 +72,12 @@ const sliderStyle = computed(() => {
 
 /* Clase helper para items del slider */
 :deep(.slider-item) {
-  flex: 0 0 var(--slider-item-width, calc(100% - 80px));
-  max-width: var(--slider-item-width, calc(100% - 80px));
-  min-width: 270px;
+  flex: 0 0 var(--slider-item-width, 280px);
+  max-width: var(--slider-item-width, 280px);
+  min-width: var(--slider-item-width, 280px);
   scroll-snap-align: start;
   scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
 }
 </style>

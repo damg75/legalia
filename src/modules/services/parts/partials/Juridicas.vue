@@ -45,21 +45,21 @@
 
       <!-- Slider de Formación - Mobile -->
       <div class="mt-8 d-md-none">
-        <HorizontalSlider item-width="270px">
+        <HorizontalSlider item-width="280px" :gap="8" :padding="8">
           <v-card
             v-for="(course, index) in courses"
             :key="index"
             class="course-card course-card-mobile slider-item"
-            elevation="4"
+            elevation="3"
           >
-            <v-card-text class="pa-6">
+            <v-card-text class="pa-6 d-flex flex-column" style="height: 100%;">
               <div class="course-icon-wrapper mb-4">
                 <div class="course-icon" :style="{ backgroundColor: course.iconBg }">
                   <v-icon :color="course.iconColor" size="24">{{ course.icon }}</v-icon>
                 </div>
               </div>
               <h3 class="course-title mb-2">{{ course.title }}</h3>
-              <p class="course-description">{{ course.description }}</p>
+              <p class="course-description flex-grow-1">{{ course.description }}</p>
             </v-card-text>
           </v-card>
         </HorizontalSlider>
@@ -208,6 +208,8 @@ const courses = ref([
   height: 100%;
   transition: all 0.3s ease;
   border: 1px solid #E5E7EB;
+  display: flex;
+  flex-direction: column;
 }
 
 .course-card:hover {
@@ -218,11 +220,11 @@ const courses = ref([
 .course-card-mobile {
   max-width: 100%;
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.course-card-mobile {
-  /* Estilos específicos para las tarjetas móviles */
-}
 
 .course-icon-wrapper {
   display: flex;
