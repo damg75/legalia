@@ -44,8 +44,9 @@
       </v-row>
 
       <!-- Carrusel de Formación - Mobile -->
-      <div class="mt-8 d-md-none">
+      <div class="mt-8 d-md-none courses-carousel-wrapper">
         <v-carousel
+          v-model="currentSlide"
           :show-arrows="false"
           :hide-delimiters="true"
           height="auto"
@@ -70,6 +71,23 @@
             </div>
           </v-carousel-item>
         </v-carousel>
+        <!-- Flechas personalizadas fuera del contenido -->
+        <v-btn
+          icon
+          variant="text"
+          class="carousel-arrow carousel-arrow-prev"
+          @click="previousSlide"
+        >
+          <v-icon size="24">mdi-chevron-left</v-icon>
+        </v-btn>
+        <v-btn
+          icon
+          variant="text"
+          class="carousel-arrow carousel-arrow-next"
+          @click="nextSlide"
+        >
+          <v-icon size="24">mdi-chevron-right</v-icon>
+        </v-btn>
       </div>
 
       <!-- Botón -->
@@ -91,11 +109,28 @@ import { useWhatsApp } from '@/composables/useWhatsApp'
 import { useDisplay } from 'vuetify'
 
 const { mdAndUp } = useDisplay()
+const currentSlide = ref(0)
 
 const { openWhatsApp } = useWhatsApp()
 
 function handleWhatsAppClick() {
   openWhatsApp('Hola, represento una empresa y me interesa solicitar una cotización para servicios legales empresariales y programas de formación.')
+}
+
+function previousSlide() {
+  if (currentSlide.value > 0) {
+    currentSlide.value--
+  } else {
+    currentSlide.value = courses.value.length - 1
+  }
+}
+
+function nextSlide() {
+  if (currentSlide.value < courses.value.length - 1) {
+    currentSlide.value++
+  } else {
+    currentSlide.value = 0
+  }
 }
 
 const courses = ref([
@@ -225,6 +260,11 @@ const courses = ref([
   width: 100%;
 }
 
+.courses-carousel-wrapper {
+  position: relative;
+  padding: 0 40px;
+}
+
 .courses-carousel {
   padding-bottom: 0;
 }
@@ -235,6 +275,35 @@ const courses = ref([
 
 .courses-carousel :deep(.v-carousel__item) {
   padding: 8px;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  box-shadow: none !important;
+  color: #6B7280 !important;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  border-radius: 0 !important;
+  opacity: 0.6;
+}
+
+.carousel-arrow:hover {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  color: #1E2761 !important;
+  opacity: 1;
+}
+
+.carousel-arrow-prev {
+  left: 0;
+}
+
+.carousel-arrow-next {
+  right: 0;
 }
 
 .course-icon-wrapper {
