@@ -20,12 +20,12 @@
           </p>
         </v-col>
       </v-row>
-      <!-- Tarjetas de Formación -->
-      <v-row class="mt-8">
+      <!-- Tarjetas de Formación - Desktop -->
+      <v-row class="mt-8 d-none d-md-flex">
         <v-col 
           v-for="(course, index) in courses" 
           :key="index"
-          cols="6" 
+          cols="12" 
           md="3"
           class="d-flex"
         >
@@ -43,10 +43,39 @@
         </v-col>
       </v-row>
 
+      <!-- Carrusel de Formación - Mobile -->
+      <div class="mt-8 d-md-none">
+        <v-carousel
+          :show-arrows="false"
+          :hide-delimiters="true"
+          height="auto"
+          class="courses-carousel"
+        >
+          <v-carousel-item
+            v-for="(course, index) in courses"
+            :key="index"
+          >
+            <div class="d-flex justify-center pa-2">
+              <v-card class="course-card course-card-mobile" elevation="4">
+                <v-card-text class="pa-6">
+                  <div class="course-icon-wrapper mb-4">
+                    <div class="course-icon" :style="{ backgroundColor: course.iconBg }">
+                      <v-icon :color="course.iconColor" size="24">{{ course.icon }}</v-icon>
+                    </div>
+                  </div>
+                  <h3 class="course-title mb-2">{{ course.title }}</h3>
+                  <p class="course-description">{{ course.description }}</p>
+                </v-card-text>
+              </v-card>
+            </div>
+          </v-carousel-item>
+        </v-carousel>
+      </div>
+
       <!-- Botón -->
       <v-row class="mt-16">
         <v-col cols="12" class="d-flex justify-center">
-          <v-btn class="juridicas-button" color="#1E2761" height="52" rounded="lg" elevation="2" width="250">
+          <v-btn class="juridicas-button" color="#1E2761" height="52" rounded="lg" elevation="2" width="250" @click="handleWhatsAppClick">
             Solicitar cotización
             <v-icon class="ml-2" size="20">mdi-arrow-right</v-icon>
           </v-btn>
@@ -58,6 +87,16 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useWhatsApp } from '@/composables/useWhatsApp'
+import { useDisplay } from 'vuetify'
+
+const { mdAndUp } = useDisplay()
+
+const { openWhatsApp } = useWhatsApp()
+
+function handleWhatsAppClick() {
+  openWhatsApp('Hola, represento una empresa y me interesa solicitar una cotización para servicios legales empresariales y programas de formación.')
+}
 
 const courses = ref([
   {
@@ -179,6 +218,23 @@ const courses = ref([
 .course-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+.course-card-mobile {
+  max-width: 300px;
+  width: 100%;
+}
+
+.courses-carousel {
+  padding-bottom: 0;
+}
+
+.courses-carousel :deep(.v-carousel__controls) {
+  display: none;
+}
+
+.courses-carousel :deep(.v-carousel__item) {
+  padding: 8px;
 }
 
 .course-icon-wrapper {

@@ -273,6 +273,15 @@ const handleContactClick = () => {
 :deep(.v-expansion-panel) {
   background-color: rgba(255, 255, 255, 0.05);
   color: white;
+  margin-bottom: 0 !important;
+}
+
+:deep(.v-expansion-panels) {
+  gap: 0 !important;
+}
+
+:deep(.v-expansion-panel + .v-expansion-panel) {
+  margin-top: 0 !important;
 }
 
 :deep(.v-expansion-panel-title) {

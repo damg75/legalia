@@ -31,7 +31,7 @@
             </div>
           </div>
 
-          <v-btn class="action-button" :class="buttonClass" block>
+          <v-btn class="action-button" :class="buttonClass" block @click="handleButtonClick">
             {{ buttonText }}
           </v-btn>
         </v-card-text>
@@ -44,6 +44,7 @@
 import { computed } from 'vue'
 import shieldIcon from '@/modules/services/assets/pricing-card/shield.svg'
 import buildingIcon from '@/modules/services/assets/pricing-card/building.svg'
+import { useWhatsApp } from '@/composables/useWhatsApp'
 
 const props = defineProps({
   title: {
@@ -99,12 +100,27 @@ const props = defineProps({
   size: {
     type: String,
     default: 'small'
+  },
+  whatsappMessage: {
+    type: String,
+    default: ''
   }
 })
+
+const { openWhatsApp } = useWhatsApp()
 
 const iconSrc = computed(() => {
   return props.iconType === 'shield' ? shieldIcon : buildingIcon
 })
+
+const handleButtonClick = () => {
+  if (props.whatsappMessage) {
+    openWhatsApp(props.whatsappMessage)
+  } else {
+    // Mensaje por defecto si no se proporciona uno específico
+    openWhatsApp(`Hola, me interesa conocer más sobre ${props.title}.`)
+  }
+}
 </script>
 
 <style scoped>

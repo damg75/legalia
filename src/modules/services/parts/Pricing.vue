@@ -18,13 +18,15 @@
             <PricingCard title="Asesoría Integral" subtitle="Tu tranquilidad legal garantizada." price="$80"
               price-unit="por hora" :features="integralFeatures" button-text="Contratar Ahora"
               button-class="black-button" icon-type="shield" check-icon-class="yellow-check" :show-badge="true"
-              badge-text="Más Popular" :size="integralCardSize" />
+              badge-text="Más Popular" :size="integralCardSize"
+              whatsapp-message="Hola, me interesa contratar la Asesoría Integral por $80/hora para personas naturales." />
 
             <!-- Tarjeta 2: Asesoría Especializada -->
             <PricingCard title="Asesoría especializada" subtitle="Soluciones hechas a tu medida."
               plan="Planes personalizados por caso" :features="specializedFeatures" button-text="Solicitar cotización"
               button-class="dark-button" icon-type="building" check-icon-class="green-check"
-              :size="specializedCardSize" />
+              :size="specializedCardSize"
+              whatsapp-message="Hola, me interesa solicitar una cotización para la Asesoría Especializada para personas naturales." />
           </v-row>
         </v-col>
       </v-row>
@@ -64,6 +66,7 @@
             rounded="lg" 
             elevation="2" 
             width="250"
+            @click="handleJuridicasWhatsApp"
           >
             Solicitar cotización
             <v-icon class="ml-2" size="20">mdi-arrow-right</v-icon>
@@ -90,6 +93,7 @@
 import { computed } from 'vue'
 import { useDisplay } from 'vuetify'
 import PricingCard from './partials/PricingCard.vue'
+import { useWhatsApp } from '@/composables/useWhatsApp'
 
 const props = defineProps({
   selectedTab: {
@@ -127,6 +131,13 @@ const juridicasBullets = [
   'Gestión integral de contratos y documentos legales',
   'Capacitación legal para tu equipo'
 ]
+
+// WhatsApp
+const { openWhatsApp } = useWhatsApp()
+
+const handleJuridicasWhatsApp = () => {
+  openWhatsApp('Hola, me interesa solicitar una cotización para servicios legales empresariales.')
+}
 
 </script>
 

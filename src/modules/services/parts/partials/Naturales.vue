@@ -26,7 +26,7 @@
       <v-row dense>
         <v-col cols="12" class="d-flex justify-center">
           <v-btn class="naturales-button-text" color="#63071E" height="52" rounded="lg" elevation="2"
-            width="250">Solicitar
+            width="250" @click="handleWhatsAppClick">Solicitar
             cotización <v-icon size="" class="ml-2">mdi-arrow-right</v-icon></v-btn>
         </v-col>
       </v-row>
@@ -37,8 +37,14 @@
 <script setup>
 import { ref } from 'vue'
 import { useDisplay } from 'vuetify'
+import { useWhatsApp } from '@/composables/useWhatsApp'
 
 const { mobile } = useDisplay()
+const { openWhatsApp } = useWhatsApp()
+
+const handleWhatsAppClick = () => {
+  openWhatsApp('Hola, soy una persona natural y me interesa solicitar una cotización para servicios legales personalizados.')
+}
 
 const points = ref([
   {

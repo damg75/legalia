@@ -18,15 +18,15 @@
       >
         <!-- Botón de cerrar -->
         <v-btn
-          v-if="closeable"
+          v-if="closeable || isMobile"
           icon
           variant="text"
           size="small"
-          class="close-button"
+          :class="['close-button', { 'close-button--mobile': isMobile }]"
           @click="close"
           aria-label="Cerrar"
         >
-          <v-icon>mdi-close</v-icon>
+          <v-icon :size="isMobile ? 20 : 24">mdi-close</v-icon>
         </v-btn>
 
         <!-- Contenido del modal -->
@@ -127,9 +127,32 @@ const handleClickOutside = () => {
   right: 12px;
   z-index: 100;
   background-color: rgba(255, 255, 255, 0.9);
+  min-width: 32px !important;
+  width: 32px !important;
+  height: 32px !important;
   
   &:hover {
     background-color: rgba(255, 255, 255, 1);
+  }
+
+  &--mobile {
+    top: 12px;
+    right: 12px;
+    background-color: rgba(0, 0, 0, 0.04);
+    min-width: 32px !important;
+    width: 32px !important;
+    height: 32px !important;
+    opacity: 0.7;
+    
+    :deep(.v-icon) {
+      color: #6B7280 !important;
+      font-size: 18px !important;
+    }
+    
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.08);
+      opacity: 1;
+    }
   }
 }
 
