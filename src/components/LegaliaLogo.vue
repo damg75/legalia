@@ -1,16 +1,20 @@
 <template>
-  <div class="d-flex align-center">
+  <div class="d-flex align-center logo-container" @click="goToRoot">
     <v-img
       :class="['mr-2', { 'logo-white': variant === 'white' }]"  
       alt="Legalia Logo"
-      height="40"
-      width="200"  
+      height="60"
+      width="300"  
       src="@/assets/legalia-final.png"
     />
   </div>
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
 defineProps({
   variant: {
     type: String,
@@ -18,9 +22,17 @@ defineProps({
     validator: (value) => ['default', 'white'].includes(value)
   }
 })
+
+const goToRoot = () => {
+  router.push('/')
+}
 </script>
 
 <style scoped>
+.logo-container {
+  cursor: pointer;
+}
+
 .logo-text {
   font-family: 'Poppins', sans-serif;
   font-size: 24px;
