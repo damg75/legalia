@@ -45,7 +45,7 @@
 
       <!-- Slider de Formación - Mobile -->
       <div class="mt-8 d-md-none">
-        <HorizontalSlider>
+        <HorizontalSlider item-width="270px">
           <v-card
             v-for="(course, index) in courses"
             :key="index"

@@ -3,7 +3,7 @@
     <div 
       class="horizontal-slider" 
       :class="sliderClass"
-      :style="sliderStyle"
+      :style="{ ...sliderStyle, '--slider-item-width': itemWidth }"
     >
       <slot />
     </div>
@@ -73,7 +73,7 @@ const sliderStyle = computed(() => {
 :deep(.slider-item) {
   flex: 0 0 var(--slider-item-width, calc(100% - 80px));
   max-width: var(--slider-item-width, calc(100% - 80px));
-  min-width: var(--slider-item-width, calc(100% - 80px));
+  min-width: 270px;
   scroll-snap-align: start;
   scroll-snap-stop: always;
 }
