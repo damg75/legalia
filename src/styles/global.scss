@@ -4,6 +4,18 @@
  * Clases CSS globales para toda la aplicación
  */
 
+/* Color de fondo para navegadores móviles (Chrome, Safari, etc.) */
+html,
+body {
+  background-color: #722F37;
+  min-height: 100vh;
+}
+
+#app {
+  background-color: #FFFFFF;
+  min-height: 100vh;
+}
+
 /* Colores del tema */
 .text-primary { color: #8B1538 !important; }
 .text-primary-dark { color: #63071E !important; }
