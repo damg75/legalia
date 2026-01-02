@@ -43,51 +43,26 @@
         </v-col>
       </v-row>
 
-      <!-- Carrusel de Formación - Mobile -->
-      <div class="mt-8 d-md-none courses-carousel-wrapper">
-        <v-carousel
-          v-model="currentSlide"
-          :show-arrows="false"
-          :hide-delimiters="true"
-          height="auto"
-          class="courses-carousel"
-        >
-          <v-carousel-item
+      <!-- Slider de Formación - Mobile -->
+      <div class="mt-8 d-md-none">
+        <HorizontalSlider>
+          <v-card
             v-for="(course, index) in courses"
             :key="index"
+            class="course-card course-card-mobile slider-item"
+            elevation="4"
           >
-            <div class="d-flex justify-center w-100">
-              <v-card class="course-card course-card-mobile w-100" elevation="4">
-                <v-card-text class="pa-6">
-                  <div class="course-icon-wrapper mb-4">
-                    <div class="course-icon" :style="{ backgroundColor: course.iconBg }">
-                      <v-icon :color="course.iconColor" size="24">{{ course.icon }}</v-icon>
-                    </div>
-                  </div>
-                  <h3 class="course-title mb-2">{{ course.title }}</h3>
-                  <p class="course-description">{{ course.description }}</p>
-                </v-card-text>
-              </v-card>
-            </div>
-          </v-carousel-item>
-        </v-carousel>
-        <!-- Flechas personalizadas fuera del contenido -->
-        <v-btn
-          icon
-          variant="text"
-          class="carousel-arrow carousel-arrow-prev"
-          @click="previousSlide"
-        >
-          <v-icon size="24">mdi-chevron-left</v-icon>
-        </v-btn>
-        <v-btn
-          icon
-          variant="text"
-          class="carousel-arrow carousel-arrow-next"
-          @click="nextSlide"
-        >
-          <v-icon size="24">mdi-chevron-right</v-icon>
-        </v-btn>
+            <v-card-text class="pa-6">
+              <div class="course-icon-wrapper mb-4">
+                <div class="course-icon" :style="{ backgroundColor: course.iconBg }">
+                  <v-icon :color="course.iconColor" size="24">{{ course.icon }}</v-icon>
+                </div>
+              </div>
+              <h3 class="course-title mb-2">{{ course.title }}</h3>
+              <p class="course-description">{{ course.description }}</p>
+            </v-card-text>
+          </v-card>
+        </HorizontalSlider>
       </div>
 
       <!-- Botón -->
@@ -107,9 +82,9 @@
 import { ref } from 'vue'
 import { useWhatsApp } from '@/composables/useWhatsApp'
 import { useDisplay } from 'vuetify'
+import HorizontalSlider from '@/components/HorizontalSlider.vue'
 
 const { mdAndUp } = useDisplay()
-const currentSlide = ref(0)
 
 const { openWhatsApp } = useWhatsApp()
 
@@ -117,21 +92,6 @@ function handleWhatsAppClick() {
   openWhatsApp('Hola, represento una empresa y me interesa solicitar una cotización para servicios legales empresariales y programas de formación.')
 }
 
-function previousSlide() {
-  if (currentSlide.value > 0) {
-    currentSlide.value--
-  } else {
-    currentSlide.value = courses.value.length - 1
-  }
-}
-
-function nextSlide() {
-  if (currentSlide.value < courses.value.length - 1) {
-    currentSlide.value++
-  } else {
-    currentSlide.value = 0
-  }
-}
 
 const courses = ref([
   {
@@ -260,65 +220,8 @@ const courses = ref([
   width: 100%;
 }
 
-.courses-carousel-wrapper {
-  position: relative;
-  padding: 0 28px;
-  width: 100%;
-}
-
-.courses-carousel {
-  padding-bottom: 0;
-  width: 100%;
-}
-
-.courses-carousel :deep(.v-carousel__controls) {
-  display: none;
-}
-
-.courses-carousel :deep(.v-carousel__item) {
-  padding: 0;
-}
-
-.courses-carousel :deep(.v-window__container) {
-  width: 100%;
-}
-
-.courses-carousel :deep(.v-window-item) {
-  width: 100%;
-}
-
 .course-card-mobile {
-  max-width: 100%;
-  width: 100%;
-}
-
-.carousel-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  background-color: rgba(255, 255, 255, 0.7) !important;
-  box-shadow: none !important;
-  color: #6B7280 !important;
-  width: 32px !important;
-  height: 32px !important;
-  min-width: 32px !important;
-  border-radius: 0 !important;
-  opacity: 0.6;
-}
-
-.carousel-arrow:hover {
-  background-color: rgba(255, 255, 255, 0.9) !important;
-  color: #1E2761 !important;
-  opacity: 1;
-}
-
-.carousel-arrow-prev {
-  left: 0;
-}
-
-.carousel-arrow-next {
-  right: 0;
+  /* Estilos específicos para las tarjetas móviles */
 }
 
 .course-icon-wrapper {
