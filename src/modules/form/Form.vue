@@ -14,7 +14,12 @@
 
           <!-- Formulario -->
           <v-card class="form-card pa-8" elevation="2">
-            <v-form ref="formRef" v-model="valid" :disabled="loading" @submit.prevent="handleSubmit" netlify>
+            <v-form ref="formRef" v-model="valid" :disabled="loading" @submit.prevent="handleSubmit">
+              <!-- Honeypot field for spam protection (hidden from users) -->
+              <input type="hidden" name="form-name" value="job-application" />
+              <div style="display: none;">
+                <label>Don't fill this out if you're human: <input name="bot-field" v-model="formData.botField" /></label>
+              </div>
               <!-- Nombre y Apellido -->
               <div class="form-field mb-6">
                 <label class="field-label" for="name">
@@ -167,7 +172,8 @@ const formData = ref({
   name: '',
   email: '',
   phone: '',
-  experience: ''
+  experience: '',
+  botField: ''
 })
 
 const selectedFile = ref(null)
@@ -246,25 +252,25 @@ const handleSubmit = async () => {
   loading.value = true
 
   try {
-    // Preparar FormData para envío
+    // Preparar FormData para envío a Netlify Forms
     const submitData = new FormData()
+    submitData.append('form-name', 'job-application')
+    submitData.append('bot-field', formData.value.botField)
     submitData.append('name', formData.value.name)
     submitData.append('email', formData.value.email)
     submitData.append('phone', formData.value.phone)
     submitData.append('experience', formData.value.experience)
     submitData.append('curriculum', selectedFile.value)
 
-    // Simular petición a API (2 segundos)
-    await new Promise(resolve => setTimeout(resolve, 2000))
-
-    // Simular respuesta exitosa
-    console.log('FormData preparado:', {
-      name: formData.value.name,
-      email: formData.value.email,
-      phone: formData.value.phone,
-      experience: formData.value.experience,
-      file: selectedFile.value.name
+    // Enviar a Netlify Forms
+    const response = await fetch('/', {
+      method: 'POST',
+      body: submitData
     })
+
+    if (!response.ok) {
+      throw new Error('Error al enviar el formulario')
+    }
 
     // Mostrar diálogo de éxito
     successDialog.value = true
@@ -286,7 +292,8 @@ const resetForm = () => {
     name: '',
     email: '',
     phone: '',
-    experience: ''
+    experience: '',
+    botField: ''
   }
   removeFile()
   formRef.value?.resetValidation()
