@@ -20,19 +20,16 @@
         <!-- Servicios -->
         <v-col cols="12" md="3" class="d-flex flex-column">
           <h3 class="footer-title mb-4">Servicios</h3>
-          <v-btn variant="text" class="footer-link justify-start pa-0 mb-2" @click="$router.push('/')">
+          <v-btn variant="text" class="footer-link justify-start pa-0 mb-2" @click="handleNaturalPersonClick">
             Para personas naturales
           </v-btn>
-          <v-btn variant="text" class="footer-link justify-start pa-0 mb-2" @click="$router.push('/servicios')">
+          <v-btn variant="text" class="footer-link justify-start pa-0 mb-2" @click="handleLegalEntityClick">
             Para personas jurídicas
-          </v-btn>
-          <v-btn variant="text" class="footer-link justify-start pa-0 mb-2" @click="$router.push('/servicios')">
-            Casos específicos
           </v-btn>
           <v-btn variant="text" class="footer-link justify-start pa-0 mb-2" @click="$router.push('/sobre-nosotros')">
             Sobre nosotros
           </v-btn>
-          <v-btn variant="text" class="footer-link justify-start pa-0 mb-2" @click="$router.push('/')">
+          <v-btn variant="text" class="footer-link justify-start pa-0 mb-2" @click="handleContactClick">
             Contáctanos
           </v-btn>
         </v-col>
@@ -99,20 +96,17 @@
             </v-expansion-panel-title>
             <v-expansion-panel-text>
               <div class="d-flex flex-column">
-                <v-btn variant="text" class="footer-link justify-start pa-2 mb-1" @click="$router.push('/')">
+                <v-btn variant="text" class="footer-link justify-start pa-2 mb-1" @click="handleNaturalPersonClick">
                   Para personas naturales
                 </v-btn>
-                <v-btn variant="text" class="footer-link justify-start pa-2 mb-1" @click="$router.push('/servicios')">
+                <v-btn variant="text" class="footer-link justify-start pa-2 mb-1" @click="handleLegalEntityClick">
                   Para personas jurídicas
-                </v-btn>
-                <v-btn variant="text" class="footer-link justify-start pa-2 mb-1" @click="$router.push('/servicios')">
-                  Casos específicos
                 </v-btn>
                 <v-btn variant="text" class="footer-link justify-start pa-2 mb-1"
                   @click="$router.push('/sobre-nosotros')">
                   Sobre nosotros
                 </v-btn>
-                <v-btn variant="text" class="footer-link justify-start pa-2 mb-1" @click="$router.push('/')">
+                <v-btn variant="text" class="footer-link justify-start pa-2 mb-1" @click="handleContactClick">
                   Contáctanos
                 </v-btn>
               </div>
@@ -176,7 +170,28 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+import { useServiceTab } from '@/composables/useServiceTab'
+import { useWhatsApp } from '@/composables/useWhatsApp'
 import LegaliaLogo from './LegaliaLogo.vue'
+
+const router = useRouter()
+const { setSelectedTab } = useServiceTab()
+const { openWhatsApp } = useWhatsApp()
+
+const handleNaturalPersonClick = () => {
+  setSelectedTab('naturales')
+  router.push('/servicios')
+}
+
+const handleLegalEntityClick = () => {
+  setSelectedTab('juridicas')
+  router.push('/servicios')
+}
+
+const handleContactClick = () => {
+  openWhatsApp()
+}
 </script>
 
 <style scoped>
