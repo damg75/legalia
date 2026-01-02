@@ -21,8 +21,18 @@
                   <v-icon size="18" class="mr-1" color="#9CA3AF">mdi-account</v-icon>
                   Nombre y Apellido<span class="text-red">*</span>
                 </label>
-                <v-text-field id="name" v-model="formData.name" variant="outlined"
-                  placeholder="Ingresa tu nombre completo" :rules="nameRules" density="comfortable" class="mt-2" />
+                <v-text-field 
+                  id="name" 
+                  v-model="formData.name" 
+                  variant="outlined"
+                  placeholder="Ingresa tu nombre completo" 
+                  :rules="nameRules" 
+                  density="comfortable" 
+                  class="mt-2"
+                  maxlength="50"
+                  counter
+                  @input="handleNameInput"
+                />
               </div>
 
               <!-- Email -->
@@ -31,8 +41,18 @@
                   <v-icon size="18" class="mr-1" color="#9CA3AF">mdi-email</v-icon>
                   Email<span class="text-red">*</span>
                 </label>
-                <v-text-field id="email" v-model="formData.email" variant="outlined" placeholder="tuemail@ejemplo.com"
-                  :rules="emailRules" density="comfortable" class="mt-2" />
+                <v-text-field 
+                  id="email" 
+                  v-model="formData.email" 
+                  variant="outlined" 
+                  placeholder="tuemail@ejemplo.com"
+                  :rules="emailRules" 
+                  density="comfortable" 
+                  class="mt-2"
+                  maxlength="50"
+                  counter
+                  @input="handleEmailInput"
+                />
               </div>
 
               <!-- Teléfono -->
@@ -60,9 +80,18 @@
                   <v-icon size="18" class="mr-1" color="#9CA3AF">mdi-briefcase</v-icon>
                   Describe tu experiencia académica y laboral<span class="text-red">*</span>
                 </label>
-                <v-textarea id="experience" v-model="formData.experience" variant="outlined"
-                  placeholder="Ej. Estudios, certificaciones, experiencia en..." :rules="experienceRules" rows="5"
-                  class="mt-2" />
+                <v-textarea 
+                  id="experience" 
+                  v-model="formData.experience" 
+                  variant="outlined"
+                  placeholder="Ej. Estudios, certificaciones, experiencia en..." 
+                  :rules="experienceRules" 
+                  rows="5"
+                  maxlength="1000"
+                  counter
+                  class="mt-2"
+                  @input="handleExperienceInput"
+                />
               </div>
 
               <!-- Adjuntar archivo -->
@@ -185,13 +214,31 @@ const fileError = ref('')
 // Validaciones
 const nameRules = [
   v => !!v || 'El nombre es requerido',
-  v => (v && v.length >= 3) || 'El nombre debe tener al menos 3 caracteres'
+  v => (v && v.length >= 3) || 'El nombre debe tener al menos 3 caracteres',
+  v => (v && v.length <= 50) || 'El nombre no puede tener más de 50 caracteres'
 ]
+
+// Limitar la entrada de nombre a 50 caracteres
+const handleNameInput = (event) => {
+  const value = event.target.value
+  if (value.length > 50) {
+    formData.value.name = value.substring(0, 50)
+  }
+}
 
 const emailRules = [
   v => !!v || 'El email es requerido',
+  v => (v && v.length <= 50) || 'El email no puede tener más de 50 caracteres',
   v => /.+@.+\..+/.test(v) || 'El email debe ser válido'
 ]
+
+// Limitar la entrada de email a 50 caracteres
+const handleEmailInput = (event) => {
+  const value = event.target.value
+  if (value.length > 50) {
+    formData.value.email = value.substring(0, 50)
+  }
+}
 
 const phoneRules = [
   v => !!v || 'El teléfono es requerido',
@@ -221,8 +268,17 @@ const handlePhoneInput = (event) => {
 
 const experienceRules = [
   v => !!v || 'La experiencia es requerida',
-  v => (v && v.length >= 20) || 'Describe tu experiencia con al menos 20 caracteres'
+  v => (v && v.length >= 20) || 'Describe tu experiencia con al menos 20 caracteres',
+  v => (v && v.length <= 1000) || 'La experiencia no puede tener más de 1000 caracteres'
 ]
+
+// Limitar la entrada de experiencia a 1000 caracteres
+const handleExperienceInput = (event) => {
+  const value = event.target.value
+  if (value.length > 1000) {
+    formData.value.experience = value.substring(0, 1000)
+  }
+}
 
 // Manejo de archivos
 const handleFileChange = (event) => {
