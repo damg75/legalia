@@ -66,6 +66,15 @@
   </head>
   <body>
     <div id="app"></div>
+    <!-- Hidden form for Netlify Forms detection at deploy time -->
+    <form name="job-application" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <textarea name="experience"></textarea>
+      <input type="file" name="curriculum" />
+    </form>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
