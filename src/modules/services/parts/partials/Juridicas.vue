@@ -56,8 +56,8 @@
             v-for="(course, index) in courses"
             :key="index"
           >
-            <div class="d-flex justify-center pa-2">
-              <v-card class="course-card course-card-mobile" elevation="4">
+            <div class="d-flex justify-center w-100">
+              <v-card class="course-card course-card-mobile w-100" elevation="4">
                 <v-card-text class="pa-6">
                   <div class="course-icon-wrapper mb-4">
                     <div class="course-icon" :style="{ backgroundColor: course.iconBg }">
@@ -256,17 +256,19 @@ const courses = ref([
 }
 
 .course-card-mobile {
-  max-width: 300px;
+  max-width: 100%;
   width: 100%;
 }
 
 .courses-carousel-wrapper {
   position: relative;
-  padding: 0 40px;
+  padding: 0 28px;
+  width: 100%;
 }
 
 .courses-carousel {
   padding-bottom: 0;
+  width: 100%;
 }
 
 .courses-carousel :deep(.v-carousel__controls) {
@@ -274,7 +276,20 @@ const courses = ref([
 }
 
 .courses-carousel :deep(.v-carousel__item) {
-  padding: 8px;
+  padding: 0;
+}
+
+.courses-carousel :deep(.v-window__container) {
+  width: 100%;
+}
+
+.courses-carousel :deep(.v-window-item) {
+  width: 100%;
+}
+
+.course-card-mobile {
+  max-width: 100%;
+  width: 100%;
 }
 
 .carousel-arrow {
