@@ -36,12 +36,23 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
+import { useServiceTab } from '@/composables/useServiceTab'
 import TabChild from './partials/TabChild.vue'
 
 const emit = defineEmits(['tab-change', 'service-click'])
 
+const { getSelectedTab, clearSelectedTab } = useServiceTab()
 const tab = ref('naturales')
+
+// Leer estado compartido al montar el componente
+onMounted(() => {
+  const savedTab = getSelectedTab()
+  if (savedTab === 'naturales' || savedTab === 'juridicas') {
+    tab.value = savedTab
+    clearSelectedTab()
+  }
+})
 
 // Emitir cambios de tab al padre
 watch(tab, (newTab) => {

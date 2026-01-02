@@ -87,6 +87,7 @@
               rounded="lg"
               size="large"
               class="service-btn text-white font-weight-medium"
+              @click="handleServiceClick(service.tab)"
             >
               {{ service.buttonText }}
               <v-icon class="ms-2" size="20">mdi-arrow-right</v-icon>
@@ -103,6 +104,16 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useServiceTab } from '@/composables/useServiceTab'
+
+const router = useRouter()
+const { setSelectedTab } = useServiceTab()
+
+const handleServiceClick = (tab) => {
+  setSelectedTab(tab)
+  router.push('/servicios')
+}
 
 const services = ref([
   {
@@ -119,7 +130,8 @@ const services = ref([
     whyChoose: 'Atención ágil y sin trámites innecesarios, respuestas inmediatas y tarifas transparentes. Tu tranquilidad es nuestra prioridad.',
     buttonText: 'Explorar servicios personales',
     buttonColor: '#000000',
-    additionalText: 'Consulta inicial por $80'
+    additionalText: 'Consulta inicial por $80',
+    tab: 'naturales'
   },
   {
     id: 2,
@@ -135,7 +147,8 @@ const services = ref([
     whyChoose: 'Soporte jurídico integral, tecnología avanzada y equipo especializado. Protegemos y hacemos posible tu negocio.',
     buttonText: 'Explorar servicios empresariales',
     buttonColor: '#000000',
-    additionalText: 'Asesoría estratégica incluida • Planes escalables'
+    additionalText: 'Asesoría estratégica incluida • Planes escalables',
+    tab: 'juridicas'
   }
 ])
 </script>
