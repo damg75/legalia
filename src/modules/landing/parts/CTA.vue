@@ -19,7 +19,7 @@
           size="large"
           rounded="lg"
           class="cta-button mb-6"
-          @click="openWhatsApp"
+          @click="handleWhatsAppClick"
         >
           <v-icon class="me-2" size="20">mdi-whatsapp</v-icon>
           Consultar por WhatsApp
@@ -38,6 +38,10 @@
 import { useWhatsApp } from '@/composables/useWhatsApp'
 
 const { openWhatsApp } = useWhatsApp()
+
+const handleWhatsAppClick = () => {
+  openWhatsApp()
+}
 </script>
 
 <style scoped lang="scss">

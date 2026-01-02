@@ -6,6 +6,10 @@
  */
 export function useWhatsApp(phoneNumber = '+584122515898', defaultMessage = 'Hola, me interesa conocer más sobre sus servicios legales.') {
   const openWhatsApp = (customMessage = null) => {
+    // Si se pasa un evento por error, ignorarlo y usar el mensaje por defecto
+    if (customMessage && typeof customMessage !== 'string') {
+      customMessage = null
+    }
     const message = encodeURIComponent(customMessage || defaultMessage)
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`
     window.open(whatsappUrl, '_blank')
