@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://legalia.com/sitemap.xml
+
+# No indexar archivos de desarrollo
+Disallow: /src/
+Disallow: /node_modules/
+
+# Permitir todo lo demás
+Allow: /

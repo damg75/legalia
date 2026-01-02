@@ -9,13 +9,15 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import { useSEO } from '@/composables/useSEO'
 
 // Layouts
 import LandingLayout from '@/layouts/LandingLayout.vue'
 
 const route = useRoute()
+const { updateSEO } = useSEO()
 
 // Layout components mapping
 const layouts = {
@@ -28,6 +30,19 @@ const layout = computed(() => {
   const layoutName = route.meta?.layout || 'default'
   return layouts[layoutName] || layouts.default
 })
+
+// Actualizar SEO cuando cambia la ruta
+watch(
+  () => route.path,
+  () => {
+    const seoData = route.meta?.seo || {}
+    updateSEO({
+      ...seoData,
+      url: `${window.location.origin}${route.path}`
+    })
+  },
+  { immediate: true }
+)
 </script>
 
 <style>

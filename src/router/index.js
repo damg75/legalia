@@ -19,7 +19,25 @@ const routes = [
     name: 'Landing',
     component: Landing,
     meta: {
-      layout: 'LandingLayout'
+      layout: 'LandingLayout',
+      seo: {
+        title: 'Legalia - Servicios Legales Digitales en Venezuela',
+        description: 'Acercamos el acceso a la justicia con soluciones legales digitales, accesibles y eficientes para personas y empresas en Venezuela. Consulta inicial por $80.',
+        keywords: 'servicios legales Venezuela, abogados online, asesoría legal digital, consultoría jurídica, servicios legales accesibles',
+        image: '/og-logo.png',
+        schemaType: 'LegalService',
+        structuredData: {
+          '@type': 'LegalService',
+          serviceType: 'Servicios Legales Digitales',
+          areaServed: {
+            '@type': 'Country',
+            name: 'Venezuela'
+          },
+          priceRange: '$$',
+          telephone: '+584122515898',
+          email: 'hola@legalia.com'
+        }
+      }
     }
   },
   {
@@ -27,7 +45,28 @@ const routes = [
     name: 'Services',
     component: Services,
     meta: {
-      layout: 'LandingLayout'
+      layout: 'LandingLayout',
+      seo: {
+        title: 'Servicios Legales - Legalia',
+        description: 'Servicios legales personalizados para personas naturales y jurídicas. Contratos, asesoría fiscal, propiedad intelectual, derecho procesal y más. Respuesta rápida y tarifas transparentes.',
+        keywords: 'servicios legales personas naturales, servicios legales empresas, abogados especializados, asesoría legal personalizada',
+        image: '/og-logo.png',
+        schemaType: 'Service',
+        structuredData: {
+          '@type': 'Service',
+          serviceType: 'Servicios Legales',
+          provider: {
+            '@type': 'LegalService',
+            name: 'Legalia'
+          },
+          areaServed: 'Venezuela',
+          availableChannel: {
+            '@type': 'ServiceChannel',
+            serviceType: 'Online',
+            availableLanguage: 'Spanish'
+          }
+        }
+      }
     }
   },
   {
@@ -35,7 +74,19 @@ const routes = [
     name: 'Form',
     component: Form,
     meta: {
-      layout: 'LandingLayout'
+      layout: 'LandingLayout',
+      seo: {
+        title: 'Únete a Nosotros - Legalia',
+        description: 'Forma parte del equipo de Legalia. Buscamos profesionales del derecho comprometidos con hacer la justicia más accesible.',
+        keywords: 'trabajo legal, oportunidades abogados, carrera jurídica, unirse a Legalia',
+        image: '/og-logo.png',
+        schemaType: 'WebPage',
+        structuredData: {
+          '@type': 'WebPage',
+          name: 'Únete a Nosotros - Legalia',
+          description: 'Oportunidades de trabajo para profesionales del derecho'
+        }
+      }
     }
   },
   {
@@ -43,7 +94,31 @@ const routes = [
     name: 'AboutUs',
     component: AboutUs,
     meta: {
-      layout: 'LandingLayout'
+      layout: 'LandingLayout',
+      seo: {
+        title: 'Sobre Nosotros - Legalia',
+        description: 'Conoce a nuestro equipo de profesionales especializados en el área legal. Más de 30 años de experiencia combinada ofreciendo soluciones legales efectivas y transparentes.',
+        keywords: 'equipo legal, abogados especializados Venezuela, profesionales legales, experiencia jurídica',
+        image: '/og-logo.png',
+        schemaType: 'AboutPage',
+        structuredData: {
+          '@type': 'AboutPage',
+          mainEntity: {
+            '@type': 'Organization',
+            name: 'Legalia',
+            description: 'Servicios legales digitales en Venezuela',
+            url: 'https://legalia.com',
+            logo: 'https://legalia.com/og-logo.png',
+            contactPoint: {
+              '@type': 'ContactPoint',
+              telephone: '+584122515898',
+              contactType: 'customer service',
+              email: 'hola@legalia.com',
+              availableLanguage: 'Spanish'
+            }
+          }
+        }
+      }
     }
   },
   {
