@@ -41,8 +41,17 @@
                   <v-icon size="18" class="mr-1" color="#9CA3AF">mdi-phone</v-icon>
                   Teléfono<span class="text-red">*</span>
                 </label>
-                <v-text-field id="phone" v-model="formData.phone" variant="outlined" placeholder="+1 (555) 123-4567"
-                  :rules="phoneRules" density="comfortable" class="mt-2" />
+                <v-text-field 
+                  id="phone" 
+                  v-model="formData.phone" 
+                  type="tel"
+                  variant="outlined" 
+                  placeholder="+58 412 1234567"
+                  :rules="phoneRules" 
+                  density="comfortable" 
+                  class="mt-2"
+                  @input="handlePhoneInput"
+                />
               </div>
 
               <!-- Experiencia -->
@@ -186,8 +195,29 @@ const emailRules = [
 
 const phoneRules = [
   v => !!v || 'El teléfono es requerido',
-  v => (v && v.length >= 10) || 'El teléfono debe tener al menos 10 caracteres'
+  v => (v && v.length <= 15) || 'El teléfono no puede tener más de 15 caracteres',
+  v => (v && /^\+?[0-9]+$/.test(v)) || 'El teléfono solo puede contener números y el símbolo + al inicio',
+  v => {
+    const digitsOnly = v ? v.replace(/[^0-9]/g, '') : ''
+    return digitsOnly.length >= 10 || 'El teléfono debe tener al menos 10 dígitos'
+  }
 ]
+
+// Filtrar solo números y + al inicio mientras el usuario escribe
+const handlePhoneInput = (event) => {
+  const value = event.target.value
+  // Permitir solo números y + al inicio
+  let filtered = value.replace(/[^0-9+]/g, '')
+  // Asegurar que el + solo esté al inicio
+  if (filtered.includes('+')) {
+    filtered = '+' + filtered.replace(/\+/g, '')
+  }
+  // Limitar a máximo 15 caracteres
+  if (filtered.length > 15) {
+    filtered = filtered.substring(0, 15)
+  }
+  formData.value.phone = filtered
+}
 
 const experienceRules = [
   v => !!v || 'La experiencia es requerida',
