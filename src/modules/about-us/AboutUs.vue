@@ -32,50 +32,34 @@
       <v-row class="mt-8">
         <v-col cols="12">
           <div class="carousel-wrapper">
-            <v-btn
-              icon
-              variant="elevated"
-              class="carousel-nav-btn carousel-prev"
-              @click="prevSlide"
-            >
-              <v-icon>mdi-chevron-left</v-icon>
-            </v-btn>
+            <button class="carousel-nav-btn carousel-prev" @click="carouselRef?.prev()" aria-label="Anterior">
+              <v-icon size="40" color="#9CA3AF">mdi-chevron-left</v-icon>
+            </button>
             <div class="carousel-container">
-              <v-carousel
+              <SimpleCarousel
                 ref="carouselRef"
-                v-model="currentSlide"
-                hide-delimiters
-                :show-arrows="false"
-                height="auto"
+                :items="teamMembersRef"
+                :items-per-page="itemsPerPage"
                 class="team-carousel"
-                crossfade
               >
-              <v-carousel-item
-                v-for="(chunk, chunkIndex) in chunkedMembers"
-                :key="chunkIndex"
-              >
-                <v-row class="py-4 carousel-row" justify="center">
-                  <v-col
-                    v-for="member in chunk"
-                    :key="member.id"
-                    cols="12"
-                    md="4"
-                    class="d-flex justify-center"
-                  >
-                    <TeamMemberCard :member="member" @header-click="handleMemberHeaderClick" />
-                  </v-col>
-                </v-row>
-              </v-carousel-item>
-              </v-carousel>
+                <template #default="{ items }">
+                  <v-row class="py-4 carousel-row" justify="center">
+                    <v-col
+                      v-for="member in items"
+                      :key="member.id"
+                      cols="12"
+                      md="4"
+                      class="d-flex justify-center"
+                    >
+                      <TeamMemberCard :member="member" @header-click="handleMemberHeaderClick" />
+                    </v-col>
+                  </v-row>
+                </template>
+              </SimpleCarousel>
             </div>
-            <v-btn
-              icon
-              variant="elevated"
-              class="carousel-nav-btn carousel-next"
-              @click="nextSlide"
-            >
-              <v-icon>mdi-chevron-right</v-icon>
-            </v-btn>
+            <button class="carousel-nav-btn carousel-next" @click="carouselRef?.next()" aria-label="Siguiente">
+              <v-icon size="40" color="#9CA3AF">mdi-chevron-right</v-icon>
+            </button>
           </div>
         </v-col>
       </v-row>
@@ -133,13 +117,16 @@ import { useDisplay } from 'vuetify'
 import TeamMemberCard from './parts/TeamMemberCard.vue'
 import TeamMemberModal from './parts/TeamMemberModal.vue'
 import BaseModal from '@/components/BaseModal.vue'
+import SimpleCarousel from '@/components/SimpleCarousel.vue'
 import { teamMembers } from './data/teamMembers.js'
 import { useTeamMember } from './composables/useTeamMember.js'
 
 const display = useDisplay()
 const mobile = computed(() => display.smAndDown.value)
 const carouselRef = ref(null)
-const currentSlide = ref(0)
+
+// Items por página según el dispositivo
+const itemsPerPage = computed(() => mobile.value ? 1 : 3)
 
 // Composable para manejar el modal del miembro
 const {
@@ -148,24 +135,6 @@ const {
   handleMemberHeaderClick,
   closeMemberModal
 } = useTeamMember()
-
-const prevSlide = () => {
-  if (carouselRef.value && currentSlide.value > 0) {
-    currentSlide.value--
-  } else if (carouselRef.value) {
-    // Si estamos en el primer slide, ir al último
-    currentSlide.value = chunkedMembers.value.length - 1
-  }
-}
-
-const nextSlide = () => {
-  if (carouselRef.value && currentSlide.value < chunkedMembers.value.length - 1) {
-    currentSlide.value++
-  } else if (carouselRef.value) {
-    // Si estamos en el último slide, volver al primero
-    currentSlide.value = 0
-  }
-}
 
 // Tamaño responsive para las comillas
 const quoteSize = computed(() => {
@@ -188,16 +157,6 @@ const paragraphs = ref([
 
 // Usar los datos de teamMembers desde el archivo externo
 const teamMembersRef = ref(teamMembers)
-
-// Agrupar miembros en chunks según el dispositivo
-const chunkedMembers = computed(() => {
-  const chunkSize = mobile.value ? 1 : 3
-  const chunks = []
-  for (let i = 0; i < teamMembersRef.value.length; i += chunkSize) {
-    chunks.push(teamMembersRef.value.slice(i, i + chunkSize))
-  }
-  return chunks
-})
 </script>
 
 <style scoped>
@@ -271,50 +230,38 @@ const chunkedMembers = computed(() => {
   margin: 0 auto;
   overflow: visible !important;
   position: relative;
-}
-
-.team-carousel :deep(.v-window) {
-  overflow: visible !important;
-}
-
-.team-carousel :deep(.v-carousel__controls),
-.team-carousel :deep(.v-window__controls),
-.team-carousel :deep(.v-window__control),
-.team-carousel :deep(.v-window__left),
-.team-carousel :deep(.v-window__right),
-.team-carousel :deep(button.v-window__left),
-.team-carousel :deep(button.v-window__right) {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
+  width: 100%;
 }
 
 .carousel-nav-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: #F3F4F6 !important;
-  color: #6B7280 !important;
-  box-shadow: none !important;
-  width: 40px !important;
-  height: 40px !important;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
   z-index: 10;
-  flex-shrink: 0;
-  border-radius: 50% !important;
-}
+  transition: all 0.2s ease;
 
-.carousel-nav-btn:hover {
-  background-color: #E5E7EB !important;
-  color: #374151 !important;
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &:active {
+    transform: translateY(-50%) scale(0.95);
+  }
 }
 
 .carousel-prev {
-  left: -40px;
+  left: -50px;
 }
 
 .carousel-next {
-  right: -40px;
+  right: -50px;
 }
 
 
@@ -376,23 +323,16 @@ const chunkedMembers = computed(() => {
   }
 
   .carousel-prev {
-    left: 10px;
+    left: 0px;
   }
 
   .carousel-next {
-    right: 10px;
+    right: 0px;
   }
 
-  .carousel-nav-btn {
-    width: 36px !important;
-    height: 36px !important;
+  .carousel-nav-btn :deep(.v-icon) {
+    font-size: 32px !important;
   }
-
-  .team-carousel :deep(.v-btn--icon) {
-    width: 40px !important;
-    height: 40px !important;
-  }
-
 
   .quote-section {
     margin: 60px 0;
@@ -438,16 +378,15 @@ const chunkedMembers = computed(() => {
   }
 
   .carousel-prev {
-    left: 4px;
+    left: -5px;
   }
 
   .carousel-next {
-    right: 4px;
+    right: -5px;
   }
 
-  .carousel-nav-btn {
-    width: 32px !important;
-    height: 32px !important;
+  .carousel-nav-btn :deep(.v-icon) {
+    font-size: 28px !important;
   }
 
 

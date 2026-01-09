@@ -60,6 +60,32 @@ const handleHeaderClick = () => {
   width: 100%;
   max-width: 400px;
   padding-top: 80px;
+  cursor: pointer;
+}
+
+/* Hover en toda la tarjeta */
+.team-card-wrapper:hover .profile-image-container {
+  transform: translateX(-50%) scale(1.08) translateY(-4px);
+}
+
+.team-card-wrapper:hover .profile-image,
+.team-card-wrapper:hover .profile-placeholder {
+  box-shadow: 0 8px 24px rgba(99, 7, 30, 0.25);
+  border-color: #63071E;
+}
+
+.team-card-wrapper:hover .team-card {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(99, 7, 30, 0.08);
+}
+
+.team-card-wrapper:hover .dashed-divider {
+  border-color: #63071E;
+  width: 80%;
+}
+
+.team-card-wrapper:hover .member-name {
+  color: #63071E;
 }
 
 .profile-image-container {
@@ -69,11 +95,7 @@ const handleHeaderClick = () => {
   transform: translateX(-50%);
   z-index: 10;
   cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.profile-image-container:hover {
-  transform: translateX(-50%) scale(1.05);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .profile-image {
@@ -83,6 +105,8 @@ const handleHeaderClick = () => {
   object-fit: cover;
   border: 6px solid #FFFFFF;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.35s ease, border-color 0.35s ease;
+  animation: avatarPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 .profile-placeholder {
@@ -95,6 +119,23 @@ const handleHeaderClick = () => {
   justify-content: center;
   border: 6px solid #FFFFFF;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.35s ease, border-color 0.35s ease;
+  animation: avatarPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Animación de entrada del avatar */
+@keyframes avatarPop {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .team-card {
@@ -104,6 +145,8 @@ const handleHeaderClick = () => {
   height: 550px;
   display: flex;
   flex-direction: column;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), 
+              box-shadow 0.35s ease;
 }
 
 .team-card-content {
@@ -120,6 +163,7 @@ const handleHeaderClick = () => {
   border-top: 2px dashed #D1D5DB;
   margin: 12px 0;
   flex-shrink: 0;
+  transition: border-color 0.35s ease, width 0.35s ease;
 }
 
 .member-header {
@@ -136,6 +180,7 @@ const handleHeaderClick = () => {
   line-height: 1.3;
   margin-bottom: 8px;
   flex-shrink: 0;
+  transition: color 0.35s ease;
 }
 
 .member-title {
