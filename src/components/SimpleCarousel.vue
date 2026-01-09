@@ -1,5 +1,10 @@
 <template>
-  <div class="simple-carousel">
+  <div 
+    class="simple-carousel"
+    @touchstart="handleTouchStart"
+    @touchmove="handleTouchMove"
+    @touchend="handleTouchEnd"
+  >
     <div class="carousel-track">
       <transition :name="transitionName" mode="out-in">
         <div :key="currentIndex" class="carousel-slide">
@@ -26,6 +31,10 @@ const props = defineProps({
   modelValue: {
     type: Number,
     default: 0
+  },
+  swipeThreshold: {
+    type: Number,
+    default: 80 // Mínimo de píxeles para considerar un swipe
   }
 })
 
@@ -33,6 +42,12 @@ const emit = defineEmits(['update:modelValue'])
 
 const currentIndex = ref(props.modelValue)
 const transitionName = ref('fade')
+
+// Touch/Swipe state
+const touchStartX = ref(0)
+const touchStartY = ref(0)
+const touchEndX = ref(0)
+const isSwiping = ref(false)
 
 // Sincronizar con v-model
 watch(() => props.modelValue, (newVal) => {
@@ -78,6 +93,46 @@ const goTo = (index) => {
   }
 }
 
+// Touch handlers para swipe
+const handleTouchStart = (e) => {
+  touchStartX.value = e.touches[0].clientX
+  touchStartY.value = e.touches[0].clientY
+  isSwiping.value = true
+}
+
+const handleTouchMove = (e) => {
+  if (!isSwiping.value) return
+  touchEndX.value = e.touches[0].clientX
+}
+
+const handleTouchEnd = () => {
+  if (!isSwiping.value) return
+  
+  // Si no hubo movimiento (solo tap), no hacer nada
+  if (touchEndX.value === 0) {
+    isSwiping.value = false
+    return
+  }
+  
+  const diffX = touchStartX.value - touchEndX.value
+  
+  // Solo procesar si el swipe horizontal es mayor que el threshold
+  if (Math.abs(diffX) > props.swipeThreshold) {
+    if (diffX > 0) {
+      // Swipe izquierda -> siguiente
+      next()
+    } else {
+      // Swipe derecha -> anterior
+      prev()
+    }
+  }
+  
+  // Reset
+  isSwiping.value = false
+  touchStartX.value = 0
+  touchEndX.value = 0
+}
+
 // Exponer métodos
 defineExpose({
   next,
@@ -93,6 +148,7 @@ defineExpose({
   width: 100%;
   position: relative;
   overflow: hidden;
+  touch-action: pan-y pinch-zoom; /* Permite scroll vertical pero captura swipe horizontal */
 }
 
 .carousel-track {
