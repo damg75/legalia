@@ -10,6 +10,11 @@
  * - zoom: Zoom con fade
  */
 
+/* Prevenir scroll horizontal causado por animaciones */
+html, body {
+  overflow-x: hidden;
+}
+
 /* Variables por defecto */
 :root {
   --scroll-duration: 600ms;
