@@ -18,12 +18,52 @@
         </div>
       </div>
     </v-card-title>
+
+    <!-- Separador -->
+    <v-divider class="mx-6 divider-header"></v-divider>
     
-    <v-card-text class="pa-6 pt-2">
-      <!-- Descripción -->
-      <div v-if="member?.description" class="member-description-section">
-        <p class="member-description-text" v-html="member.description"></p>
-      </div>
+    <v-card-text class="pa-6 pt-4">
+      <!-- Si tiene fullProfile, mostrar estructura completa -->
+      <template v-if="member?.fullProfile">
+        <!-- Prefacio -->
+        <div class="profile-section prefacio-section">
+          <p v-if="member.fullProfile.prefacio?.texto" class="prefacio-texto">
+            {{ member.fullProfile.prefacio.texto }}
+          </p>
+          <ul v-if="member.fullProfile.prefacio?.bullets?.length" class="prefacio-bullets">
+            <li v-for="(bullet, index) in member.fullProfile.prefacio.bullets" :key="'prefacio-' + index">
+              {{ bullet }}
+            </li>
+          </ul>
+        </div>
+
+        <!-- Experiencia -->
+        <div v-if="member.fullProfile.experiencia?.length" class="profile-section experiencia-section">
+          <h3 class="section-title">Experiencia</h3>
+          <ul class="experience-list">
+            <li v-for="(exp, index) in member.fullProfile.experiencia" :key="'exp-' + index">
+              {{ exp }}
+            </li>
+          </ul>
+        </div>
+
+        <!-- Educación -->
+        <div v-if="member.fullProfile.educacion?.length" class="profile-section educacion-section">
+          <h3 class="section-title">Educación</h3>
+          <ul class="education-list">
+            <li v-for="(edu, index) in member.fullProfile.educacion" :key="'edu-' + index">
+              {{ edu }}
+            </li>
+          </ul>
+        </div>
+      </template>
+
+      <!-- Fallback: Descripción simple si no tiene fullProfile -->
+      <template v-else>
+        <div v-if="member?.description" class="member-description-section">
+          <p class="member-description-text" v-html="member.description"></p>
+        </div>
+      </template>
     </v-card-text>
   </div>
 </template>
@@ -81,7 +121,80 @@ defineProps({
   margin: 4px 0 0 0;
 }
 
-/* Description */
+/* Divider */
+.divider-header {
+  border-color: #E5E7EB;
+  opacity: 1;
+}
+
+/* Profile Sections */
+.profile-section {
+  margin-bottom: 24px;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.section-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1F2937;
+  margin: 0 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #E5E7EB;
+}
+
+/* Prefacio */
+.prefacio-section {
+  margin-top: 8px;
+}
+
+.prefacio-texto {
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: #374151;
+  margin: 0 0 16px 0;
+}
+
+.prefacio-bullets,
+.experience-list,
+.education-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  
+  li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #4B5563;
+    
+    &:before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: #63071E; // Vinotinto Legalia
+      font-weight: bold;
+    }
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.prefacio-bullets li {
+  margin-bottom: 8px;
+}
+
+/* Fallback Description */
 .member-description-section {
   margin-top: 16px;
 }
@@ -99,16 +212,30 @@ defineProps({
 /* Responsive */
 @media (max-width: 600px) {
   .member-modal-title {
-    font-size: 20px;
+    font-size: 18px;
   }
   
   .member-modal-subtitle {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .icon-container-modal {
-    width: 60px;
-    height: 60px;
+    width: 56px;
+    height: 56px;
+  }
+
+  .section-title {
+    font-size: 15px;
+  }
+
+  .prefacio-texto {
+    font-size: 14px;
+  }
+
+  .prefacio-bullets li,
+  .experience-list li,
+  .education-list li {
+    font-size: 13px;
   }
 
   .member-description-text {

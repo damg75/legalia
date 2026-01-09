@@ -1,10 +1,47 @@
 export const teamMembers = [
   {
-    id: 'renee-moros-t',
-    name: 'Renée Moros T.',
+    id: 'renee-moros-troccoli',
+    name: 'Renée Moros Troccoli',
     title: 'Abogada Especialista en Ciencias Penales y Criminológicas',
     profileUrl: '/members/renee_moros.webp',
-    description: 'Abogada USM (1992), con más de treinta (30) años de experiencia profesional, especialista en Ciencias Penales y Criminológicas en la Universidad   de Venezuela (UCV), doctoranda en Ciencias Penales y Criminalísticas en UNIMAR, ex socia fundadora del Despacho de Abogados RMA, profesora de posgrado en distintas casas de estudio (UCV, UNIMAR, UCSAR, ENM), ex jueza penal de carrera, y ex Conjueza del TSJ, coordinadora del Área de litigios en materia penal y del Area de Compliance Corporativo, Criminal Compliance, Derecho Penal Económico y de la Empresa de nuestra firma.'
+    // Descripción corta para el carrusel
+    description: 'Abogada USM (1992), con más de treinta (30) años de experiencia profesional, especialista en Ciencias Penales y Criminológicas en la Universidad Central de Venezuela (UCV), doctoranda en Ciencias Penales y Criminalísticas en UNIMAR, ex socia fundadora del Despacho de Abogados RMA, profesora de posgrado en distintas casas de estudio (UCV, UNIMAR, UCSAR, ENM), ex jueza penal de carrera, y ex Conjueza del TSJ, coordinadora del Área de litigios en materia penal y del Área de Compliance Corporativo, Criminal Compliance, Derecho Penal Económico y de la Empresa de nuestra firma.',
+    // Datos completos para el modal
+    fullProfile: {
+      prefacio: {
+        texto: 'Abogada Especialista en Ciencias Penales y Criminológicas | Penal Económico y de la Empresa | Modelos de Prevención de Delitos | Litigante, profesora, conferencista, articulista e infoproductora.',
+        bullets: [
+          'Abogada con más de 30 años de experiencia profesional.',
+          'Especialista en Ciencias Penales y Criminológicas (UCV).',
+          'Doctoranda en Ciencias Penales y Criminalísticas (UNIMAR).',
+          'Ex socia fundadora del Despacho de Abogados RMA.',
+          'Profesora de posgrado en UCV, UNIMAR, UCSAR y la Escuela Nacional de la Magistratura (ENM).',
+          'Ex jueza penal de carrera y ex Conjueza del Tribunal Supremo de Justicia (TSJ).',
+          'Coordinadora del Área de Litigios en materia penal.',
+          'Coordinadora del Área de Compliance Corporativo, Criminal Compliance, Derecho Penal Económico y de la Empresa.'
+        ]
+      },
+      experiencia: [
+        'Coordinadora del Área Penal, Criminal Compliance, Derecho Penal Económico y de la Empresa en KLMCLegal Law Firm (febrero 2021 – presente).',
+        'Docente en Derecho Procesal Penal en la Universidad Central de Venezuela, UNIMAR, Escuela Nacional de la Magistratura y ENF (diciembre 2010 – presente).',
+        'Socia fundadora del despacho RMA Despacho de Abogados (septiembre 2015 – enero 2021).',
+        'Jueza Superior Penal en la Corte de Apelaciones del Área Metropolitana de Caracas (mayo 2008 – septiembre 2015).',
+        'Jueza de Primera Instancia Penal del Área Metropolitana de Caracas y del estado Miranda (julio 1999 – mayo 2008).',
+        'Jueza itinerante Superior y de Primera Instancia Penal a nivel nacional (junio 1998 – julio 1999).',
+        'Abogada relatora del Tribunal Superior de Salvaguarda del Patrimonio Público (julio 1992 – junio 1998).',
+        'Fiscal Suplente del Ministerio Público en el estado Nueva Esparta (abril 1993 – junio 1998).',
+        'Defensora Pública Suplente del Área Metropolitana de Caracas (julio 1992 – junio 1998).',
+        'Amanuense en los Tribunales Superior Quinto, Noveno Penal y Duodécimo de Primera Instancia Penal (octubre 1988 – julio 1992).'
+      ],
+      educacion: [
+        'Doctoranda en Ciencias Penales y Criminalísticas, Universidad de Margarita (UNIMAR), abril 2021 – noviembre 2025.',
+        'Especialista en Ciencias Penales y Criminológicas, Universidad Central de Venezuela (UCV), 1994 – 2005.',
+        'Abogada, mención Derecho, Universidad Santa María, 1987 – 1992.',
+        'Docente en la Especialización de Ciencias Penales y Criminológicas, Universidad Central de Venezuela (UCV). Temas impartidos: "La imputación en el proceso penal" y "Actos de investigación y actos de prueba".',
+        'Docente contratada en Derecho Procesal Penal Superior I, II y III, Universidad de Margarita (UNIMAR).',
+        'Miembro asociada de la World Compliance Association desde marzo de 2023.'
+      ]
+    }
   },
   {
     id: 'carlos-armando-armas-flores',
