@@ -123,6 +123,25 @@ const handleButtonClick = () => {
 }
 </script>
 
+<style lang="scss">
+/* Estilos globales para sobreescribir Vuetify */
+.pricing-card.v-card {
+  --v-hover-opacity: 0 !important;
+  
+  &:hover {
+    background-color: #FFFFFF !important;
+    
+    > .v-card__overlay {
+      opacity: 0 !important;
+    }
+  }
+  
+  > .v-card__overlay {
+    background-color: transparent !important;
+  }
+}
+</style>
+
 <style scoped>
 /* Wrapper para la tarjeta con badge */
 .pricing-card-wrapper {
@@ -186,6 +205,12 @@ const handleButtonClick = () => {
 .pricing-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+  background-color: #FFFFFF !important;
+}
+
+.pricing-card:hover::before,
+.pricing-card::before {
+  opacity: 0 !important;
 }
 
 /* Títulos y textos de las tarjetas */
