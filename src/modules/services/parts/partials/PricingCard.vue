@@ -8,7 +8,7 @@
         </div>
       </div>
 
-      <v-card class="pricing-card" elevation="2">
+      <v-card class="pricing-card" elevation="2" @click="handleButtonClick">
         <v-card-text class="pa-8 text-center">
           <!-- Icono -->
           <div class="card-icon-wrapper mb-4 d-flex flex-row justify-center align-center">
@@ -179,6 +179,13 @@ const handleButtonClick = () => {
   background-color: #FFFFFF;
   height: 100%;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
 }
 
 /* Títulos y textos de las tarjetas */
