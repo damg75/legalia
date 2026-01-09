@@ -1,28 +1,30 @@
 <template>
-  <div class="team-member-modal pa-4">
-    <!-- Header con imagen y título -->
-    <v-card-title class="pa-6 pb-2">
-      <div class="d-flex align-start">
-        <div class="icon-container-modal mr-4">
-          <v-img
-            v-if="member?.profileUrl"
-            :src="member.profileUrl"
-            class="member-image-modal"
-            cover
-          />
-          <v-icon v-else size="60" color="#9CA3AF">mdi-account-circle</v-icon>
+  <div class="team-member-modal">
+    <!-- Header sticky con imagen y título -->
+    <div class="modal-sticky-header">
+      <v-card-title class="pa-6 pb-2">
+        <div class="d-flex align-start">
+          <div class="icon-container-modal mr-4">
+            <v-img
+              v-if="member?.profileUrl"
+              :src="member.profileUrl"
+              class="member-image-modal"
+              cover
+            />
+            <v-icon v-else size="60" color="#9CA3AF">mdi-account-circle</v-icon>
+          </div>
+          <div class="flex-grow-1">
+            <h2 class="member-modal-title">{{ member?.name }}</h2>
+            <p class="member-modal-subtitle" v-html="formattedTitle"></p>
+          </div>
         </div>
-        <div class="flex-grow-1">
-          <h2 class="member-modal-title">{{ member?.name }}</h2>
-          <p class="member-modal-subtitle">{{ member?.title }}</p>
-        </div>
-      </div>
-    </v-card-title>
+      </v-card-title>
 
-    <!-- Separador -->
-    <v-divider class="mx-6 divider-header"></v-divider>
+      <!-- Separador -->
+      <v-divider class="mx-6 divider-header"></v-divider>
+    </div>
     
-    <v-card-text class="pa-6 pt-4">
+    <v-card-text ref="scrollableContent" class="pa-6 pt-4 modal-scrollable-content">
       <!-- Si tiene fullProfile, mostrar estructura completa -->
       <template v-if="member?.fullProfile">
         <!-- Prefacio -->
@@ -41,9 +43,23 @@
         <div v-if="member.fullProfile.experiencia?.length" class="profile-section experiencia-section">
           <h3 class="section-title">Experiencia</h3>
           <ul class="experience-list">
-            <li v-for="(exp, index) in member.fullProfile.experiencia" :key="'exp-' + index">
-              {{ exp }}
-            </li>
+            <template v-for="(exp, index) in member.fullProfile.experiencia" :key="'exp-' + index">
+              <!-- Si es string simple -->
+              <li v-if="typeof exp === 'string'">
+                {{ exp }}
+              </li>
+              <!-- Si es objeto con subitems -->
+              <template v-else>
+                <li class="exp-parent">
+                  {{ exp.texto }}
+                </li>
+                <ul v-if="exp.subitems?.length" class="experience-subitems">
+                  <li v-for="(subitem, subIndex) in exp.subitems" :key="'sub-' + index + '-' + subIndex">
+                    {{ subitem }}
+                  </li>
+                </ul>
+              </template>
+            </template>
           </ul>
         </div>
 
@@ -51,9 +67,23 @@
         <div v-if="member.fullProfile.educacion?.length" class="profile-section educacion-section">
           <h3 class="section-title">Educación</h3>
           <ul class="education-list">
-            <li v-for="(edu, index) in member.fullProfile.educacion" :key="'edu-' + index">
-              {{ edu }}
-            </li>
+            <template v-for="(edu, index) in member.fullProfile.educacion" :key="'edu-' + index">
+              <!-- Si es string simple -->
+              <li v-if="typeof edu === 'string'">
+                {{ edu }}
+              </li>
+              <!-- Si es objeto con subitems -->
+              <template v-else>
+                <li class="edu-parent">
+                  {{ edu.texto }}
+                </li>
+                <ul v-if="edu.subitems?.length" class="education-subitems">
+                  <li v-for="(subitem, subIndex) in edu.subitems" :key="'edusub-' + index + '-' + subIndex">
+                    {{ subitem }}
+                  </li>
+                </ul>
+              </template>
+            </template>
           </ul>
         </div>
       </template>
@@ -69,11 +99,34 @@
 </template>
 
 <script setup>
-defineProps({
+import { computed, ref, watch, nextTick } from 'vue'
+
+const props = defineProps({
   member: {
     type: Object,
     default: null
   }
+})
+
+const scrollableContent = ref(null)
+
+// Formatear el título para hacer salto de línea en " y " y " en "
+const formattedTitle = computed(() => {
+  if (!props.member?.title) return ''
+  return props.member.title
+    .replace(/ y /g, '<br>y ')
+    .replace(/ en /g, '<br>en ')
+})
+
+// Resetear scroll cuando cambia el miembro seleccionado
+watch(() => props.member, () => {
+  nextTick(() => {
+    if (scrollableContent.value?.$el) {
+      scrollableContent.value.$el.scrollTop = 0
+    } else if (scrollableContent.value) {
+      scrollableContent.value.scrollTop = 0
+    }
+  })
 })
 </script>
 
@@ -81,6 +134,27 @@ defineProps({
 .team-member-modal {
   width: 100%;
   font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+/* Header sticky */
+.modal-sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #FFFFFF;
+  flex-shrink: 0;
+  padding-top: 16px;
+}
+
+/* Contenido scrolleable */
+.modal-scrollable-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 /* Header Section */
@@ -194,6 +268,70 @@ defineProps({
   margin-bottom: 8px;
 }
 
+/* Subitems anidados en experiencia */
+.experience-subitems {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 12px 20px;
+  
+  li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 6px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #6B7280;
+    
+    &:before {
+      content: '◦';
+      position: absolute;
+      left: 0;
+      color: #63071E;
+      font-weight: normal;
+    }
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.exp-parent,
+.edu-parent {
+  font-weight: 600;
+  color: #374151 !important;
+}
+
+/* Subitems anidados en educación */
+.education-subitems {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 12px 20px;
+  
+  li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 6px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #6B7280;
+    
+    &:before {
+      content: '◦';
+      position: absolute;
+      left: 0;
+      color: #63071E;
+      font-weight: normal;
+    }
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
 /* Fallback Description */
 .member-description-section {
   margin-top: 16px;
@@ -211,17 +349,24 @@ defineProps({
 
 /* Responsive */
 @media (max-width: 600px) {
+  .modal-sticky-header {
+    padding-top: 12px;
+  }
+
   .member-modal-title {
-    font-size: 18px;
+    font-size: 14px;
+    line-height: 1.2;
+    word-break: break-word;
   }
   
   .member-modal-subtitle {
-    font-size: 13px;
+    font-size: 11px;
+    line-height: 1.4;
   }
 
   .icon-container-modal {
-    width: 56px;
-    height: 56px;
+    width: 46px;
+    height: 46px;
   }
 
   .section-title {

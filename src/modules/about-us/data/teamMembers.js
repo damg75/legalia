@@ -46,9 +46,50 @@ export const teamMembers = [
   {
     id: 'carlos-armando-armas-flores',
     name: 'Carlos Armando Armas Flores',
-    title: 'Abogado con especialización en Derecho Privado',
+    title: 'Abogado Especialista en Derecho Penal y Procesal Penal',
     profileUrl: '',
-    description: 'Abogado con especialización en Derecho Privado.Experto en Derecho Civil, Mercantil y Laboral, centrado en el ámbito empresarial y gerencial. Técnico Superior Universitario en Administración de Empresas, con mención en Ciencias Comerciales. Más de 25 años de experiencia progresiva en gerencia, particularmente en los sectores gasífero, metalúrgico e inmobiliario. Amplia trayectoria como abogado litigante y directivo en empresas privadas.Conocimiento de normas internacionales y venezolanas en la distribución de Gas Natural y Gas Licuado de Petróleo (GLP).'
+    description: 'Abogado con especialización en Derecho Privado. Experto en Derecho Civil, Mercantil y Laboral, centrado en el ámbito empresarial y gerencial. Técnico Superior Universitario en Administración de Empresas. Más de 25 años de experiencia progresiva en gerencia.',
+    fullProfile: {
+      prefacio: {
+        bullets: [
+          'Abogado con especialización en Derecho Privado.',
+          'Experto en Derecho Civil, Mercantil y Laboral, centrado en el ámbito empresarial y gerencial.',
+          'Técnico Superior Universitario en Administración de Empresas, con mención en Ciencias Comerciales.',
+          'Más de 25 años de experiencia progresiva en gerencia, particularmente en los sectores gasífero, metalúrgico e inmobiliario.',
+          'Amplia trayectoria como abogado litigante y directivo en empresas privadas.',
+          'Conocimiento de normas internacionales y venezolanas en la distribución de Gas Natural y Gas Licuado de Petróleo (GLP).',
+          'Capacidad para supervisar equipos multidisciplinarios: profesionales, técnicos y obreros.',
+          'Certificaciones nacionales e internacionales en manejo y regulación de gas, seguridad industrial y liderazgo gerencial.'
+        ]
+      },
+      experiencia: [
+        'Presidente / Director Ejecutivo, Grupo empresarial del sector gasífero y metalúrgico: TIGASCO, VDGAS, Rutas y Ruedas, Distribuidora Martínez C.A. (octubre 2012 – presente).',
+        'Director Ejecutivo / Presidente, Centauro Propiedades C.A., sector inmobiliario (junio 2007 – septiembre 2012).',
+        'Gerente General, Venezolana Distribuidora de Gas Natural (VDGAS) (1998 – julio 2007).',
+        {
+          texto: 'Diversos cargos gerenciales y de supervisión, Grupo TIGASCO, VDGAS, Rutas y Ruedas, Martigas (1989 – 1998):',
+          subitems: [
+            'Gerente de Operaciones',
+            'Gerente de Planta de Llenado GLP',
+            'Gerente de Flota y Taller',
+            'Supervisor de Taller Metalúrgico',
+            'Supervisor de Almacén General',
+            'Supervisor Operacional'
+          ]
+        }
+      ],
+      educacion: [
+        'Abogado, Universidad Santa María.',
+        {
+          texto: 'Especialización en Derecho Privado, Universidad Santa María. Diplomados en:',
+          subitems: [
+            'Derecho Civil y Mercantil',
+            'Obligaciones Legales de las Empresas Gerencia, Administración, Liderazgo y Finanzas'
+          ]
+        },
+        'Técnico Superior Universitario en Administración de Empresas, mención Ciencias Comerciales (Instituto de Tecnología Antonio José de Sucre).'
+      ]
+    }
   },
   {
     id: 'cruz-marcel-caraballo-espanol',
@@ -111,7 +152,31 @@ export const teamMembers = [
     name: 'Henry Gerardo Corredor Rivas',
     title: 'Abogado Especialista en Derecho Penal y Procesal Penal',
     profileUrl: '/members/henry_corredor.webp',
-    description: 'Abogado egresado de la Universidad de Los Andes (2001), con más de 20 años de experiencia en el libre ejercicio profesional.Actualmente cursa el último semestre de la Maestría en Derecho Penal y Criminología en la Universidad Bicentenaria de Aragua. Su trayectoria está enfocada principalmente en Derecho Procesal Penal, complementada con experiencia en Derecho Civil, Derecho de Niños, Niñas y Adolescentes, así como en trámites de registros y notarías. Reconocido por su celeridad, responsabilidad, organización, capacidad de resolución de problemas y trabajo en equipo'
+    description: 'Abogado egresado de la Universidad de Los Andes (2001), con más de 20 años de experiencia en el libre ejercicio profesional. Actualmente cursa el último semestre de la Maestría en Derecho Penal y Criminología en la Universidad Bicentenaria de Aragua. Su trayectoria está enfocada principalmente en Derecho Procesal Penal, complementada con experiencia en Derecho Civil, Derecho de Niños, Niñas y Adolescentes, así como en trámites de registros y notarías. Reconocido por su celeridad, responsabilidad, organización, capacidad de resolución de problemas y trabajo en equipo.',
+    fullProfile: {
+      prefacio: {
+        texto: 'Abogado egresado de la Universidad de Los Andes (2001), con más de 20 años de experiencia en el libre ejercicio profesional. Actualmente cursa el último semestre de la Maestría en Derecho Penal y Criminología en la Universidad Bicentenaria de Aragua. Su trayectoria está enfocada principalmente en Derecho Procesal Penal, complementada con experiencia en Derecho Civil, Derecho de Niños, Niñas y Adolescentes, así como en trámites de registros y notarías. Reconocido por su celeridad, responsabilidad, organización, capacidad de resolución de problemas y trabajo en equipo.'
+      },
+      experiencia: [
+        {
+          texto: 'Ejercicio Libre de la Profesión (2001 – presente)',
+          subitems: [
+            'Más de 1.200 causas penales atendidas.',
+            '21 recursos de casación de sentencia presentados ante el Tribunal Supremo de Justicia.',
+            'Amplia experiencia en autorizaciones de viaje de menores, patria potestad, divorcios (por desafecto y homologados).',
+            'Redacción y gestión de documentos en Registro Público y Notaría en El Vigía, Estado Mérida.',
+            'Asesor jurídico de diversas empresas en distintos ramos comerciales.',
+            'Ejercicio activo en El Vigía y Mérida, Venezuela.'
+          ]
+        }
+      ],
+      educacion: [
+        'Maestría en Derecho Penal y Criminología – Universidad Bicentenaria de Aragua (en curso, último semestre).',
+        'Título de Abogado – Universidad de Los Andes, Mérida (2001).',
+        'Educación Diversificada – Liceo Simón Bolívar, El Vigía.',
+        'Educación Básica – Colegio Santa Teresita, El Vigía.'
+      ]
+    }
   },
   {
     id: 'yhonny-meza',

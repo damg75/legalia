@@ -1,18 +1,21 @@
 <template>
-  <div class="modal-payload pa-4">
-    <!-- Header con icono y título -->
-    <v-card-title class="pa-6 pb-2">
-      <div class="d-flex align-start">
-        <div class="icon-container-modal mr-4">
-          <span class="service-icon-modal">{{ selectedService?.icon }}</span>
+  <div class="modal-payload">
+    <!-- Header sticky con icono y título -->
+    <div class="modal-sticky-header">
+      <v-card-title class="pa-6 pb-2">
+        <div class="d-flex align-start">
+          <div class="icon-container-modal mr-4">
+            <span class="service-icon-modal">{{ selectedService?.icon }}</span>
+          </div>
+          <div class="flex-grow-1">
+            <h2 class="service-modal-title">{{ selectedService?.title }}</h2>
+          </div>
         </div>
-        <div class="flex-grow-1">
-          <h2 class="service-modal-title">{{ selectedService?.title }}</h2>
-        </div>
-      </div>
-    </v-card-title>
+      </v-card-title>
+      <v-divider class="mx-6"></v-divider>
+    </div>
     
-    <v-card-text class="pa-6 pt-2">
+    <v-card-text ref="scrollableContent" class="pa-6 pt-4 modal-scrollable-content">
       <!-- Subtítulo -->
       <p v-if="selectedService?.subtitle" class="service-subtitle mb-4">
         {{ selectedService.subtitle }}
@@ -28,7 +31,13 @@
         <h3 class="section-title mb-4">¿En qué situaciones podemos ayudarte?</h3>
         <ul class="situations-list">
           <li v-for="(situation, index) in selectedService.situations" :key="index" class="situation-item">
-            <span class="situation-title">{{ situation.title }}</span>
+            <template v-if="situation.title.includes(':')">
+              <span class="situation-title">{{ situation.title.split(':')[0] }}</span>
+              <span class="situation-subtitle">{{ situation.title.split(':').slice(1).join(':').trim() }}</span>
+            </template>
+            <template v-else>
+              <span class="situation-title">{{ situation.title }}</span>
+            </template>
             <span v-if="situation.subtitle" class="situation-subtitle">
               {{ situation.subtitle }}
             </span>
@@ -82,7 +91,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, watch, nextTick } from 'vue'
 
 interface ServiceSituation {
   title: string
@@ -113,8 +122,21 @@ const emit = defineEmits<{
   (e: 'confirm', service: Service | null): void
 }>()
 
+const scrollableContent = ref<HTMLElement | null>(null)
+
 const showPersonType = computed(() => {
   return props.selectedService?.forNaturalPerson || props.selectedService?.forLegalEntity
+})
+
+// Resetear scroll cuando cambia el servicio seleccionado
+watch(() => props.selectedService, () => {
+  nextTick(() => {
+    if (scrollableContent.value?.$el) {
+      scrollableContent.value.$el.scrollTop = 0
+    } else if (scrollableContent.value) {
+      (scrollableContent.value as any).scrollTop = 0
+    }
+  })
 })
 </script>
 
@@ -122,6 +144,27 @@ const showPersonType = computed(() => {
 .modal-payload {
   width: 100%;
   font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+/* Header sticky */
+.modal-sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #FFFFFF;
+  flex-shrink: 0;
+  padding-top: 16px;
+}
+
+/* Contenido scrolleable */
+.modal-scrollable-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 /* Header Section */
@@ -209,7 +252,7 @@ const showPersonType = computed(() => {
   display: block;
   font-family: 'Poppins', sans-serif;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.4;
   color: #1F2937;
 }
@@ -220,8 +263,8 @@ const showPersonType = computed(() => {
   font-size: 13px;
   font-weight: 400;
   line-height: 1.5;
-  color: #6B7280;
-  margin-top: 2px;
+  color: #4B5563;
+  margin-top: 4px;
 }
 
 /* Why Choose Us */
@@ -255,8 +298,8 @@ const showPersonType = computed(() => {
 
 /* Responsive */
 @media (max-width: 600px) {
-  .modal-payload {
-    padding: 16px !important;
+  .modal-sticky-header {
+    padding-top: 12px;
   }
 
   .service-modal-title {

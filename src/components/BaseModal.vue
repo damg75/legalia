@@ -1,7 +1,7 @@
 <template>
   <v-dialog
     :model-value="modelValue"
-    @update:model-value="$emit('update:modelValue', $event)"
+    @update:model-value="handleModelUpdate"
     :persistent="persistent"
     :content-class="contentClass"
     :max-width="isMobile ? '100%' : maxWidth"
@@ -9,6 +9,7 @@
     :scrim="'rgba(0, 0, 0, 0.75)'"
     @click:outside="handleClickOutside"
     :fullscreen="false"
+    eager
   >
     <v-card
       :class="cardClass"
@@ -90,6 +91,10 @@ const cardClass = computed(() => {
 const close = () => {
   emit('update:modelValue', false)
   emit('close')
+}
+
+const handleModelUpdate = (value: boolean) => {
+  emit('update:modelValue', value)
 }
 
 const handleClickOutside = () => {
@@ -180,69 +185,49 @@ const handleClickOutside = () => {
   transition: opacity 0.12s ease-out !important;
 }
 
-// ===== TRANSICIONES MEJORADAS PARA EL BOTTOMSHEET (MÓVIL) =====
-// Sobrescribir completamente las transiciones de Vuetify para el bottomsheet
-.dialog-bottom-transition-enter-active {
-  .base-modal-mobile {
-    transition: transform 0.15s cubic-bezier(0.2, 0, 0, 1) !important;
+// ===== TRANSICIONES PERSONALIZADAS =====
+// Animación de entrada desde abajo
+@keyframes slideUpModal {
+  from {
+    transform: translateY(100vh);
+  }
+  to {
+    transform: translateY(0);
   }
 }
 
-.dialog-bottom-transition-leave-active {
-  .base-modal-mobile {
-    transition: transform 0.12s cubic-bezier(0.4, 0, 1, 1) !important;
+// Animación de salida hacia abajo
+@keyframes slideDownModal {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100vh);
   }
 }
 
-.dialog-bottom-transition-enter-from,
-.dialog-bottom-transition-leave-to {
-  .base-modal-mobile {
-    transform: translateY(100%) !important;
-  }
+// Mobile (bottomsheet)
+.base-modal-mobile {
+  transform: translateY(100vh);
 }
 
-.dialog-bottom-transition-enter-to,
-.dialog-bottom-transition-leave-from {
-  .base-modal-mobile {
-    transform: translateY(0%) !important;
-  }
+.v-overlay.v-overlay--active .base-modal-mobile {
+  animation: slideUpModal 0.2s cubic-bezier(0.2, 0, 0, 1) forwards !important;
 }
 
-// ===== TRANSICIONES PARA DESKTOP (MODAL CENTRADO) =====
-.dialog-transition-enter-active {
-  .base-modal-desktop {
-    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
-                opacity 0.2s ease-out !important;
-  }
+// Desktop
+.base-modal-desktop {
+  transform: translateY(100vh);
 }
 
-.dialog-transition-leave-active {
-  .base-modal-desktop {
-    transition: transform 0.18s cubic-bezier(0.4, 0, 0.6, 1),
-                opacity 0.15s ease-in !important;
-  }
+.v-overlay.v-overlay--active .base-modal-desktop {
+  animation: slideUpModal 0.3s cubic-bezier(0.2, 0, 0, 1) forwards !important;
 }
 
-.dialog-transition-enter-from {
-  .base-modal-desktop {
-    transform: scale(0.85) translateY(20px) !important;
-    opacity: 0;
-  }
-}
-
-.dialog-transition-enter-to,
-.dialog-transition-leave-from {
-  .base-modal-desktop {
-    transform: scale(1) translateY(0) !important;
-    opacity: 1;
-  }
-}
-
-.dialog-transition-leave-to {
-  .base-modal-desktop {
-    transform: scale(0.9) translateY(10px) !important;
-    opacity: 0;
-  }
+// Animación de salida cuando el overlay se cierra
+.v-overlay:not(.v-overlay--active) .base-modal-mobile,
+.v-overlay:not(.v-overlay--active) .base-modal-desktop {
+  animation: slideDownModal 0.2s cubic-bezier(0.4, 0, 1, 1) forwards !important;
 }
 
 // Scrollbar personalizado para el modal
