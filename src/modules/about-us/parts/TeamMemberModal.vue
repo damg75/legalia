@@ -100,6 +100,9 @@
 
 <script setup>
 import { computed, ref, watch, nextTick } from 'vue'
+import { useDisplay } from 'vuetify'
+
+const { mobile } = useDisplay()
 
 const props = defineProps({
   member: {
@@ -110,12 +113,15 @@ const props = defineProps({
 
 const scrollableContent = ref(null)
 
-// Formatear el título para hacer salto de línea en " y " y " en "
+// Formatear el título para hacer salto de línea en " y " y " en " solo en mobile
 const formattedTitle = computed(() => {
   if (!props.member?.title) return ''
+  if (mobile.value) {
+    return props.member.title
+      .replace(/ y /g, '<br>y ')
+      .replace(/ en /g, '<br>en ')
+  }
   return props.member.title
-    .replace(/ y /g, '<br>y ')
-    .replace(/ en /g, '<br>en ')
 })
 
 // Resetear scroll cuando cambia el miembro seleccionado
@@ -155,6 +161,26 @@ watch(() => props.member, () => {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.4) transparent;
+  
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: rgba(156, 163, 175, 0.4);
+    border-radius: 10px;
+    transition: background 0.3s ease;
+  }
+  
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(156, 163, 175, 0.6);
+  }
 }
 
 /* Header Section */

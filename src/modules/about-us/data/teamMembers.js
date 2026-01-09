@@ -94,63 +94,291 @@ export const teamMembers = [
   {
     id: 'cruz-marcel-caraballo-espanol',
     name: 'Cruz Marcel Caraballo Español',
-    title: 'Abogado de litigios penales.',
+    title: 'Abogado Especialista en Derecho Penal y Procesal Penal | Asesor Jurídico | Litigios',
     profileUrl: '',
-    description: 'Abogado con 15 años de experiencia en litigios penales. Especialista en Derecho Procesal Constitucional (Universidad Monte Ávila). Especialista en Derecho Penal y Criminología (Universidad Gran Mariscal de Ayacucho). Actualmente, socio del Escritorio Jurídico Salazar, Cultrera, Caraballo Abogados Consultores. Defensor Público Octavo Penal del estado Anzoátegui. Profesor universitario de Derecho Penal I y Derecho Procesal Penal I en la Universidad Santa María (núcleo Oriente).'
+    description: 'Abogado con 15 años de experiencia en litigios penales. Especialista en Derecho Procesal Constitucional (Universidad Monte Ávila). Especialista en Derecho Penal y Criminología (Universidad Gran Mariscal de Ayacucho). Actualmente, socio del Escritorio Jurídico Salazar, Cultrera, Caraballo Abogados Consultores. Defensor Público Octavo Penal del estado Anzoátegui. Profesor universitario de Derecho Penal I y Derecho Procesal Penal I en la Universidad Santa María (núcleo Oriente).',
+    fullProfile: {
+      prefacio: {
+        bullets: [
+          'Abogado con 15 años de experiencia en litigios penales.',
+          'Especialista en Derecho Procesal Constitucional (Universidad Monte Ávila).',
+          'Especialista en Derecho Penal y Criminología (Universidad Gran Mariscal de Ayacucho).',
+          'Bachiller en Ciencias.',
+          'Actualmente, socio del Escritorio Jurídico Salazar, Cultrera, Caraballo Abogados Consultores.',
+          'Defensor Público Octavo Penal del estado Anzoátegui.',
+          'Profesor universitario de Derecho Penal I y Derecho Procesal Penal I en la Universidad Santa María (núcleo Oriente).'
+        ]
+      },
+      experiencia: [
+        'Abogado litigante y socio en el Escritorio Jurídico Salazar, Cultrera, Caraballo Abogados Consultores (actualmente).',
+        'Defensor Público en el Octavo Penal del estado Anzoátegui.',
+        'Profesor universitario de Derecho Penal I y Derecho Procesal Penal I en la Universidad Santa María, núcleo Oriente.'
+      ],
+      educacion: [
+        'Abogado, Universidad Santa María.',
+        'Especialización en Derecho Procesal Constitucional, Universidad Monte Ávila.',
+        'Especialización en Derecho Penal y Criminología, Universidad Gran Mariscal de Ayacucho.',
+        'Bachiller en Ciencias, U.E. C.C.B. Guanta Nocturno.',
+        'Curso de Capacitación y Actualización Docente.',
+        'Diplomado en Derechos Humanos de Policías y Militares – Curso bilingüe inglés-español (Darlitz English Institute C.A.).',
+        'I Congreso Nacional en Ciencias Jurídicas de Venezuela.',
+        'II Congreso Nacional en Ciencias Jurídicas de Venezuela.'
+      ]
+    }
   },
   {
     id: 'alberto-ruiz-blanco',
     name: 'Alberto Ruiz Blanco',
-    title: 'Abogado con especialización en Derecho Privado',
+    title: 'Abogado Especialista en Derecho Penal y Procesal Penal | Asesor Jurídico | Litigios',
     profileUrl: '',
-    description: 'Abogado con más de 30 años de experiencia en el ejercicio profesional. Socio de SLV Consultores, con enfoque en Derecho Laboral, Constitucional y Procesal. Amplia experiencia en Derecho Ambiental, Administrativo y de Hidrocarburos. Trayectoria destacada como profesor universitario en Derecho Corporativo y Procesal Laboral.Experiencia tanto en la práctica independiente como en prestigiosos escritorios jurídicos nacionales.'
+    description: 'Abogado con más de 30 años de experiencia en el ejercicio profesional. Socio de SLV Consultores, con enfoque en Derecho Laboral, Constitucional y Procesal. Amplia experiencia en Derecho Ambiental, Administrativo y de Hidrocarburos. Trayectoria destacada como profesor universitario en Derecho Corporativo y Procesal Laboral. Experiencia tanto en la práctica independiente como en prestigiosos escritorios jurídicos nacionales.',
+    fullProfile: {
+      prefacio: {
+        bullets: [
+          'Abogado con más de 30 años de experiencia en el ejercicio profesional.',
+          'Socio de SLV Consultores, con enfoque en Derecho Laboral, Constitucional y Procesal.',
+          'Amplia experiencia en Derecho Ambiental, Administrativo y de Hidrocarburos.',
+          'Trayectoria destacada como profesor universitario en Derecho Corporativo y Procesal Laboral.',
+          'Experiencia tanto en la práctica independiente como en prestigiosos escritorios jurídicos nacionales.'
+        ]
+      },
+      experiencia: [
+        'Socio, SLV Consultores (2022 – presente).',
+        'Abogado independiente, con ejercicio en las áreas laboral, ambiental, procesal y administrativa (2015–2022).',
+        'Profesor universitario, Universidad Metropolitana, Posgrado de Derecho Corporativo y Diplomado en Derecho Laboral (2006–2016 y 1995–1996).',
+        'Profesor universitario, Universidad Simón Bolívar (1999–2005).',
+        "Socio consultor en Derecho Laboral, Escritorio Jurídico D'Empaire Reyna, Abogados (1994–2015).",
+        'Asistente legal, Escritorio Jurídico Mendoza, Palacios, Acedo, Borjas, Páez-Pumar y Cía (1991–1994).'
+      ],
+      educacion: [
+        'Abogado, Universidad Católica Andrés Bello, mención Cum Laude (1989–1994).',
+        'Máster en Política Territorial y Urbanística, Universidad Carlos III, Madrid, España (1996–1997).',
+        'Diplomado en Derecho de Hidrocarburos, Universidad Monteávila (2009).'
+      ]
+    }
   },
   {
     id: 'carlos-jose-serrano-diaz',
     name: 'Carlos José Serrano Díaz',
-    title: 'Abogado con especialización en Derecho Privado',
+    title: 'Abogado Especialista en Derecho Penal y Procesal Penal | Asesor Jurídico | Litigios',
     profileUrl: '',
-    description: 'Abogado con más de 20 años de experiencia.Especialista en Derecho Procesal del Trabajo. Amplia trayectoria como asesor jurídico en el sector público y privado. Profesor universitario en Derecho Laboral. Conocimientos sólidos en Derecho Civil, Mercantil, Laboral, Agrario, Sucesiones y Protección del Niño y Adolescente.Buen manejo de trabajo bajo presión, toma de decisiones y atención al público.'
+    description: 'Abogado con más de 20 años de experiencia. Especialista en Derecho Procesal del Trabajo. Amplia trayectoria como asesor jurídico en el sector público y privado. Profesor universitario en Derecho Laboral. Conocimientos sólidos en Derecho Civil, Mercantil, Laboral, Agrario, Sucesiones y Protección del Niño y Adolescente. Buen manejo de trabajo bajo presión, toma de decisiones y atención al público.',
+    fullProfile: {
+      prefacio: {
+        bullets: [
+          'Abogado con más de 20 años de experiencia.',
+          'Especialista en Derecho Procesal del Trabajo.',
+          'Amplia trayectoria como asesor jurídico en el sector público y privado.',
+          'Profesor universitario en Derecho Laboral.',
+          'Conocimientos sólidos en Derecho Civil, Mercantil, Laboral, Agrario, Sucesiones y Protección del Niño y Adolescente.',
+          'Buen manejo de trabajo bajo presión, toma de decisiones y atención al público.'
+        ]
+      },
+      experiencia: [
+        'Abogado asociado, Escritorio Jurídico "Arro & Asociados" (2006–2007).',
+        'Asesor jurídico, Asociación Civil "Progreso Social" (2005–2006).',
+        'Asesor jurídico ad honorem, Movimiento Bolivariano Republicano (MBR 200) (2004–2005).',
+        'Asesor jurídico ad honorem, Asociación Civil "San Judas Tadeo" (2004).',
+        'Abogado asesor, Abogados Consultores "Rodríguez, Serrano & Socios" (2002–2004).',
+        'Abogado asesor, Escritorio Jurídico Contable "La Llovizna" (2002).',
+        'Asesor jurídico, Constructora "Buena Vista, C.A." (2001–2002).',
+        'Asistente legal, Escritorio Jurídico Contable "La Llovizna" (2001–2002).',
+        'Alguacil temporal, Juzgado 1ero de 1era Instancia Civil, Mercantil y Agrario, Estado Bolívar (2000).',
+        'Pasante, Escritorio Jurídico "Zapata, Becerra & Asoc." (1999).',
+        'Profesor universitario en Derecho Laboral (IUTAJS).'
+      ],
+      educacion: [
+        'Abogado, Universidad Nororiental "Gran Mariscal de Ayacucho" (2002).',
+        'Especialista en Derecho Procesal del Trabajo, Universidad Nororiental (2007).',
+        'Talleres y seminarios sobre Derecho Laboral, LOPNA, Política Criminal, Función Pública, Reforma de la LOT, Criminalística, etc.',
+        'Cursos de computación y sistemas operativos.'
+      ]
+    }
   },
   {
     id: 'jennifer-andreina-barreto-vargas',
     name: 'Jennifer Andreina Barreto Vargas',
-    title: 'Abogado de litigios penales.',
+    title: 'Abogado Especialista en Derecho Penal y Procesal Penal | Asesor Jurídico | Litigios',
     profileUrl: '/members/jennifer_barreto.webp',
-    description: 'Abogada egresada de la Universidad Central de Venezuela (2013). Experiencia judicial como secretaria y juez provisoria en el Circuito Judicial Penal del Área Metropolitana de Caracas. Actualmente abogada del Departamento Penal del Escritorio Jurídico KLMC Legal S.C. Formación en Derecho humanos, Criminalística, Derecho Procesal Telemático y Jurisdicción Penal.'
+    description: 'Abogada egresada de la Universidad Central de Venezuela (2013). Experiencia judicial como secretaria y juez provisoria en el Circuito Judicial Penal del Área Metropolitana de Caracas. Actualmente abogada del Departamento Penal del Escritorio Jurídico KLMC Legal S.C. Formación en Derecho humanos, Criminalística, Derecho Procesal Telemático y Jurisdicción Penal.',
+    fullProfile: {
+      prefacio: {
+        bullets: [
+          'Abogada egresada de la Universidad Central de Venezuela (2013).',
+          'Experiencia judicial como secretaria y juez provisoria en el Circuito Judicial Penal del Área Metropolitana de Caracas.',
+          'Actualmente abogada del Departamento Penal del Escritorio Jurídico KLMC Legal S.C.',
+          'Formación en Derecho humanos, Criminalística, Derecho Procesal Telemático y Jurisdicción Penal.'
+        ]
+      },
+      experiencia: [
+        'Secretaria suplente en al menos 10 juzgados penales de control del AMC (2012–2020).',
+        'Secretaria titular del juzgado 33 de Control (2016–2020).',
+        'Juez Provisoria del mismo tribunal (2020 – 2023 (abril)).',
+        'Abogada en KLMC Legal S.C. (actualidad).',
+        'Participación en servicios jurídicos comunitarios y asesorías en jurisdicción voluntaria.'
+      ],
+      educacion: [
+        'Abogada, Universidad Central de Venezuela (2013).',
+        'Postgrado en Derecho Penal, Universidad Santa María (culminado, pendiente presentación del trabajo de grado).',
+        'Diplomado en Derecho humanos de Niños, Niñas y Adolescentes.',
+        'Diplomado en Criminalística y sus disciplinas auxiliares.',
+        'Diplomado en Derecho Procesal Telemático (en curso).'
+      ]
+    }
   },
   {
     id: 'luz-veronica-canas-izaguirre',
     name: 'Luz Verónica Cañas Izaguirre',
-    title: 'Abogada Especialista en Ciencias Penales y Criminológicas',
+    title: 'Abogado Especialista en Derecho Penal y Procesal Penal | Asesor Jurídico | Litigios',
     profileUrl: '/members/luz_canas.webp',
-    description: 'Abogada con más de 30 años de trayectoria en el sistema judicial venezolano. Jueza Titular y Provisoria en múltiples instancias penales del Estado Anzoátegui y Vargas. Jueza Temporal de la Corte de Apelaciones del Estado Anzoátegui. (2006-2017).Jubilada como Juez Superior Penal en 2018. Especialista en Ciencias Penales y Criminológicas, Derecho Penal, Gerencia Policial y Seguridad Ciudadana. Docente universitaria de pregrado y postgrado en diversas universidades (UBV, UGMA, USM, UNES, etc). Reconocida ponente en foros nacionales sobre justicia, derecho humanos y derecho penal.'
+    description: 'Abogada con más de 30 años de trayectoria en el sistema judicial venezolano. Jueza Titular y Provisoria en múltiples instancias penales del Estado Anzoátegui y Vargas. Jueza Temporal de la Corte de Apelaciones del Estado Anzoátegui (2006-2017). Jubilada como Juez Superior Penal en 2018. Especialista en Ciencias Penales y Criminológicas, Derecho Penal, Gerencia Policial y Seguridad Ciudadana. Docente universitaria de pregrado y postgrado en diversas universidades (UBV, UGMA, USM, UNES, etc). Reconocida ponente en foros nacionales sobre justicia, derecho humanos y derecho penal.',
+    fullProfile: {
+      prefacio: {
+        bullets: [
+          'Abogada con más de 30 años de trayectoria en el sistema judicial venezolano.',
+          'Jueza Titular y Provisoria en múltiples instancias penales del Estado Anzoátegui y Vargas.',
+          'Jueza Temporal de la Corte de Apelaciones del Estado Anzoátegui (2006–2017).',
+          'Jubilada como Juez Superior Penal en 2018.',
+          'Especialista en Ciencias Penales y Criminológicas, Derecho Penal, Gerencia Policial y Seguridad Ciudadana.',
+          'Docente universitaria de pregrado y postgrado en diversas universidades (UBV, UGMA, USM, UNES, etc).',
+          'Reconocida ponente en foros nacionales sobre justicia, derecho humanos y derecho penal.'
+        ]
+      },
+      experiencia: [
+        'Jueza Titular y Provisoria en más de diez tribunales penales de juicio, control y ejecución (Estado Vargas y Anzoátegui).',
+        'Jueza de la Corte de Apelaciones Ordinaria y Penal de Adolescente (2017–2018).',
+        'Defensora Pública Penal (suplente) en el Estado Vargas.',
+        'Asistente legal en Prefectura del Municipio Vargas y Servicio Clínico UCV.'
+      ],
+      educacion: [
+        'Abogada, Universidad Central de Venezuela (1993).',
+        'Especialización en Ciencias Penales y Criminológicas, UCV.',
+        'Especialización en Derecho Penal, Universidad Santa María.',
+        'Especialización en Gerencia y Administración Policial, IUPOL.',
+        'Magister en Seguridad de la Nación, IAESEN.',
+        'Doctorado de Seguridad Ciudadana, UNES (en curso).',
+        'Capacitación Pedagógica para Profesionales no Docentes, UPEL.'
+      ]
+    }
   },
   {
     id: 'ana-yoleida-pacheco',
     name: 'Ana Yoleida Pacheco',
-    title: 'Abogado con especialización en Derecho Privado',
+    title: 'Abogado Especialista en Derecho Penal y Procesal Penal | Asesor Jurídico | Litigios',
     profileUrl: '/members/ana_pachecho.webp',
-    description: 'Abogada egresada Magna Cum Laude. Licenciada en Educación, mención Lectura y Escritura (Summa Cum Laude). Especialista en Propiedad Intelectual y Marketing (ULA). Profesora universitaria de Obligaciones y Contratos. Consultora de negocios y asesora legal de empresas. Conferencista profesional y creadora de contenido jurídico.'
+    description: 'Abogada egresada Magna Cum Laude. Licenciada en Educación, mención Lectura y Escritura (Summa Cum Laude). Especialista en Propiedad Intelectual y Marketing (ULA). Profesora universitaria de Obligaciones y Contratos. Consultora de negocios y asesora legal de empresas. Conferencista profesional y creadora de contenido jurídico.',
+    fullProfile: {
+      prefacio: {
+        bullets: [
+          'Abogada egresada Magna Cum Laude.',
+          'Licenciada en Educación, mención Lectura y Escritura (Summa Cum Laude).',
+          'Especialista en Propiedad Intelectual y Marketing (ULA).',
+          'Profesora universitaria de Obligaciones y Contratos.',
+          'Consultora de negocios y asesora legal de empresas.',
+          'Conferencista profesional y creadora de contenido jurídico.'
+        ]
+      },
+      experiencia: [
+        'Abogada (Universidad Nuevas Redes).',
+        'Especialización en Propiedad Intelectual y Marketing, Universidad de Los Andes (ULA).',
+        'Licenciada en Educación, mención Lectura y Escritura.'
+      ],
+      educacion: [
+        'Abogada, Magna Cum Laude.',
+        'Licenciada en Educación, mención Lectura y Escritura, Summa Cum Laude.',
+        'Especialista en Propiedad Intelectual y Marketing, Universidad de Los Andes (ULA).'
+      ]
+    }
   },
   {
     id: 'lizbeth-suegart-siverio',
     name: 'Lizbeth Suegart Siverio',
-    title: 'Abogado de litigios penales.',
+    title: 'Abogado Especialista en Derecho Penal y Procesal Penal | Asesor Jurídico | Litigios',
     profileUrl: '/members/lisbeth_suegart.webp',
-    description: 'Abogada egresada de la Universidad Santa María (1990).Especialista en Ciencias Penales y Criminológicas (UCAB, 1992).Ex Defensora Pública Penal Ordinario (2000–2018). Actualmente abogada litigante en ejercicio libre. Ponente en congresos y formadora en temas de género, criminalística y derecho penal. Publicaciones jurídicas en revistas especializadas sobre DDHH y defensa penal.'
+    description: 'Abogada egresada de la Universidad Santa María (1990). Especialista en Ciencias Penales y Criminológicas (UCAB, 1992). Ex Defensora Pública Penal Ordinario (2000–2018). Actualmente abogada litigante en ejercicio libre. Ponente en congresos y formadora en temas de género, criminalística y derecho penal. Publicaciones jurídicas en revistas especializadas sobre DDHH y defensa penal.',
+    fullProfile: {
+      prefacio: {
+        bullets: [
+          'Abogada egresada de la Universidad Santa María (1990).',
+          'Especialista en Ciencias Penales y Criminológicas (UCAB, 1992).',
+          'Ex Defensora Pública Penal Ordinario (2000–2018).',
+          'Actualmente abogada litigante en ejercicio libre.',
+          'Ponente en congresos y formadora en temas de género, criminalística y derecho penal.',
+          'Publicaciones jurídicas en revistas especializadas sobre DDHH y defensa penal.'
+        ]
+      },
+      experiencia: [
+        'Fundadora del Departamento de Averiguaciones Administrativas del Banco Guayana (1990).',
+        'Coordinadora Regional de la Defensa Pública en Bolívar (2000–2005).',
+        'Defensora Pública en materia Penal Ordinario por 18 años.',
+        'Abogada en Consultoría Jurídica del Banco Guayana.'
+      ],
+      educacion: [
+        'Diplomado en Teoría del Delito (JUDEC, 2004).',
+        'Diplomado en Derecho Procesal Digital (Coracas-México, 2022–2024).',
+        'Maestría en Ciencias y Artes Militares (UNEFA, parcialmente cursada).',
+        'Diplomado internacional en Investigación del Femicidio y Violencia de Género (2024).',
+        'Especialización en Derecho Penal (en pausa, USM).'
+      ]
+    }
   },
   {
     id: 'ricardo-loreto-cardenas',
     name: 'Ricardo Loreto Cárdenas',
-    title: 'Abogado Especialista en Derecho Civil, Mercantil y Corporativo.',
+    title: 'Abogado Especialista en Derecho Civil, Mercantil y Corporativo | Litigios | Asesor Jurídico Empresarial',
     profileUrl: '/members/ricardo_loreto.webp',
-    description: 'Abogado con más de 20 años de experiencia en el ámbito judicial y corporativo.Especialista en Derecho Privado (Universidad Santa María).Trayectoria de 15 años como relator en la Sala de Casación Civil del Tribunal Supremo de Justicia. Director y socio de Loreto y Asociados, con amplia experiencia en derecho civil, mercantil, corporativo y litigios. Reconocido por su honestidad, dedicación y capacidad de adaptación. Actualmente presta asesoría legal a importantes empresas y entidades financieras en litigios y asuntos corporativos'
+    description: 'Abogado con más de 20 años de experiencia en el ámbito judicial y corporativo. Especialista en Derecho Privado (Universidad Santa María). Trayectoria de 15 años como relator en la Sala de Casación Civil del Tribunal Supremo de Justicia. Director y socio de Loreto y Asociados, con amplia experiencia en derecho civil, mercantil, corporativo y litigios. Reconocido por su honestidad, dedicación y capacidad de adaptación. Actualmente presta asesoría legal a importantes empresas y entidades financieras en litigios y asuntos corporativos.',
+    fullProfile: {
+      prefacio: {
+        bullets: [
+          'Abogado con más de 20 años de experiencia en el ámbito judicial y corporativo.',
+          'Especialista en Derecho Privado (Universidad Santa María).',
+          'Trayectoria de 15 años como relator en la Sala de Casación Civil del Tribunal Supremo de Justicia.',
+          'Director y socio de Loreto y Asociados, con amplia experiencia en derecho civil, mercantil, corporativo y litigios.',
+          'Reconocido por su honestidad, dedicación y capacidad de adaptación.',
+          'Actualmente presta asesoría legal a importantes empresas y entidades financieras en litigios y asuntos corporativos.'
+        ]
+      },
+      experiencia: [
+        {
+          texto: 'Director y Socio – Loreto y Asociados (2016 – presente)',
+          subitems: [
+            'Libre ejercicio en el área procesal civil, casación civil, contencioso administrativo, corporativo y laboral.',
+            'Asesoría jurídica a empresas del sector privado y personas naturales.'
+          ]
+        },
+        'Juez Superior Civil, Mercantil y Tránsito – Estado Miranda, Dirección Ejecutiva de la Magistratura (marzo – junio 2015).',
+        {
+          texto: 'Tribunal Supremo de Justicia – Sala de Casación Civil',
+          subitems: [
+            'Abogado Auxiliar I (2011 – 2015)',
+            'Abogado II (2005 – 2011)',
+            'Abogado I (2003 – 2005)',
+            'Abogado Contratado III (2001 – 2003)'
+          ]
+        },
+        {
+          texto: 'Pasante en Secretaría de Sala (2000 – 2001)',
+          subitems: [
+            'Funciones: revisar y relator en recursos de casación y regulaciones de competencia.',
+            'Participación en establecimiento y cambio de criterios jurisprudenciales.'
+          ]
+        },
+        'Pasante – Escritorio Jurídico Dr. Manuel Antonio Negrón Castañeda y Asociados (1998 – 1999).',
+        'Pasante – Escritorio Jurídico Dr. Bernardo Loreto Yanes (1996 – 1998).'
+      ],
+      educacion: [
+        'Especialista en Derecho Privado – Universidad Santa María (2000).',
+        'Abogado – Universidad Santa María (1987 – 1992).',
+        'Botón Honor al Mérito – Clase Púrpura por labor y años de servicio, Tribunal Supremo de Justicia (mayo 2012).',
+        'Ponente en el 1er Congreso de Derecho Procesal Civil (diciembre 2022). Tema: "El Recurso de Casación de Forma".'
+      ]
+    }
   },
   {
     id: 'henry-gerardo-corredor-rivas',
     name: 'Henry Gerardo Corredor Rivas',
-    title: 'Abogado Especialista en Derecho Penal y Procesal Penal',
+    title: 'Abogado Especialista en Derecho Penal y Procesal Penal | Asesor Jurídico | Litigios',
     profileUrl: '/members/henry_corredor.webp',
     description: 'Abogado egresado de la Universidad de Los Andes (2001), con más de 20 años de experiencia en el libre ejercicio profesional. Actualmente cursa el último semestre de la Maestría en Derecho Penal y Criminología en la Universidad Bicentenaria de Aragua. Su trayectoria está enfocada principalmente en Derecho Procesal Penal, complementada con experiencia en Derecho Civil, Derecho de Niños, Niñas y Adolescentes, así como en trámites de registros y notarías. Reconocido por su celeridad, responsabilidad, organización, capacidad de resolución de problemas y trabajo en equipo.',
     fullProfile: {
