@@ -1,7 +1,7 @@
 <template>
-  <div class="team-card-wrapper">
+  <div class="team-card-wrapper" @click="handleCardClick">
     <!-- Profile Image - Outside and on top -->
-    <div class="profile-image-container" @click="handleHeaderClick">
+    <div class="profile-image-container">
       <v-img
         v-if="member.profileUrl"
         :src="member.profileUrl"
@@ -17,7 +17,7 @@
     <v-card class="team-card" elevation="2">
       <v-card-text class="team-card-content">
         <!-- Member Info -->
-        <div class="member-header" @click="handleHeaderClick">
+        <div class="member-header">
           <h3 class="member-name">{{ member.name }}</h3>
           <p class="member-title">{{ member.title }}</p>
         </div>
@@ -49,7 +49,7 @@ const props = defineProps({
   }
 })
 
-const handleHeaderClick = () => {
+const handleCardClick = () => {
   emit('header-click', props.member)
 }
 </script>
