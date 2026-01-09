@@ -21,35 +21,32 @@
         </v-col>
       </v-row>
       <!-- Tarjetas de Formación - Desktop -->
-      <v-row class="mt-8 d-none d-md-flex">
-        <v-col 
+      <div v-if="mdAndUp" class="mt-8 formation-grid-desktop">
+        <v-card 
           v-for="(course, index) in courses" 
-          :key="index"
-          cols="12" 
-          md="3"
-          class="d-flex"
+          :key="'desktop-' + index"
+          class="course-card-desktop" 
+          elevation="4"
         >
-          <v-card class="course-card" elevation="4" hover>
-            <v-card-text class="pa-6">
-              <div class="course-icon-wrapper mb-4">
-                <div class="course-icon" :style="{ backgroundColor: course.iconBg }">
-                  <v-icon :color="course.iconColor" size="24">{{ course.icon }}</v-icon>
-                </div>
+          <v-card-text class="pa-6">
+            <div class="course-icon-wrapper mb-4">
+              <div class="course-icon" :style="{ backgroundColor: course.iconBg }">
+                <v-icon :color="course.iconColor" size="24">{{ course.icon }}</v-icon>
               </div>
-              <h3 class="course-title mb-2">{{ course.title }}</h3>
-              <p class="course-description">{{ course.description }}</p>
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
+            </div>
+            <h3 class="course-title mb-2">{{ course.title }}</h3>
+            <p class="course-description">{{ course.description }}</p>
+          </v-card-text>
+        </v-card>
+      </div>
 
       <!-- Slider de Formación - Mobile -->
-      <div class="mt-8 d-md-none">
-        <HorizontalSlider item-width="280px" :gap="8" :padding="8">
+      <div v-else class="mt-8 formation-slider-mobile">
+        <HorizontalSlider item-width="260px" :gap="12" :padding="16">
           <v-card
             v-for="(course, index) in courses"
-            :key="index"
-            class="course-card course-card-mobile slider-item"
+            :key="'mobile-' + index"
+            class="course-card-mobile slider-item"
             elevation="3"
           >
             <v-card-text class="pa-6 d-flex flex-column" style="height: 100%;">
@@ -80,12 +77,11 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useWhatsApp } from '@/composables/useWhatsApp'
 import { useDisplay } from 'vuetify'
+import { useWhatsApp } from '@/composables/useWhatsApp'
 import HorizontalSlider from '@/components/HorizontalSlider.vue'
 
 const { mdAndUp } = useDisplay()
-
 const { openWhatsApp } = useWhatsApp()
 
 function handleWhatsAppClick() {
@@ -201,28 +197,44 @@ const courses = ref([
   box-shadow: none !important;
 }
 
-/* Tarjetas de Cursos */
-.course-card {
+/* Grid de Formación Desktop */
+.formation-grid-desktop {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 24px;
+}
+
+/* Tarjetas de Cursos - Desktop */
+.course-card-desktop {
   border-radius: 16px;
   background-color: #FFFFFF;
   height: 100%;
-  transition: all 0.3s ease;
+  width: 100%;
   border: 1px solid #E5E7EB;
   display: flex;
   flex-direction: column;
+  cursor: default;
+  transition: all 0.3s ease;
 }
 
-.course-card:hover {
+.course-card-desktop:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12) !important;
 }
 
+/* Tarjetas de Cursos - Mobile */
 .course-card-mobile {
+  border-radius: 16px;
+  background-color: #FFFFFF;
   max-width: 100%;
   width: 100%;
   height: 100%;
+  min-height: 220px;
+  border: 1px solid #E5E7EB;
   display: flex;
   flex-direction: column;
+  cursor: default;
 }
 
 
@@ -241,7 +253,7 @@ const courses = ref([
   transition: transform 0.3s ease;
 }
 
-.course-card:hover .course-icon {
+.course-card-desktop:hover .course-icon {
   transform: scale(1.1);
 }
 
@@ -313,7 +325,7 @@ const courses = ref([
     left: 8%;
   }
 
-  .course-card {
+  .course-card-mobile {
     border-radius: 12px;
   }
 
@@ -335,6 +347,74 @@ const courses = ref([
     width: 100% !important;
     font-size: 14px;
     height: 48px !important;
+  }
+
+}
+
+/* Slider de formación en mobile - siempre aplica cuando se muestra */
+.formation-slider-mobile {
+  margin: 0 -8px;
+  padding: 8px 0;
+  
+  :deep(.horizontal-slider-wrapper) {
+    overflow: visible;
+  }
+  
+  :deep(.horizontal-slider) {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    align-items: stretch;
+  }
+  
+  :deep(.slider-item) {
+    min-height: 220px;
+  }
+  
+  .course-card-mobile {
+    height: 100% !important;
+    
+    .v-card-text {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .course-description {
+      flex-grow: 1;
+    }
+  }
+}
+
+/* Pantallas de ~410px */
+@media (max-width: 430px) {
+  .formation-slider-mobile :deep(.slider-item) {
+    flex: 0 0 240px !important;
+    max-width: 240px !important;
+    min-width: 240px !important;
+    min-height: 220px !important;
+  }
+  
+  .formation-slider-mobile .course-card-mobile {
+    min-height: 220px !important;
+  }
+}
+
+/* Pantallas de ~360px */
+@media (max-width: 380px) {
+  .formation-slider-mobile :deep(.slider-item) {
+    flex: 0 0 220px !important;
+    max-width: 220px !important;
+    min-width: 220px !important;
+    min-height: 220px !important;
+  }
+  
+  .formation-slider-mobile .course-card-mobile {
+    min-height: 220px !important;
+  }
+  
+  .formation-slider-mobile :deep(.horizontal-slider) {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
   }
 }
 </style>

@@ -52,7 +52,7 @@ const sliderStyle = computed(() => {
 <style scoped lang="scss">
 .horizontal-slider-wrapper {
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
   padding: 0;
 }
 
@@ -79,5 +79,12 @@ const sliderStyle = computed(() => {
   scroll-snap-stop: always;
   display: flex;
   flex-direction: column;
+  align-self: stretch;
+  height: auto;
+}
+
+:deep(.slider-item > *) {
+  flex: 1;
+  height: 100%;
 }
 </style>
