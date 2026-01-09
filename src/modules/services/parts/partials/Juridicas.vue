@@ -2,7 +2,13 @@
   <v-container fluid class="py-12">
     <v-container class="px-4 px-md-8">
       <v-row>
-        <v-col cols="12" class="d-flex flex-column align-center justify-center">
+        <v-col 
+          cols="12" 
+          class="d-flex flex-column align-center justify-center"
+          v-intersect="titleAnimation.intersectOptions"
+          :class="titleAnimation.animationClass()"
+          :style="titleAnimation.animationStyle"
+        >
           <div class="juridicas-title-wrapper">
             <h2 class="juridicas-main-title">
               Legalia: <span class="text-blue-dark">Formación y Academia</span>
@@ -12,7 +18,14 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" md="12" class="d-flex justify-center">
+        <v-col 
+          cols="12" 
+          md="12" 
+          class="d-flex justify-center"
+          v-intersect="subtitleAnimation.intersectOptions"
+          :class="subtitleAnimation.animationClass()"
+          :style="subtitleAnimation.animationStyle"
+        >
           <p class="juridicas-subtitle">
             En Legalia creemos que una empresa bien informada toma decisiones más seguras y estratégicas. Diseñamos
             programas de formación legal prácticos y adaptados a las áreas clave de tu negocio, combinando conocimiento
@@ -27,6 +40,9 @@
           :key="'desktop-' + index"
           class="course-card-desktop" 
           elevation="4"
+          v-intersect="courseAnimations[index]?.intersectOptions"
+          :class="courseAnimations[index]?.animationClass()"
+          :style="courseAnimations[index]?.animationStyle"
         >
           <v-card-text class="pa-6">
             <div class="course-icon-wrapper mb-4">
@@ -64,7 +80,13 @@
 
       <!-- Botón -->
       <v-row class="mt-16">
-        <v-col cols="12" class="d-flex justify-center">
+        <v-col 
+          cols="12" 
+          class="d-flex justify-center"
+          v-intersect="buttonAnimation.intersectOptions"
+          :class="buttonAnimation.animationClass()"
+          :style="buttonAnimation.animationStyle"
+        >
           <v-btn class="juridicas-button" color="#1E2761" height="52" rounded="lg" elevation="2" width="250" @click="handleWhatsAppClick">
             Solicitar cotización
             <v-icon class="ml-2" size="20">mdi-arrow-right</v-icon>
@@ -80,9 +102,50 @@ import { ref } from 'vue'
 import { useDisplay } from 'vuetify'
 import { useWhatsApp } from '@/composables/useWhatsApp'
 import HorizontalSlider from '@/components/HorizontalSlider.vue'
+import { useScrollAnimation } from '@/composables/useScrollAnimation'
 
-const { mdAndUp } = useDisplay()
+const { mdAndUp, mobile } = useDisplay()
 const { openWhatsApp } = useWhatsApp()
+
+// Animaciones de entrada
+const animationOffset = mobile.value ? '-30px' : '-80px'
+const titleAnimation = useScrollAnimation({ 
+  type: 'fade', 
+  duration: 800, 
+  once: true, 
+  threshold: 0.2,
+  offset: animationOffset
+})
+
+const subtitleAnimation = useScrollAnimation({ 
+  type: 'slide-up', 
+  duration: 600, 
+  delay: 200,
+  once: true, 
+  threshold: 0.2,
+  offset: animationOffset
+})
+
+// Animaciones staggered para las 8 tarjetas de cursos
+const courseAnimations = [
+  useScrollAnimation({ type: 'slide-up', duration: 600, delay: 0, once: true, threshold: 0.1, offset: animationOffset }),
+  useScrollAnimation({ type: 'slide-up', duration: 600, delay: 100, once: true, threshold: 0.1, offset: animationOffset }),
+  useScrollAnimation({ type: 'slide-up', duration: 600, delay: 200, once: true, threshold: 0.1, offset: animationOffset }),
+  useScrollAnimation({ type: 'slide-up', duration: 600, delay: 300, once: true, threshold: 0.1, offset: animationOffset }),
+  useScrollAnimation({ type: 'slide-up', duration: 600, delay: 400, once: true, threshold: 0.1, offset: animationOffset }),
+  useScrollAnimation({ type: 'slide-up', duration: 600, delay: 500, once: true, threshold: 0.1, offset: animationOffset }),
+  useScrollAnimation({ type: 'slide-up', duration: 600, delay: 600, once: true, threshold: 0.1, offset: animationOffset }),
+  useScrollAnimation({ type: 'slide-up', duration: 600, delay: 700, once: true, threshold: 0.1, offset: animationOffset })
+]
+
+// Animación para el botón
+const buttonAnimation = useScrollAnimation({ 
+  type: 'scale', 
+  duration: 600, 
+  once: true, 
+  threshold: 0.2,
+  offset: animationOffset
+})
 
 function handleWhatsAppClick() {
   openWhatsApp('Hola, represento una empresa y me interesa solicitar una cotización para servicios legales empresariales y programas de formación.')

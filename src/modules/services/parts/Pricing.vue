@@ -46,7 +46,14 @@
 
       <v-row v-else-if="selectedTab === 'juridicas'" class="align-center">
         <!-- Texto izquierdo para jurídicas -->
-        <v-col cols="12" md="4" class="d-flex flex-column justify-center pr-8">
+        <v-col 
+          cols="12" 
+          md="4" 
+          class="d-flex flex-column justify-center pr-8"
+          v-intersect="juridicasTitleAnimation.intersectOptions"
+          :class="juridicasTitleAnimation.animationClass()"
+          :style="juridicasTitleAnimation.animationStyle"
+        >
           <h2 class="juridicas-main-title">
             Asesoría legal <span class="text-purple">especializada para tu empresa</span>
           </h2>
@@ -60,7 +67,13 @@
         </v-col>
 
         <!-- Bullets de características -->
-        <v-col cols="12" md="4">
+        <v-col 
+          cols="12" 
+          md="4"
+          v-intersect="juridicasBulletsAnimation.intersectOptions"
+          :class="juridicasBulletsAnimation.animationClass()"
+          :style="juridicasBulletsAnimation.animationStyle"
+        >
           <div class="juridicas-bullets-list">
             <div v-for="(bullet, index) in juridicasBullets" :key="index"
               class="juridicas-bullet-item d-flex flex-row align-center">
@@ -71,7 +84,14 @@
             </div>
           </div>
         </v-col>
-        <v-col cols="12" md="4" class="d-flex justify-center align-center">
+        <v-col 
+          cols="12" 
+          md="4" 
+          class="d-flex justify-center align-center"
+          v-intersect="juridicasButtonAnimation.intersectOptions"
+          :class="juridicasButtonAnimation.animationClass()"
+          :style="juridicasButtonAnimation.animationStyle"
+        >
           <v-btn 
             class="juridicas-button" 
             color="#1E2761" 
@@ -136,6 +156,33 @@ const cardsAnimation = useScrollAnimation({
   type: 'slide-left', 
   duration: 800, 
   delay: 200,
+  once: true, 
+  threshold: 0.2,
+  offset: cardsOffset
+})
+
+// Animación para jurídicas
+const juridicasTitleAnimation = useScrollAnimation({ 
+  type: 'slide-right', 
+  duration: 800, 
+  once: true, 
+  threshold: 0.2,
+  offset: titleOffset
+})
+
+const juridicasBulletsAnimation = useScrollAnimation({ 
+  type: 'slide-left', 
+  duration: 800, 
+  delay: 150,
+  once: true, 
+  threshold: 0.2,
+  offset: cardsOffset
+})
+
+const juridicasButtonAnimation = useScrollAnimation({ 
+  type: 'slide-left', 
+  duration: 800, 
+  delay: 300,
   once: true, 
   threshold: 0.2,
   offset: cardsOffset

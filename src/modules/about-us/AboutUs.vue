@@ -2,7 +2,13 @@
   <v-container fluid class="about-us-section py-12">
     <v-container class="px-4 px-md-8">
       <v-row>
-        <v-col cols="12" class="d-flex flex-column align-center justify-center">
+        <v-col 
+          cols="12" 
+          class="d-flex flex-column align-center justify-center"
+          v-intersect="titleAnimation.intersectOptions"
+          :class="titleAnimation.animationClass()"
+          :style="titleAnimation.animationStyle"
+        >
           <div class="about-title-wrapper">
             <h1 class="about-main-title">
               Legalia: <span class="text-wine">sobre nosotros</span>
@@ -15,14 +21,28 @@
       <v-row class="justify-center mt-8">
         <v-col cols="12" md="12" lg="12">
           <div class="about-content">
-            <div v-for="(paragraph, index) in paragraphs" :key="index" class="about-paragraph mb-6"
-              v-html="paragraph" />
+            <div 
+              v-for="(paragraph, index) in paragraphs" 
+              :key="index" 
+              class="about-paragraph mb-6"
+              v-intersect="paragraphAnimations[index]?.intersectOptions"
+              :class="paragraphAnimations[index]?.animationClass()"
+              :style="paragraphAnimations[index]?.animationStyle"
+              v-html="paragraph" 
+            />
           </div>
         </v-col>
       </v-row>
-      <!-- team`` -->
+      <!-- team -->
       <v-row>
-        <v-col cols="12" md="12" lg="12">
+        <v-col 
+          cols="12" 
+          md="12" 
+          lg="12"
+          v-intersect="teamTitleAnimation.intersectOptions"
+          :class="teamTitleAnimation.animationClass()"
+          :style="teamTitleAnimation.animationStyle"
+        >
           <h1 class="text-wine text-center" style="font-size: 36px; font-weight: 700; line-height: 1.2;">
             Conoce a nuestro equipo de asesores y asesoras legales
           </h1>
@@ -31,7 +51,12 @@
       <!-- Carousel -->
       <v-row class="mt-8">
         <v-col cols="12">
-          <div class="carousel-wrapper">
+          <div 
+            class="carousel-wrapper"
+            v-intersect="carouselAnimation.intersectOptions"
+            :class="carouselAnimation.animationClass()"
+            :style="carouselAnimation.animationStyle"
+          >
             <button class="carousel-nav-btn carousel-prev" @click="carouselRef?.prev()" aria-label="Anterior">
               <v-icon size="40" color="#9CA3AF">mdi-chevron-left</v-icon>
             </button>
@@ -42,17 +67,20 @@
                 :items-per-page="itemsPerPage"
                 class="team-carousel"
               >
-                <template #default="{ items }">
+                <template #default="{ items, index }">
                   <v-row class="py-4 carousel-row" justify="center">
-                    <v-col
-                      v-for="member in items"
-                      :key="member.id"
-                      cols="12"
-                      md="4"
-                      class="d-flex justify-center"
-                    >
-                      <TeamMemberCard :member="member" @header-click="handleMemberHeaderClick" />
-                    </v-col>
+                    <transition-group name="stagger-team-card" appear>
+                      <v-col
+                        v-for="(member, memberIndex) in items"
+                        :key="`${index}-${member.id}`"
+                        cols="12"
+                        md="4"
+                        class="d-flex justify-center"
+                        :style="{ '--stagger-delay': `${memberIndex * 120}ms` }"
+                      >
+                        <TeamMemberCard :member="member" @header-click="handleMemberHeaderClick" />
+                      </v-col>
+                    </transition-group>
                   </v-row>
                 </template>
               </SimpleCarousel>
@@ -75,21 +103,36 @@
               class="quote-mark quote-left"
               :width="quoteSize"
               :height="quoteSize"
+              v-intersect="quoteLeftAnimation.intersectOptions"
+              :class="quoteLeftAnimation.animationClass()"
+              :style="quoteLeftAnimation.animationStyle"
             />
             
             <!-- Quote Text -->
-            <p class="quote-text">
+            <p 
+              class="quote-text"
+              v-intersect="quoteTextAnimation.intersectOptions"
+              :class="quoteTextAnimation.animationClass()"
+              :style="quoteTextAnimation.animationStyle"
+            >
               En Legalia, acercamos el acceso a la justicia a todas las personas y empresas, 
               ofreciendo servicios integrales, accesibles y transparentes.
             </p>
             
             <!-- Closing Quote -->
-            <v-img
-              src="@/modules/about-us/assets/cita.svg"
-              class="quote-mark quote-right"
-              :width="quoteSize"
-              :height="quoteSize"
-            />
+            <div
+              class="quote-right-wrapper"
+              v-intersect="quoteRightAnimation.intersectOptions"
+              :class="quoteRightAnimation.animationClass()"
+              :style="quoteRightAnimation.animationStyle"
+            >
+              <v-img
+                src="@/modules/about-us/assets/cita.svg"
+                class="quote-mark quote-right"
+                :width="quoteSize"
+                :height="quoteSize"
+              />
+            </div>
           </div>
         </v-col>
       </v-row>
@@ -120,9 +163,78 @@ import BaseModal from '@/components/BaseModal.vue'
 import SimpleCarousel from '@/components/SimpleCarousel.vue'
 import { teamMembers } from './data/teamMembers.js'
 import { useTeamMember } from './composables/useTeamMember.js'
+import { useScrollAnimation } from '@/composables/useScrollAnimation'
 
 const display = useDisplay()
 const mobile = computed(() => display.smAndDown.value)
+
+// Animación de entrada para el título
+const titleOffset = mobile.value ? '-50px' : '-100px'
+const titleAnimation = useScrollAnimation({ 
+  type: 'fade', 
+  duration: 800, 
+  once: true, 
+  threshold: 0.2,
+  offset: titleOffset
+})
+
+// Animaciones staggered para los párrafos
+const paragraphOffset = mobile.value ? '-30px' : '0px'
+const paragraphAnimations = [
+  useScrollAnimation({ type: 'slide-up', duration: 600, delay: 0, once: true, threshold: 0.1, offset: paragraphOffset }),
+  useScrollAnimation({ type: 'slide-up', duration: 600, delay: 100, once: true, threshold: 0.1, offset: paragraphOffset }),
+  useScrollAnimation({ type: 'slide-up', duration: 600, delay: mobile.value ? 200 : 0, once: true, threshold: 0.1, offset: paragraphOffset }),
+  useScrollAnimation({ type: 'slide-up', duration: 600, delay: mobile.value ? 300 : 0, once: true, threshold: 0.1, offset: paragraphOffset }),
+  useScrollAnimation({ type: 'slide-up', duration: 600, delay: mobile.value ? 400 : 0, once: true, threshold: 0.1, offset: paragraphOffset })
+]
+
+// Animación de entrada para el título del equipo
+const teamTitleOffset = mobile.value ? '-50px' : '-100px'
+const teamTitleAnimation = useScrollAnimation({ 
+  type: 'fade', 
+  duration: 800, 
+  once: true, 
+  threshold: 0.2,
+  offset: teamTitleOffset
+})
+
+// Animación de entrada para el carrusel del equipo
+const carouselOffset = mobile.value ? '-30px' : '-80px'
+const carouselAnimation = useScrollAnimation({ 
+  type: 'fade', 
+  duration: 600, 
+  once: true, 
+  threshold: 0.1,
+  offset: carouselOffset
+})
+
+// Animaciones de entrada y salida para las comillas
+const quoteOffset = mobile.value ? '-30px' : '-100px'
+const quoteLeftAnimation = useScrollAnimation({ 
+  type: 'slide-left', 
+  duration: 800, 
+  once: false, 
+  threshold: 0.2,
+  offset: quoteOffset
+})
+
+const quoteRightAnimation = useScrollAnimation({ 
+  type: 'slide-right', 
+  duration: 800, 
+  once: false, 
+  threshold: 0.2,
+  offset: quoteOffset
+})
+
+// Animación fade para el texto de la cita
+const quoteTextAnimation = useScrollAnimation({ 
+  type: 'fade', 
+  duration: 800, 
+  delay: 200,
+  once: false, 
+  threshold: 0.2,
+  offset: quoteOffset
+})
 const carouselRef = ref(null)
 
 // Items por página según el dispositivo
@@ -286,9 +398,14 @@ const teamMembersRef = ref(teamMembers)
   left: 0;
 }
 
-.quote-right {
+.quote-right-wrapper {
+  position: absolute;
   bottom: -40px;
   right: 0;
+}
+
+.quote-right {
+  position: relative !important;
   transform: rotate(180deg);
 }
 
@@ -347,7 +464,7 @@ const teamMembersRef = ref(teamMembers)
     left: -10px;
   }
 
-  .quote-right {
+  .quote-right-wrapper {
     bottom: -30px;
     right: -10px;
   }
@@ -403,7 +520,7 @@ const teamMembersRef = ref(teamMembers)
     left: -5px;
   }
 
-  .quote-right {
+  .quote-right-wrapper {
     bottom: -20px;
     right: -5px;
   }
@@ -412,5 +529,31 @@ const teamMembersRef = ref(teamMembers)
     font-size: 18px;
     line-height: 1.6;
   }
+}
+
+/* Animación stagger para las cards del carrusel del equipo - solo entrada */
+.stagger-team-card-enter-active {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: var(--stagger-delay, 0ms);
+}
+
+.stagger-team-card-leave-active {
+  transition: none;
+  position: absolute;
+  opacity: 0;
+}
+
+.stagger-team-card-enter-from {
+  opacity: 0;
+  transform: scale(0.85) translateY(30px);
+}
+
+.stagger-team-card-enter-to {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.stagger-team-card-leave-to {
+  opacity: 0;
 }
 </style>

@@ -5,8 +5,20 @@
         <v-col cols="12" md="8" lg="8">
           <!-- Título y subtítulo -->
           <div class="text-center mb-8">
-            <h2 class="form-title mb-3">Únete a nuestro equipo</h2>
-            <p class="form-subtitle">
+            <h2 
+              class="form-title mb-3"
+              v-intersect="titleAnimation.intersectOptions"
+              :class="titleAnimation.animationClass()"
+              :style="titleAnimation.animationStyle"
+            >
+              Únete a nuestro equipo
+            </h2>
+            <p 
+              class="form-subtitle"
+              v-intersect="subtitleAnimation.intersectOptions"
+              :class="subtitleAnimation.animationClass()"
+              :style="subtitleAnimation.animationStyle"
+            >
               Completa este formulario y da el primer paso hacia tu próxima<br>
               oportunidad profesional.
             </p>
@@ -192,9 +204,29 @@
 <script setup>
 import { ref } from 'vue'
 import { useDisplay } from 'vuetify'
+import { useScrollAnimation } from '@/composables/useScrollAnimation'
 
 // Display
 const { mobile } = useDisplay()
+
+// Animaciones de entrada
+const animationOffset = mobile.value ? '-30px' : '-80px'
+const titleAnimation = useScrollAnimation({ 
+  type: 'fade', 
+  duration: 800, 
+  once: true, 
+  threshold: 0.2,
+  offset: animationOffset
+})
+
+const subtitleAnimation = useScrollAnimation({ 
+  type: 'slide-up', 
+  duration: 600, 
+  delay: 200,
+  once: true, 
+  threshold: 0.2,
+  offset: animationOffset
+})
 
 // Referencias
 const formRef = ref(null)
