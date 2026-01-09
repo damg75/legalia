@@ -33,7 +33,7 @@
           max-width="560"
           rounded="xl"
           height="auto"
-
+          @click="handleServiceClick(service.tab)"
         >
           <v-card-text class="pa-8">
             <!-- Icono -->
@@ -87,7 +87,7 @@
               rounded="lg"
               size="large"
               class="service-btn text-white font-weight-medium"
-              @click="handleServiceClick(service.tab)"
+              @click.stop="handleServiceClick(service.tab)"
             >
               {{ service.buttonText }}
               <v-icon class="ms-2" size="20">mdi-arrow-right</v-icon>
@@ -193,6 +193,7 @@ const services = ref([
 .service-card {
   border: 1px solid #E5E7EB;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
   
   &:hover {
     transform: translateY(-5px);
