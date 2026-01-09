@@ -1,7 +1,7 @@
 <template>
   <component :is="layout">
     <router-view v-slot="{ Component, route }">
-      <transition name="slide" mode="out-in">
+      <transition name="fade" mode="out-in">
         <component :is="Component" :key="route.path" />
       </transition>
     </router-view>
@@ -46,25 +46,19 @@ watch(
 </script>
 
 <style>
-/* Transición slide horizontal */
-.slide-enter-active,
-.slide-leave-active {
-  transition: all 0.3s ease-in-out;
+/* Transición fade */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
 }
 
-.slide-enter-from {
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
-  transform: translateX(30px);
 }
 
-.slide-leave-to {
-  opacity: 0;
-  transform: translateX(-30px);
-}
-
-.slide-enter-to,
-.slide-leave-from {
+.fade-enter-to,
+.fade-leave-from {
   opacity: 1;
-  transform: translateX(0);
 }
 </style>
