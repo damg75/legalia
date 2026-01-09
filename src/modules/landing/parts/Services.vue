@@ -111,7 +111,7 @@ const router = useRouter()
 const { setSelectedTab } = useServiceTab()
 
 const handleServiceClick = (tab) => {
-  setSelectedTab(tab)
+  setSelectedTab(tab, true) // true = hacer scroll a los tabs
   router.push('/servicios')
 }
 

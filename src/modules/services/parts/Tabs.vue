@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="tabs-section py-12">
+  <v-container fluid class="tabs-section py-12" id="services-tabs" ref="tabsSection">
     <v-container fluid class="px-4 px-md-16">
       <v-tabs v-model="tab" align-tabs="center" color="primary-dark" class="custom-tabs mb-8 pa-0">
         <v-tab value="naturales" class="tab-item">
@@ -36,21 +36,39 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch, onMounted, nextTick } from 'vue'
+import { useGoTo } from 'vuetify'
 import { useServiceTab } from '@/composables/useServiceTab'
 import TabChild from './partials/TabChild.vue'
 
 const emit = defineEmits(['tab-change', 'service-click'])
+const goTo = useGoTo()
 
-const { getSelectedTab, clearSelectedTab } = useServiceTab()
+const { getSelectedTab, clearSelectedTab, getShouldScroll, clearShouldScroll } = useServiceTab()
 const tab = ref('naturales')
+const tabsSection = ref(null)
 
 // Leer estado compartido al montar el componente
-onMounted(() => {
+onMounted(async () => {
   const savedTab = getSelectedTab()
+  const shouldScroll = getShouldScroll()
+  
   if (savedTab === 'naturales' || savedTab === 'juridicas') {
     tab.value = savedTab
     clearSelectedTab()
+  }
+  
+  // Hacer scroll suave a los tabs si viene de la landing
+  if (shouldScroll) {
+    await nextTick()
+    setTimeout(() => {
+      goTo('#services-tabs', {
+        duration: 800,
+        easing: 'easeInOutCubic',
+        offset: -150
+      })
+      clearShouldScroll()
+    }, 100)
   }
 })
 

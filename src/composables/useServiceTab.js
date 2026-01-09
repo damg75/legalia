@@ -2,11 +2,13 @@ import { ref } from 'vue'
 
 // Estado compartido para la tab seleccionada
 const selectedTabState = ref(null)
+const shouldScrollToTabs = ref(false)
 
 export function useServiceTab() {
-  const setSelectedTab = (tab) => {
+  const setSelectedTab = (tab, scroll = false) => {
     if (tab === 'naturales' || tab === 'juridicas') {
       selectedTabState.value = tab
+      shouldScrollToTabs.value = scroll
     }
   }
 
@@ -18,10 +20,21 @@ export function useServiceTab() {
     selectedTabState.value = null
   }
 
+  const getShouldScroll = () => {
+    return shouldScrollToTabs.value
+  }
+
+  const clearShouldScroll = () => {
+    shouldScrollToTabs.value = false
+  }
+
   return {
     selectedTabState,
+    shouldScrollToTabs,
     setSelectedTab,
     getSelectedTab,
-    clearSelectedTab
+    clearSelectedTab,
+    getShouldScroll,
+    clearShouldScroll
   }
 }
