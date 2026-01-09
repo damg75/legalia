@@ -340,6 +340,166 @@ export const servicesModalData = {
     whyChooseUs: 'Experiencia, compromiso y visión estratégica para encontrar la solución más efectiva, ya sea mediante negociación, mediación o litigio.',
     ctaText: 'Solicitar asesoría Fiscal y Tributaria',
     forLegalEntity: true
+  },
+
+  // Alias para códigos alternativos
+  'contratacion_documentacion': {
+    subtitle: 'Elaboración, negociación y revisión estratégica de acuerdos y documentos jurídicos',
+    description: 'La Contratación y Documentación Legal es la herramienta fundamental para formalizar relaciones comerciales, proteger intereses y prevenir futuros litigios.',
+    situations: [
+      { title: 'Contratos Mercantiles y Civiles', subtitle: 'Elaboración y revisión de acuerdos de suministro, distribución, arrendamiento y compraventa.' },
+      { title: 'Acuerdos Laborales', subtitle: 'Redacción de contratos de trabajo y pactos de confidencialidad (NDA).' },
+      { title: 'Pactos de Accionistas', subtitle: 'Documentación de acuerdos internos entre socios o accionistas.' },
+      { title: 'Due Diligence Legal', subtitle: 'Revisión exhaustiva de documentación contractual y corporativa.' },
+      { title: 'Contratos Tecnológicos', subtitle: 'Acuerdos de licencia de software, desarrollo tecnológico y cesión de derechos.' },
+      { title: 'Garantías y Fideicomisos', subtitle: 'Estructuración de garantías reales y personales.' }
+    ],
+    whyChooseUs: 'Precisión técnica y profundo conocimiento de la normativa civil y mercantil.',
+    ctaText: 'Solicitar asesoría en Contratación Legal',
+    forNaturalPerson: true,
+    forLegalEntity: true
+  },
+
+  'derecho_penal': {
+    subtitle: 'Defensa técnica y representación en litigios penales',
+    description: 'El Derecho Penal y Procesal Penal rige el ejercicio del poder punitivo del Estado, exigiendo una defensa técnica rigurosa para garantizar el debido proceso y proteger los derechos fundamentales.',
+    situations: [
+      { title: 'Defensa Penal Integral', subtitle: 'Representación completa en todas las fases del proceso penal.' },
+      { title: 'Fase de Investigación', subtitle: 'Asistencia inmediata en flagrancia, audiencias de presentación y solicitud de medidas cautelares.' },
+      { title: 'Fase Intermedia', subtitle: 'Preparación de excepciones y promoción de pruebas.' },
+      { title: 'Juicio Oral y Público', subtitle: 'Defensa rigurosa para desvirtuar la acusación.' },
+      { title: 'Garantías Constitucionales', subtitle: 'Vigilancia del Principio de Presunción de Inocencia y Derecho a la Defensa.' },
+      { title: 'Representación de Víctimas', subtitle: 'Interposición de denuncias y búsqueda de reparación del daño.' },
+      { title: 'Recursos de Impugnación', subtitle: 'Elaboración de recursos de Apelación y Casación.' },
+      { title: 'Ejecución de Sentencia', subtitle: 'Gestión de beneficios procesales y fórmulas alternativas.' }
+    ],
+    whyChooseUs: 'Experiencia en defensa penal y profundo conocimiento del COPP venezolano.',
+    ctaText: 'Solicitar asesoría en Derecho Penal',
+    forNaturalPerson: true,
+    forLegalEntity: true
+  },
+
+  // Variantes empresariales adicionales
+  'violencia_de_genero_empresas': {
+    subtitle: 'Asesoría legal especializada en prevención y cumplimiento normativo',
+    description: 'Asesoría a empresas en el cumplimiento de protocolos de prevención y atención de casos de violencia de género en el ámbito laboral.',
+    situations: [
+      { title: 'Protocolos de Prevención', subtitle: 'Diseño e implementación de políticas internas contra el acoso y violencia.' },
+      { title: 'Capacitación Empresarial', subtitle: 'Formación al personal en prevención y detección.' },
+      { title: 'Investigaciones Internas', subtitle: 'Conducción de investigaciones ante denuncias internas.' },
+      { title: 'Defensa Corporativa', subtitle: 'Representación de la empresa en procedimientos administrativos y judiciales.' }
+    ],
+    whyChooseUs: 'Enfoque preventivo y conocimiento especializado de la LODMVLV.',
+    ctaText: 'Solicitar asesoría empresarial',
+    forLegalEntity: true
+  },
+
+  'derecho_corporativo_empresas': {
+    subtitle: 'Asesoría integral en constitución, gestión y reestructuración empresarial',
+    description: 'El Derecho Corporativo es fundamental para la vida legal y operativa de cualquier negocio.',
+    situations: [
+      { title: 'Constitución de Sociedades', subtitle: 'Trámites completos para la creación de empresas.' },
+      { title: 'Gobierno Corporativo', subtitle: 'Estructuración de dirección y administración.' },
+      { title: 'Fusiones y Adquisiciones', subtitle: 'Due diligence, negociación y formalización legal.' },
+      { title: 'Contratación Mercantil', subtitle: 'Contratos comerciales estratégicos.' },
+      { title: 'Compliance Corporativo', subtitle: 'Programas de cumplimiento normativo.' },
+      { title: 'Inversión Extranjera', subtitle: 'Marco legal para establecimiento de operaciones.' }
+    ],
+    whyChooseUs: 'Visión estratégica de negocio y dominio del Código de Comercio.',
+    ctaText: 'Solicitar asesoría en Derecho Corporativo',
+    forLegalEntity: true
+  },
+
+  'contratacion_documentacion_empresas': {
+    subtitle: 'Elaboración y gestión de documentación legal empresarial',
+    description: 'La Contratación y Documentación Legal es fundamental para formalizar relaciones comerciales y proteger los intereses de su empresa.',
+    situations: [
+      { title: 'Contratos Mercantiles', subtitle: 'Elaboración de acuerdos comerciales estratégicos.' },
+      { title: 'Documentación de Compliance', subtitle: 'Códigos de ética y manuales de prevención.' },
+      { title: 'Due Diligence', subtitle: 'Revisión exhaustiva de documentación corporativa.' },
+      { title: 'Contratos Tecnológicos', subtitle: 'Licencias de software y transferencia de know-how.' },
+      { title: 'Garantías Corporativas', subtitle: 'Estructuración de garantías y fideicomisos.' }
+    ],
+    whyChooseUs: 'Precisión técnica enfocada en la protección empresarial.',
+    ctaText: 'Solicitar asesoría en Contratación Empresarial',
+    forLegalEntity: true
+  },
+
+  'derecho_agrario_empresas': {
+    subtitle: 'Asesoría integral en propiedad de tierra y producción agroindustrial',
+    description: 'El Derecho Agrario regula el uso y la productividad de la tierra con vocación agrícola, vital para empresas del sector agroindustrial.',
+    situations: [
+      { title: 'Regularización de Tierras', subtitle: 'Obtención de títulos y certificados de finca productiva.' },
+      { title: 'Procedimientos de Rescate', subtitle: 'Defensa ante actuaciones del INTI.' },
+      { title: 'Litigio Agrario', subtitle: 'Representación en tribunales de jurisdicción agraria.' },
+      { title: 'Contratos Agrarios', subtitle: 'Arrendamiento, aparcería y financiamiento agrícola.' },
+      { title: 'Asociaciones Agrarias', subtitle: 'Constitución de cooperativas y figuras asociativas.' }
+    ],
+    whyChooseUs: 'Conocimiento especializado de la Ley de Tierras y la Jurisdicción Agraria.',
+    ctaText: 'Solicitar asesoría en Derecho Agrario',
+    forLegalEntity: true
+  },
+
+  'derecho_migratorio_empresas': {
+    subtitle: 'Gestión migratoria corporativa y movilidad de personal',
+    description: 'Asesoría especializada en la gestión migratoria de personal expatriado y cumplimiento de normativas migratorias.',
+    situations: [
+      { title: 'Movilidad Empresarial', subtitle: 'Reubicación de personal extranjero clave.' },
+      { title: 'Permisos de Trabajo', subtitle: 'Autorizaciones laborales para extranjeros.' },
+      { title: 'Visas Corporativas', subtitle: 'Gestión de visas de inversionista y laboral.' },
+      { title: 'Compliance Migratorio', subtitle: 'Cumplimiento de normativas laborales y migratorias.' },
+      { title: 'Regularización de Personal', subtitle: 'Gestión de estatus migratorio de empleados.' }
+    ],
+    whyChooseUs: 'Experiencia en movilidad corporativa internacional.',
+    ctaText: 'Solicitar asesoría migratoria empresarial',
+    forLegalEntity: true
+  },
+
+  'derecho_penal_empresas': {
+    subtitle: 'Defensa corporativa y compliance penal empresarial',
+    description: 'Asesoría y defensa legal en materia penal para proteger a la empresa y sus directivos.',
+    situations: [
+      { title: 'Defensa de Directivos', subtitle: 'Representación de administradores y ejecutivos.' },
+      { title: 'Delitos Económicos', subtitle: 'Defensa en casos de fraude, estafa y apropiación indebida.' },
+      { title: 'Compliance Penal', subtitle: 'Programas de prevención de delitos corporativos.' },
+      { title: 'Delitos Informáticos', subtitle: 'Defensa en casos de cibercrimen empresarial.' },
+      { title: 'Responsabilidad Penal Empresarial', subtitle: 'Asesoría en responsabilidad penal de personas jurídicas.' }
+    ],
+    whyChooseUs: 'Especialización en defensa penal corporativa.',
+    ctaText: 'Solicitar asesoría penal empresarial',
+    forLegalEntity: true
+  },
+
+  'derecho_familiar_empresas': {
+    subtitle: 'Asesoría en aspectos familiares y patrimoniales para empresarios',
+    description: 'Gestión de asuntos familiares con impacto en el patrimonio empresarial y sucesión de negocios.',
+    situations: [
+      { title: 'Sucesión Empresarial', subtitle: 'Planificación de la transmisión del negocio familiar.' },
+      { title: 'Capitulaciones Matrimoniales', subtitle: 'Protección del patrimonio empresarial.' },
+      { title: 'Divorcios de Empresarios', subtitle: 'Gestión del impacto patrimonial en la empresa.' },
+      { title: 'Herencias y Legados', subtitle: 'Distribución de participaciones societarias.' },
+      { title: 'Protocolo Familiar', subtitle: 'Regulación de relaciones familia-empresa.' }
+    ],
+    whyChooseUs: 'Experiencia en la intersección del derecho familiar y empresarial.',
+    ctaText: 'Solicitar asesoría familiar empresarial',
+    forLegalEntity: true
+  },
+
+  'derecho_migratorio_vzla_esp': {
+    subtitle: 'Procesos migratorios entre Venezuela y España',
+    description: 'Asesoría especializada en trámites migratorios para ciudadanos venezolanos en España y viceversa.',
+    situations: [
+      { title: 'Visados para España', subtitle: 'Gestión de visas de residencia, trabajo y estudios.' },
+      { title: 'Nacionalidad Española', subtitle: 'Procesos de nacionalización para venezolanos.' },
+      { title: 'Arraigo y Residencia', subtitle: 'Regularización migratoria en España.' },
+      { title: 'Homologación de Títulos', subtitle: 'Convalidación de estudios y títulos profesionales.' },
+      { title: 'Reagrupación Familiar', subtitle: 'Trámites para reunir a la familia en España.' },
+      { title: 'Retorno a Venezuela', subtitle: 'Asesoría para el regreso y reinserción legal.' }
+    ],
+    whyChooseUs: 'Conocimiento binacional de los sistemas migratorios de Venezuela y España.',
+    ctaText: 'Solicitar asesoría migratoria Venezuela-España',
+    forNaturalPerson: true,
+    forLegalEntity: true
   }
 }
 
