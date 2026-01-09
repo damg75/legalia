@@ -4,7 +4,14 @@
       <!-- Contenido condicional basado en el tab seleccionado -->
       <v-row v-if="selectedTab === 'naturales'" class="align-center">
         <!-- Texto izquierdo -->
-        <v-col cols="12" md="6" class="d-flex flex-column justify-center pr-8">
+        <v-col 
+          cols="12" 
+          md="6" 
+          class="d-flex flex-column justify-center pr-8"
+          v-intersect="titleAnimation.intersectOptions"
+          :class="titleAnimation.animationClass()"
+          :style="titleAnimation.animationStyle"
+        >
           <h2 class="pricing-main-title">
             Conoce nuestras <span class="text-bold">tarifas claras</span>, y enfócate en lo que importa: <br></br><span
               class="text-brown">tu tranquilidad legal.</span>
@@ -12,7 +19,13 @@
         </v-col>
 
         <!-- Tarjetas de precios derecha -->
-        <v-col cols="12" md="6">
+        <v-col 
+          cols="12" 
+          md="6"
+          v-intersect="cardsAnimation.intersectOptions"
+          :class="cardsAnimation.animationClass()"
+          :style="cardsAnimation.animationStyle"
+        >
           <v-row class="d-flex align-center">
             <!-- Tarjeta 1: Asesoría Integral -->
             <PricingCard title="Asesoría Integral" subtitle="Tu tranquilidad legal garantizada." price="$80"
@@ -94,6 +107,7 @@ import { computed } from 'vue'
 import { useDisplay } from 'vuetify'
 import PricingCard from './partials/PricingCard.vue'
 import { useWhatsApp } from '@/composables/useWhatsApp'
+import { useScrollAnimation } from '@/composables/useScrollAnimation'
 
 const props = defineProps({
   selectedTab: {
@@ -105,6 +119,27 @@ const props = defineProps({
 
 // Usar el helper de breakpoints de Vuetify
 const { mobile } = useDisplay()
+
+// Animaciones de entrada
+const titleOffset = mobile.value ? '-50px' : '-100px'
+const cardsOffset = mobile.value ? '-50px' : '-150px'
+
+const titleAnimation = useScrollAnimation({ 
+  type: 'slide-right', 
+  duration: 800, 
+  once: true, 
+  threshold: 0.2,
+  offset: titleOffset
+})
+
+const cardsAnimation = useScrollAnimation({ 
+  type: 'slide-left', 
+  duration: 800, 
+  delay: 200,
+  once: true, 
+  threshold: 0.2,
+  offset: cardsOffset
+})
 
 // Computed properties para determinar el size basado en el breakpoint
 const integralCardSize = computed(() => mobile.value ? 'big' : 'big')

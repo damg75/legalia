@@ -35,12 +35,12 @@ const { mobile } = useDisplay()
 // Offset responsive
 const animationOffset = mobile.value ? '-50px' : '-200px'
 
-// Animaciones con stagger (delays escalonados)
+// Animaciones con stagger (delays escalonados) - solo entrada
 const paymentAnimations = [
-  useScrollAnimation({ type: 'slide-up', duration: 800, delay: 0, once: false, threshold: 0.1, offset: animationOffset }),
-  useScrollAnimation({ type: 'slide-up', duration: 800, delay: 150, once: false, threshold: 0.1, offset: animationOffset }),
-  useScrollAnimation({ type: 'slide-up', duration: 800, delay: 300, once: false, threshold: 0.1, offset: animationOffset }),
-  useScrollAnimation({ type: 'slide-up', duration: 800, delay: 450, once: false, threshold: 0.1, offset: animationOffset })
+  useScrollAnimation({ type: 'slide-up', duration: 800, delay: 0, once: true, threshold: 0.1, offset: animationOffset }),
+  useScrollAnimation({ type: 'slide-up', duration: 800, delay: 150, once: true, threshold: 0.1, offset: animationOffset }),
+  useScrollAnimation({ type: 'slide-up', duration: 800, delay: 300, once: true, threshold: 0.1, offset: animationOffset }),
+  useScrollAnimation({ type: 'slide-up', duration: 800, delay: 450, once: true, threshold: 0.1, offset: animationOffset })
 ]
 
 const payments = ref([

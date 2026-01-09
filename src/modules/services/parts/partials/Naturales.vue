@@ -10,7 +10,16 @@
       </div>
 
       <v-row class="justify-center">
-        <v-col cols="12" md="4" v-for="(point, index) in points" :key="point.title" class="d-flex justify-center">
+        <v-col 
+          cols="12" 
+          md="4" 
+          v-for="(point, index) in points" 
+          :key="point.title" 
+          class="d-flex justify-center"
+          v-intersect="pointAnimations[index].intersectOptions"
+          :class="pointAnimations[index].animationClass()"
+          :style="pointAnimations[index].animationStyle"
+        >
           <div class="naturales-point">
             <div class="naturales-point-icon-wrapper">
               <div class="naturales-point-icon" :style="{ backgroundColor: point.iconBgColor }">
@@ -38,9 +47,20 @@
 import { ref } from 'vue'
 import { useDisplay } from 'vuetify'
 import { useWhatsApp } from '@/composables/useWhatsApp'
+import { useScrollAnimation } from '@/composables/useScrollAnimation'
 
 const { mobile } = useDisplay()
 const { openWhatsApp } = useWhatsApp()
+
+// Offset responsive
+const animationOffset = mobile.value ? '-50px' : '-150px'
+
+// Animaciones staggered para los 3 points - solo entrada
+const pointAnimations = [
+  useScrollAnimation({ type: 'slide-up', duration: 800, delay: 0, once: true, threshold: 0.1, offset: animationOffset }),
+  useScrollAnimation({ type: 'slide-up', duration: 800, delay: 150, once: true, threshold: 0.1, offset: animationOffset }),
+  useScrollAnimation({ type: 'slide-up', duration: 800, delay: 300, once: true, threshold: 0.1, offset: animationOffset })
+]
 
 const handleWhatsAppClick = () => {
   openWhatsApp('Hola, soy una persona natural y me interesa solicitar una cotización para servicios legales personalizados.')

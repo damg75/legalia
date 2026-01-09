@@ -14,12 +14,27 @@
 
     <div class="hero-content d-flex justify-end align-center">
       <div class="hero-text d-flex flex-column align-start">
-        <h1 class="hero-title text-right ma-0 pa-0">
+        <h1 
+          class="hero-title text-right ma-0 pa-0"
+          v-intersect="titleAnimation.intersectOptions"
+          :class="titleAnimation.animationClass()"
+          :style="titleAnimation.animationStyle"
+        >
           <span class="text-gray">Desarrollamos </span><span class="text-primary-dark">soluciones jurídicas </span><span class="text-primary-dark">personalizadas</span><span class="text-gray">, evitando complicaciones y garantizando tu tranquilidad.</span>
         </h1>
 
         <div class="button-container d-flex justify-end">
-          <v-btn class="hero-cta mt-8 d-flex flex-row align-center justify-center" color="primary-dark" height="52" rounded="lg" elevation="2" @click="openWhatsApp">
+          <v-btn 
+            class="hero-cta mt-8 d-flex flex-row align-center justify-center" 
+            color="primary-dark" 
+            height="52" 
+            rounded="lg" 
+            elevation="2" 
+            @click="openWhatsApp"
+            v-intersect="buttonAnimation.intersectOptions"
+            :class="buttonAnimation.animationClass()"
+            :style="buttonAnimation.animationStyle"
+          >
             Agendar asesoría
           </v-btn>
         </div>
@@ -31,8 +46,25 @@
 
 <script setup>
 import { useWhatsApp } from '@/composables/useWhatsApp'
+import { useScrollAnimation } from '@/composables/useScrollAnimation'
 
 const { openWhatsApp } = useWhatsApp()
+
+// Animaciones de entrada sin offset
+const titleAnimation = useScrollAnimation({ 
+  type: 'slide-left', 
+  duration: 1000, 
+  once: true, 
+  threshold: 0.2
+})
+
+const buttonAnimation = useScrollAnimation({ 
+  type: 'scale', 
+  duration: 800, 
+  delay: 200,
+  once: true, 
+  threshold: 0.2
+})
 </script>
 
 <style scoped>

@@ -15,14 +15,15 @@
         <!-- Desktop: Carrusel con botón -->
         <div class="d-none d-md-block carousel-container">
           <div class="carousel-wrapper">
-            <transition name="carousel-fade" mode="out-in">
-              <div class="carousel-grid" :key="currentPage">
+            <div class="carousel-grid">
+              <transition-group name="stagger-card" appear>
                 <v-card 
-                  v-for="service in currentPageServices" 
-                  :key="service.code" 
+                  v-for="(service, index) in currentPageServices" 
+                  :key="`${currentPage}-${service.code}`"
                   class="service-card" 
                   elevation="2" 
                   @click="handleServiceClick(service)"
+                  :style="{ '--stagger-delay': `${index * 100}ms` }"
                 >
                   <v-card-text class="pa-4 d-flex align-start">
                     <span class="service-icon">{{ service.icon }}</span>
@@ -33,8 +34,8 @@
                     <v-icon class="arrow-icon" size="20" color="#D1D5DB">mdi-chevron-right</v-icon>
                   </v-card-text>
                 </v-card>
-              </div>
-            </transition>
+              </transition-group>
+            </div>
             
             <!-- Botón de navegación simple -->
             <button class="carousel-nav-btn" @click="nextPage" aria-label="Siguiente">
@@ -43,14 +44,22 @@
           </div>
         </div>
 
-        <!-- Mobile: Cards apiladas -->
+        <!-- Mobile: Cards apiladas con animación por scroll -->
         <div class="d-md-none mobile-cards-container">
           <v-card 
-            v-for="service in services" 
+            v-for="(service, index) in services" 
             :key="service.code" 
             class="service-card-mobile mb-3" 
             elevation="2" 
             @click="handleServiceClick(service)"
+            v-scroll-animate="{ 
+              type: 'slide-up', 
+              duration: 400, 
+              delay: index * 50,
+              once: false, 
+              threshold: 0.1,
+              offset: '-50px'
+            }"
           >
             <v-card-text class="pa-4 d-flex align-center">
               <span class="service-icon-mobile">{{ service.icon }}</span>
@@ -91,6 +100,7 @@ import BaseModal from '@/components/BaseModal.vue'
 import ModalPayload from './ModalPayload.vue'
 import { servicesModalData } from '../../data/servicesModalData.js'
 import { useWhatsApp } from '@/composables/useWhatsApp'
+import { vScrollAnimate } from '@/composables/useScrollAnimation'
 
 const { mdAndDown } = useDisplay()
 const { openWhatsApp } = useWhatsApp()
@@ -327,20 +337,30 @@ const confirmService = () => {
 }
 
 /* Responsive */
-/* Animación del carrusel - fade simple en el contenedor */
-.carousel-fade-enter-active,
-.carousel-fade-leave-active {
-  transition: opacity 0.25s ease;
+/* Animación stagger para las cards del carrusel - solo entrada */
+.stagger-card-enter-active {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: var(--stagger-delay, 0ms);
 }
 
-.carousel-fade-enter-from,
-.carousel-fade-leave-to {
+.stagger-card-leave-active {
+  transition: none;
+  position: absolute;
   opacity: 0;
 }
 
-.carousel-fade-enter-to,
-.carousel-fade-leave-from {
+.stagger-card-enter-from {
+  opacity: 0;
+  transform: scale(0.8) translateY(20px);
+}
+
+.stagger-card-enter-to {
   opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.stagger-card-leave-to {
+  opacity: 0;
 }
 
 @media (max-width: 1264px) {
