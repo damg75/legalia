@@ -28,6 +28,9 @@
           ]"
         >
         <v-card
+          v-intersect="cardAnimations[index].intersectOptions"
+          :class="cardAnimations[index].animationClass()"
+          :style="cardAnimations[index].animationStyle"
           class="service-card"
           elevation="2"
           max-width="560"
@@ -106,9 +109,16 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useServiceTab } from '@/composables/useServiceTab'
+import { useScrollAnimation } from '@/composables/useScrollAnimation'
 
 const router = useRouter()
 const { setSelectedTab } = useServiceTab()
+
+// Animaciones para las cards: izquierda y derecha
+const cardAnimations = [
+  useScrollAnimation({ type: 'slide-left', duration: 1500, once: false, threshold: 0.2, offset: '-350px' }),
+  useScrollAnimation({ type: 'slide-right', duration: 1500, once: false, threshold: 0.2, offset: '-350px' })
+]
 
 const handleServiceClick = (tab) => {
   setSelectedTab(tab, true) // true = hacer scroll a los tabs
