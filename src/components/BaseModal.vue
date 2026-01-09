@@ -10,29 +10,26 @@
     @click:outside="handleClickOutside"
     :fullscreen="false"
   >
-    <transition name="fade" mode="out-in">
-      <v-card
-        v-if="modelValue"
-        :class="cardClass"
-        :elevation="elevation"
+    <v-card
+      :class="cardClass"
+      :elevation="elevation"
+    >
+      <!-- Botón de cerrar -->
+      <v-btn
+        v-if="closeable || isMobile"
+        icon
+        variant="text"
+        size="small"
+        :class="['close-button', { 'close-button--mobile': isMobile }]"
+        @click="close"
+        aria-label="Cerrar"
       >
-        <!-- Botón de cerrar -->
-        <v-btn
-          v-if="closeable || isMobile"
-          icon
-          variant="text"
-          size="small"
-          :class="['close-button', { 'close-button--mobile': isMobile }]"
-          @click="close"
-          aria-label="Cerrar"
-        >
-          <v-icon :size="isMobile ? 20 : 24">mdi-close</v-icon>
-        </v-btn>
+        <v-icon :size="isMobile ? 20 : 24">mdi-close</v-icon>
+      </v-btn>
 
-        <!-- Contenido del modal -->
-        <slot />
-      </v-card>
-    </transition>
+      <!-- Contenido del modal -->
+      <slot />
+    </v-card>
   </v-dialog>
 </template>
 
@@ -156,30 +153,6 @@ const handleClickOutside = () => {
   }
 }
 
-// Transiciones de fade para el contenido
-.fade-enter-active {
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.fade-leave-active {
-  transition: opacity 0.25s ease, transform 0.25s ease;
-}
-
-.fade-enter-from {
-  opacity: 0;
-  transform: scale(0.95);
-}
-
-.fade-leave-to {
-  opacity: 0;
-  transform: scale(0.95);
-}
-
-.fade-enter-to,
-.fade-leave-from {
-  opacity: 1;
-  transform: scale(1);
-}
 </style>
 
 <style lang="scss">
@@ -194,8 +167,7 @@ const handleClickOutside = () => {
   max-width: 100% !important;
   width: 100% !important;
   margin: 0 !important;
-  transform: none !important;
-  animation-duration: 0.3s !important;
+  // NO usar transform: none aquí para permitir las transiciones
 }
 
 // Desktop (modal centrado)
@@ -205,20 +177,71 @@ const handleClickOutside = () => {
 
 // Transición suave para el scrim (fondo oscuro)
 .v-overlay__scrim {
-  transition: opacity 0.3s ease !important;
+  transition: opacity 0.12s ease-out !important;
 }
 
-// Mejoras a las transiciones de Vuetify
-.v-dialog {
-  &.dialog-bottom-transition-enter-active,
-  &.dialog-bottom-transition-leave-active {
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+// ===== TRANSICIONES MEJORADAS PARA EL BOTTOMSHEET (MÓVIL) =====
+// Sobrescribir completamente las transiciones de Vuetify para el bottomsheet
+.dialog-bottom-transition-enter-active {
+  .base-modal-mobile {
+    transition: transform 0.15s cubic-bezier(0.2, 0, 0, 1) !important;
   }
+}
 
-  &.dialog-transition-enter-active,
-  &.dialog-transition-leave-active {
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
-                opacity 0.3s ease !important;
+.dialog-bottom-transition-leave-active {
+  .base-modal-mobile {
+    transition: transform 0.12s cubic-bezier(0.4, 0, 1, 1) !important;
+  }
+}
+
+.dialog-bottom-transition-enter-from,
+.dialog-bottom-transition-leave-to {
+  .base-modal-mobile {
+    transform: translateY(100%) !important;
+  }
+}
+
+.dialog-bottom-transition-enter-to,
+.dialog-bottom-transition-leave-from {
+  .base-modal-mobile {
+    transform: translateY(0%) !important;
+  }
+}
+
+// ===== TRANSICIONES PARA DESKTOP (MODAL CENTRADO) =====
+.dialog-transition-enter-active {
+  .base-modal-desktop {
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity 0.2s ease-out !important;
+  }
+}
+
+.dialog-transition-leave-active {
+  .base-modal-desktop {
+    transition: transform 0.18s cubic-bezier(0.4, 0, 0.6, 1),
+                opacity 0.15s ease-in !important;
+  }
+}
+
+.dialog-transition-enter-from {
+  .base-modal-desktop {
+    transform: scale(0.85) translateY(20px) !important;
+    opacity: 0;
+  }
+}
+
+.dialog-transition-enter-to,
+.dialog-transition-leave-from {
+  .base-modal-desktop {
+    transform: scale(1) translateY(0) !important;
+    opacity: 1;
+  }
+}
+
+.dialog-transition-leave-to {
+  .base-modal-desktop {
+    transform: scale(0.9) translateY(10px) !important;
+    opacity: 0;
   }
 }
 

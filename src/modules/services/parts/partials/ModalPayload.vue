@@ -260,16 +260,17 @@ const showPersonType = computed(() => {
   }
 
   .service-modal-title {
-    font-size: 20px;
+    font-size: 17px;
   }
   
   .icon-container-modal {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
   }
   
   .service-icon-modal {
-    font-size: 24px;
+    font-size: 20px;
   }
 
   .cta-button {

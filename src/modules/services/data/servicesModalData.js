@@ -230,7 +230,7 @@ export const servicesModalData = {
   },
 
   'derecho_laboral_empresarial': {
-    subtitle: 'Asesoría estratégica y compliance en la gestión de talento humano para el sector corporativo',
+    subtitle: 'Asesoría estratégica y compliance en la gestión del talento humano para el sector corporativo',
     description: 'El Derecho Laboral Empresarial es un área vital para mitigar riesgos, asegurar la estabilidad operativa y proteger a la empresa frente a la alta conflictividad y el marco regulatorio de la Ley Orgánica del Trabajo, los Trabajadores y las Trabajadoras (LOTTT). Ofrecemos asesoría y representación estratégica a empleadores para la correcta administración del talento humano, garantizando el compliance legal y la defensa eficiente en instancias administrativas y judiciales en Venezuela.',
     situations: [
       { title: 'Auditoría Laboral (Due Diligence)', subtitle: 'Revisión exhaustiva de contratos, expedientes y prácticas de nómina para identificar y corregir pasivos laborales ocultos y riesgos de sanciones.' },
