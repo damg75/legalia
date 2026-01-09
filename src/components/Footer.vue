@@ -180,12 +180,12 @@ const { setSelectedTab } = useServiceTab()
 const { openWhatsApp } = useWhatsApp()
 
 const handleNaturalPersonClick = () => {
-  setSelectedTab('naturales')
+  setSelectedTab('naturales', true) // true = hacer scroll a los tabs
   router.push('/servicios')
 }
 
 const handleLegalEntityClick = () => {
-  setSelectedTab('juridicas')
+  setSelectedTab('juridicas', true) // true = hacer scroll a los tabs
   router.push('/servicios')
 }
 
