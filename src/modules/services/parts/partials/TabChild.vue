@@ -90,8 +90,10 @@ import { useDisplay } from 'vuetify'
 import BaseModal from '@/components/BaseModal.vue'
 import ModalPayload from './ModalPayload.vue'
 import { servicesModalData } from '../../data/servicesModalData.js'
+import { useWhatsApp } from '@/composables/useWhatsApp'
 
 const { mdAndDown } = useDisplay()
+const { openWhatsApp } = useWhatsApp()
 
 const isMobile = computed(() => mdAndDown.value)
 
@@ -158,7 +160,9 @@ const closeModal = () => {
 }
 
 const confirmService = () => {
-  console.log('Servicio confirmado:', selectedService.value)
+  const service = selectedService.value
+  const message = `Hola, me interesa obtener información sobre el servicio de ${service?.title || 'asesoría legal'}. ¿Podrían ayudarme?`
+  openWhatsApp(message)
   isModalOpen.value = false
 }
 </script>
