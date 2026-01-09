@@ -9,8 +9,16 @@
     </v-row>
 
     <v-row>
-      <v-col cols="6" md="3" v-for="payment in payments" :key="payment.title"
-        class="d-flex justify-center align-center">
+      <v-col 
+        cols="6" 
+        md="3" 
+        v-for="(payment, index) in payments" 
+        :key="payment.title"
+        v-intersect="paymentAnimations[index].intersectOptions"
+        :class="paymentAnimations[index].animationClass()"
+        :style="paymentAnimations[index].animationStyle"
+        class="d-flex justify-center align-center"
+      >
         <v-img :src="payment.icon" :alt="payment.title" max-width="284" contain />
       </v-col>
     </v-row>
@@ -19,6 +27,21 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useDisplay } from 'vuetify'
+import { useScrollAnimation } from '@/composables/useScrollAnimation'
+
+const { mobile } = useDisplay()
+
+// Offset responsive
+const animationOffset = mobile.value ? '-50px' : '-200px'
+
+// Animaciones con stagger (delays escalonados)
+const paymentAnimations = [
+  useScrollAnimation({ type: 'slide-up', duration: 800, delay: 0, once: false, threshold: 0.1, offset: animationOffset }),
+  useScrollAnimation({ type: 'slide-up', duration: 800, delay: 150, once: false, threshold: 0.1, offset: animationOffset }),
+  useScrollAnimation({ type: 'slide-up', duration: 800, delay: 300, once: false, threshold: 0.1, offset: animationOffset }),
+  useScrollAnimation({ type: 'slide-up', duration: 800, delay: 450, once: false, threshold: 0.1, offset: animationOffset })
+]
 
 const payments = ref([
   {

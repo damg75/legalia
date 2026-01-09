@@ -14,6 +14,9 @@
         
         <!-- Botón de WhatsApp -->
         <v-btn
+          v-intersect="buttonAnimation.intersectOptions"
+          :class="buttonAnimation.animationClass()"
+          :style="buttonAnimation.animationStyle"
           color="white"
           variant="outlined"
           size="large"
@@ -36,8 +39,23 @@
 
 <script setup>
 import { useWhatsApp } from '@/composables/useWhatsApp'
+import { useDisplay } from 'vuetify'
+import { useScrollAnimation } from '@/composables/useScrollAnimation'
 
 const { openWhatsApp } = useWhatsApp()
+const { mobile } = useDisplay()
+
+// Offset responsive
+const buttonOffset = mobile.value ? '-50px' : '-150px'
+
+// Animación del botón con entrada y salida
+const buttonAnimation = useScrollAnimation({ 
+  type: 'scale', 
+  duration: 800, 
+  once: false, 
+  threshold: 0.2, 
+  offset: buttonOffset 
+})
 
 const handleWhatsAppClick = () => {
   openWhatsApp()

@@ -4,7 +4,13 @@
     <!-- IMage -->
 
     <v-row class="ma-0 pa-0 d-flex d-row justify-center align-center">
-      <v-col cols="12" md="6" class="">
+      <v-col 
+        cols="12" 
+        md="6" 
+        v-intersect="heroTextAnimation.intersectOptions"
+        :class="heroTextAnimation.animationClass()"
+        :style="heroTextAnimation.animationStyle"
+      >
         <div class="hero-copy text-justify d-flex justify-center">
 
           <div>
@@ -14,7 +20,14 @@
         </div>
 
       </v-col>
-      <v-col cols="12" md="6" class="d-flex justify-center align-center">
+      <v-col 
+        cols="12" 
+        md="6" 
+        class="d-flex justify-center align-center"
+        v-intersect="heroImageAnimation.intersectOptions"
+        :class="heroImageAnimation.animationClass()"
+        :style="heroImageAnimation.animationStyle"
+      >
 
         <v-img src="@/modules/landing/assets/hero.svg" alt="Hero Illustration" class="hero-svg" max-width="683"
           height="482" contain>
@@ -54,11 +67,14 @@
 
      <v-row class="d-flex justify-center align-center mt-4 mb-8">
        <v-col 
-         v-for="card in heroCards" 
+         v-for="(card, index) in heroCards" 
          :key="card.id"
          cols="12" 
          md="4" 
          class="d-flex justify-center mb-4"
+         v-intersect="cardAnimations[index].intersectOptions"
+         :class="cardAnimations[index].animationClass()"
+         :style="cardAnimations[index].animationStyle"
        >
          <v-card
            class="hero-card d-flex flex-column pa-3"
@@ -95,6 +111,43 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useDisplay } from 'vuetify'
+import { useScrollAnimation } from '@/composables/useScrollAnimation'
+
+const { mobile } = useDisplay()
+
+// Offset responsive
+const textOffset = mobile.value ? '-50px' : '-150px'
+const imageOffset = mobile.value ? '-50px' : '-200px'
+
+// Animaciones para texto e imagen del hero (solo entrada, sin salida)
+const heroTextAnimation = useScrollAnimation({ 
+  type: 'slide-left', 
+  duration: 1200, 
+  delay: 0, 
+  once: true, 
+  threshold: 0.1, 
+  offset: textOffset 
+})
+
+const heroImageAnimation = useScrollAnimation({ 
+  type: 'slide-right', 
+  duration: 1200, 
+  delay: 200, 
+  once: true, 
+  threshold: 0.1, 
+  offset: imageOffset 
+})
+
+// Offset para cards
+const cardsOffset = mobile.value ? '-50px' : '-150px'
+
+// Animaciones para las 3 cards con stagger (solo entrada)
+const cardAnimations = [
+  useScrollAnimation({ type: 'slide-up', duration: 800, delay: 0, once: true, threshold: 0.1, offset: cardsOffset }),
+  useScrollAnimation({ type: 'slide-up', duration: 800, delay: 150, once: true, threshold: 0.1, offset: cardsOffset }),
+  useScrollAnimation({ type: 'slide-up', duration: 800, delay: 300, once: true, threshold: 0.1, offset: cardsOffset })
+]
 
 // Cards data
 const heroCards = ref([

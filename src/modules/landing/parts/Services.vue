@@ -108,16 +108,19 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useDisplay } from 'vuetify'
 import { useServiceTab } from '@/composables/useServiceTab'
 import { useScrollAnimation } from '@/composables/useScrollAnimation'
 
 const router = useRouter()
 const { setSelectedTab } = useServiceTab()
+const { mobile } = useDisplay()
 
-// Animaciones para las cards: izquierda y derecha
+// Animaciones para las cards: izquierda y derecha (solo entrada)
+const animationOffset = mobile.value ? '-100px' : '-350px'
 const cardAnimations = [
-  useScrollAnimation({ type: 'slide-left', duration: 1500, once: false, threshold: 0.2, offset: '-350px' }),
-  useScrollAnimation({ type: 'slide-right', duration: 1500, once: false, threshold: 0.2, offset: '-350px' })
+  useScrollAnimation({ type: 'slide-left', duration: 1500, once: true, threshold: 0.2, offset: animationOffset }),
+  useScrollAnimation({ type: 'slide-right', duration: 1500, once: true, threshold: 0.2, offset: animationOffset })
 ]
 
 const handleServiceClick = (tab) => {
